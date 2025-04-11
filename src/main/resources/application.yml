@@ -1,0 +1,18 @@
+debug: false
+logging:
+  level:
+    org:
+      springframework:
+        ai:
+          chat:
+            client:
+              advisor: DEBUG
+
+spring:
+  ai:
+    chat:
+      client:
+        observations:
+          include-input: true
+          include-output: true
+          include-prompt: true
