@@ -1,8 +1,7 @@
-package io.promptics.jopbagent;
+package io.promptics.jobagent.interviewplan;
 
 import lombok.Builder;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.expression.spel.ast.Identifier;
 
 @Document
 @Builder

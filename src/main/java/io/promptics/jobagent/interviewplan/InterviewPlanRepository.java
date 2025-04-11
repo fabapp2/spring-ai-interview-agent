@@ -1,4 +1,4 @@
-package io.promptics.jopbagent;
+package io.promptics.jobagent.interviewplan;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;

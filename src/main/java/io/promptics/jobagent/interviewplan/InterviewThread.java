@@ -1,4 +1,4 @@
-package io.promptics.jopbagent;
+package io.promptics.jobagent.interviewplan;
 
 import lombok.Builder;
 import lombok.Singular;

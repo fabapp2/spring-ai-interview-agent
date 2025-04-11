@@ -1,4 +1,4 @@
-package io.promptics.jopbagent;
+package io.promptics.jobagent;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

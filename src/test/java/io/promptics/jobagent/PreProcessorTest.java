@@ -1,4 +1,4 @@
-package io.promptics.jopbagent;
+package io.promptics.jobagent;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,5 +1,6 @@
-package io.promptics.jopbagent;
+package io.promptics.jobagent;
 
+import io.promptics.jobagent.interviewplan.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Testcontainers
-class InterviewApplicationPlanRepositoryTest {
+class InterviewPlanRepositoryTest {
 
     @Container
     @ServiceConnection
@@ -24,7 +25,6 @@ class InterviewApplicationPlanRepositoryTest {
 
     @Autowired
     InterviewPlanRepository repository;
-
 
     @Autowired
     private MongoTemplate mongoTemplate;
