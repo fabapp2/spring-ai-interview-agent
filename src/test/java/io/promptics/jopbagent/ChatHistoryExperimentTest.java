@@ -54,7 +54,7 @@ public class ChatHistoryExperimentTest {
                 .options(ChatOptions.builder().temperature(0.0).build())
                 .call()
                 .content();
-        System.out.println(reply);
 
+        System.out.println(reply);
     }
 }

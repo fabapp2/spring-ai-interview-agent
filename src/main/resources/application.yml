@@ -16,3 +16,11 @@ spring:
           include-input: true
           include-output: true
           include-prompt: true
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: baeldung
+      username: admin
+      password: password

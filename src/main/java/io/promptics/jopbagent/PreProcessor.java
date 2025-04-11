@@ -17,6 +17,8 @@ public class PreProcessor {
 
     private final ChatClient client;
 
+    private final ChatMemory chatMemory;
+
     private static final String prompt = """
         You are pre-processing user inputs for a career data interview.
         
@@ -39,13 +41,12 @@ public class PreProcessor {
         }}
         """;
 
-    public PreProcessor(ChatClient.Builder chatClientBuilder) {
-        client = chatClientBuilder.build();
+    public PreProcessor(ChatClient.Builder chatClientBuilder, ChatMemory chatMemory) {
+        this.chatMemory = chatMemory;
+        this.client = chatClientBuilder.build();
     }
 
     public String run() {
-
-        ChatMemory chatMemory = new InMemoryChatMemory();
         chatMemory.add("id", new AssistantMessage("What was you last job?"));
         chatMemory.add("id", new UserMessage("I worked at Mc Donalds"));
         chatMemory.add("id", new AssistantMessage("How long did you work there?"));
