@@ -4,8 +4,15 @@ import lombok.Getter;
 
 @Getter
 public class InterviewContext {
-    private String careerDataId;
-    private String userId;
-    private String sessionId;
-    private String username;
+    private final String careerDataId;
+    private final String userId;
+    private final String sessionId;
+    private final String username;
+
+    public InterviewContext(String careerDataId, String userId, String sessionId, String username) {
+        this.careerDataId = careerDataId;
+        this.userId = userId;
+        this.sessionId = sessionId;
+        this.username = username;
+    }
 }

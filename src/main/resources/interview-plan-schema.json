@@ -1,5 +1,4 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "description": "Structure for planning and tracking career interviews with validation and detailed exploration phases",
   "properties": {
@@ -110,11 +109,13 @@
                 },
                 "duration": {
                   "type": "integer",
-                  "minimum": 1
+                  "minimum": 1,
+                  "description": "The planned time in seconds"
                 },
                 "actual_duration": {
                   "type": "integer",
-                  "minimum": 0
+                  "minimum": 0,
+                  "description": "The time spent in seconds"
                 },
                 "status": {
                   "type": "string",

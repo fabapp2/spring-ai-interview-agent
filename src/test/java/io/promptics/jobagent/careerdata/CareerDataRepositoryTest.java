@@ -1,7 +1,6 @@
 package io.promptics.jobagent.careerdata;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.gitgub.eaxdev.jsonresume.validator.JsonResume;
 import io.promptics.jobagent.careerdata.model.CareerData;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,6 +14,9 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.io.File;
 import java.io.IOException;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 @SpringBootTest
 @Testcontainers
@@ -44,5 +46,6 @@ class CareerDataRepositoryTest {
     void crud() {
         CareerData careerData = readCareerData();
         CareerData saved = repository.save(careerData);
+        assertThat(careerData).usingRecursiveComparison().isEqualTo(saved);
     }
 }
