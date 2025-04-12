@@ -1,8 +1,10 @@
 
 package io.promptics.jobagent.interviewplan;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -19,19 +21,45 @@ import lombok.NoArgsConstructor;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "section",
-    "identifier"
+    "id",
+    "type",
+    "reference",
+    "threads"
 })
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Reference {
+public class Topic {
 
-    @JsonProperty("section")
-    public Reference.Section section;
-    @JsonProperty("identifier")
-    public Identifier identifier;
+    /**
+     * 
+     * (Required)
+     * 
+     */
+    @JsonProperty("id")
+    public String id;
+    /**
+     * 
+     * (Required)
+     * 
+     */
+    @JsonProperty("type")
+    public Topic.Type type;
+    /**
+     * 
+     * (Required)
+     * 
+     */
+    @JsonProperty("reference")
+    public Reference reference;
+    /**
+     * 
+     * (Required)
+     * 
+     */
+    @JsonProperty("threads")
+    public List<Thread> threads = new ArrayList<Thread>();
     @JsonIgnore
     private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
@@ -45,29 +73,32 @@ public class Reference {
         this.additionalProperties.put(name, value);
     }
 
-    public enum Section {
-        BASICS("basics"),
-        WORK("work"),
-        VOLUNTEER("volunteer"),
+    public enum Type {
+
+        WORK_EXPERIENCE("work_experience"),
+        VOLUNTEER_WORK("volunteer_work"),
         EDUCATION("education"),
-        AWARDS("awards"),
-        CERTIFICATES("certificates"),
-        PUBLICATIONS("publications"),
-        SKILLS("skills"),
-        LANGUAGES("languages"),
-        INTERESTS("interests"),
-        REFERENCES("references"),
-        PROJECTS("projects");
+        PROJECT("project"),
+        AWARD("award"),
+        CERTIFICATE("certificate"),
+        PUBLICATION("publication"),
+        SKILL_AREA("skill_area"),
+        LANGUAGE("language"),
+        INTEREST("interest"),
+        REFERENCE("reference"),
+        GAP("gap"),
+        ROLE("role");
+
         private final String value;
-        private final static Map<String, Reference.Section> CONSTANTS = new HashMap<String, Reference.Section>();
+        private final static Map<String, Topic.Type> CONSTANTS = new HashMap<String, Topic.Type>();
 
         static {
-            for (Reference.Section c: values()) {
+            for (Topic.Type c: values()) {
                 CONSTANTS.put(c.value, c);
             }
         }
 
-        Section(String value) {
+        Type(String value) {
             this.value = value;
         }
 
@@ -82,8 +113,8 @@ public class Reference {
         }
 
         @JsonCreator
-        public static Reference.Section fromValue(String value) {
-            Reference.Section constant = CONSTANTS.get(value);
+        public static Topic.Type fromValue(String value) {
+            Topic.Type constant = CONSTANTS.get(value);
             if (constant == null) {
                 throw new IllegalArgumentException(value);
             } else {

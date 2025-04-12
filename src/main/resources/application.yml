@@ -1,21 +1,20 @@
 debug: false
 logging:
   level:
+    root: WARN
     org:
       springframework:
         ai:
           chat:
             client:
-              advisor: DEBUG
+              advisor: WARN
 
 spring:
   ai:
     chat:
       client:
         observations:
-          include-input: true
-          include-output: true
-          include-prompt: true
+          include-input: false
 
   data:
     mongodb:

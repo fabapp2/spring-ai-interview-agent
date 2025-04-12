@@ -68,235 +68,150 @@ class InterviewPlannerTest {
     @DisplayName("deserialize")
     void deserialize() throws JsonProcessingException {
         String json = """
-            {
-              "career_data_id": "67e98007bd5c558ba6ad93d6",
-              "topics": [
                 {
-                  "id": "1",
-                  "type": "role",
-                  "reference": {
-                    "section": "work",
-                    "identifier": {
-                      "name": "TechGiant",
-                      "startDate": "2024-01"
-                    }
-                  },
-                  "threads": [
-                    {
-                      "id": "1.1",
-                      "type": "validation",
-                      "focus": "Confirm current role and responsibilities at TechGiant",
-                      "duration": 300,
-                      "actual_duration": 0,
-                      "status": "pending",
-                      "related_threads": [],
-                      "fields": ["position", "highlights"]
-                    },
-                    {
-                      "id": "1.2",
-                      "type": "core_details",
-                      "focus": "Explore specific responsibilities and projects at TechGiant",
-                      "duration": 600,
-                      "actual_duration": 0,
-                      "status": "pending",
-                      "related_threads": [],
-                      "fields": ["highlights"]
-                    },
-                    {
-                      "id": "1.3",
-                      "type": "achievements",
-                      "focus": "Discuss key achievements and their impacts at TechGiant",
-                      "duration": 600,
-                      "actual_duration": 0,
-                      "status": "pending",
-                      "related_threads": [],
-                      "fields": ["highlights"]
-                    },
-                    {
-                      "id": "1.4",
-                      "type": "team_context",
-                      "focus": "Understand team dynamics and organizational context at TechGiant",
-                      "duration": 300,
-                      "actual_duration": 0,
-                      "status": "pending",
-                      "related_threads": [],
-                      "fields": ["highlights"]
-                    },
-                    {
-                      "id": "1.5",
-                      "type": "challenges",
-                      "focus": "Identify challenges faced and learnings from experiences at TechGiant",
-                      "duration": 600,
-                      "actual_duration": 0,
-                      "status": "pending",
-                      "related_threads": [],
-                      "fields": ["highlights"]
-                    }
-                  ]
-                },
-                {
-                  "id": "2",
-                  "type": "role",
-                  "reference": {
-                    "section": "work",
-                    "identifier": {
-                      "name": "MiniCorp",
-                      "startDate": "2020-01"
-                    }
-                  },
-                  "threads": [
-                    {
-                      "id": "2.1",
-                      "type": "core_details",
-                      "focus": "Explore specific responsibilities and projects at MiniCorp",
-                      "duration": 600,
-                      "actual_duration": 0,
-                      "status": "pending",
-                      "related_threads": [],
-                      "fields": ["highlights"]
-                    },
-                    {
-                      "id": "2.2",
-                      "type": "achievements",
-                      "focus": "Discuss key achievements and their impacts at MiniCorp",
-                      "duration": 600,
-                      "actual_duration": 0,
-                      "status": "pending",
-                      "related_threads": [],
-                      "fields": ["highlights"]
-                    },
-                    {
-                      "id": "2.3",
-                      "type": "skills",
-                      "focus": "Identify skills developed during the time at MiniCorp",
-                      "duration": 300,
-                      "actual_duration": 0,
-                      "status": "pending",
-                      "related_threads": [],
-                      "fields": ["highlights"]
-                    },
-                    {
-                      "id": "2.4",
-                      "type": "challenges",
-                      "focus": "Identify challenges faced and learnings from experiences at MiniCorp",
-                      "duration": 600,
-                      "actual_duration": 0,
-                      "status": "pending",
-                      "related_threads": [],
-                      "fields": ["highlights"]
-                    }
-                  ]
-                },
-                {
-                  "id": "3",
-                  "type": "role",
-                  "reference": {
-                    "section": "work",
-                    "identifier": {
-                      "name": "StartupX",
-                      "startDate": "2017-07"
-                    }
-                  },
-                  "threads": [
-                    {
-                      "id": "3.1",
-                      "type": "core_details",
-                      "focus": "Explore specific responsibilities and projects at StartupX",
-                      "duration": 600,
-                      "actual_duration": 0,
-                      "status": "pending",
-                      "related_threads": [],
-                      "fields": ["highlights"]
-                    },
-                    {
-                      "id": "3.2",
-                      "type": "achievements",
-                      "focus": "Discuss key achievements and their impacts at StartupX",
-                      "duration": 600,
-                      "actual_duration": 0,
-                      "status": "pending",
-                      "related_threads": [],
-                      "fields": ["highlights"]
-                    },
-                    {
-                      "id": "3.3",
-                      "type": "skills",
-                      "focus": "Identify skills developed during the time at StartupX",
-                      "duration": 300,
-                      "actual_duration": 0,
-                      "status": "pending",
-                      "related_threads": [],
-                      "fields": ["highlights"]
-                    },
-                    {
-                      "id": "3.4",
-                      "type": "challenges",
-                      "focus": "Identify challenges faced and learnings from experiences at StartupX",
-                      "duration": 600,
-                      "actual_duration": 0,
-                      "status": "pending",
-                      "related_threads": [],
-                      "fields": ["highlights"]
-                    }
-                  ]
-                },
-                {
-                  "id": "4",
-                  "type": "education",
-                  "reference": {
-                    "section": "education",
-                    "identifier": {
-                      "name": "TechU Berlin",
-                      "startDate": "2015-09"
-                    }
-                  },
-                  "threads": [
-                    {
-                      "id": "4.1",
-                      "type": "core_details",
-                      "focus": "Discuss coursework and projects during Master's at TechU Berlin",
-                      "duration": 600,
-                      "actual_duration": 0,
-                      "status": "pending",
-                      "related_threads": [],
-                      "fields": ["courses"]
-                    },
-                    {
-                      "id": "4.2",
-                      "type": "skills",
-                      "focus": "Identify skills gained during education at TechU Berlin",
-                      "duration": 300,
-                      "actual_duration": 0,
-                      "status": "pending",
-                      "related_threads": [],
-                      "fields": ["score"]
-                    }
-                  ]
-                },
-                {
-                  "id": "5",
-                  "type": "certificates",
-                  "reference": {
-                    "section": "certificates",
-                    "identifier": {
-                      "name": "Certified Scrum Master"
-                    }
-                  },
-                  "threads": [
-                    {
-                      "id": "5.1",
-                      "type": "core_details",
-                      "focus": "Discuss the relevance and application of certifications in current role",
-                      "duration": 600,
-                      "actual_duration": 0,
-                      "status": "pending",
-                      "related_threads": [],
-                      "fields": ["name"]
-                    }
-                  ]
+                    "career_data_id": "12345",
+                    "topics": [
+                        {
+                            "id": "gap_current_status",
+                            "type": "gap",
+                            "reference": {
+                                "section": "work",
+                                "identifier": {
+                                    "name": "TechGiant",
+                                    "startDate": "2024-01"
+                                }
+                            },
+                            "threads": [
+                                {
+                                    "id": "gap_employment_2025",
+                                    "type": "core_details",
+                                    "focus": "Identify current employment status - CV only shows until 2024-12",
+                                    "duration": 15,
+                                    "actual_duration": 0,
+                                    "status": "pending"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "gap_post_techgiant",
+                            "type": "gap",
+                            "reference": {
+                                "section": "work",
+                                "identifier": {
+                                    "name": "TechGiant",
+                                    "startDate": "2024-12"
+                                }
+                            },
+                            "threads": [
+                                {
+                                    "id": "gap_recent_activities",
+                                    "type": "core_details",
+                                    "focus": "Understand activities and employment since TechGiant (2024-12 to present)",
+                                    "duration": 20,
+                                    "actual_duration": 0,
+                                    "status": "pending"
+                                },
+                                {
+                                    "id": "gap_transition_reason",
+                                    "type": "transition",
+                                    "focus": "Explore reasons for leaving TechGiant and career direction",
+                                    "duration": 10,
+                                    "actual_duration": 0,
+                                    "status": "pending"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "gap_skills_update",
+                            "type": "gap",
+                            "reference": {
+                                "section": "skills",
+                                "identifier": {
+                                    "name": "Programming Languages"
+                                }
+                            },
+                            "threads": [
+                                {
+                                    "id": "gap_recent_skills",
+                                    "type": "skill_application",
+                                    "focus": "Update on new skills acquired since last CV update",
+                                    "duration": 10,
+                                    "actual_duration": 0,
+                                    "status": "pending"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "gap_certificates_current",
+                            "type": "gap",
+                            "reference": {
+                                "section": "certificates",
+                                "identifier": {
+                                    "name": "AWS Certified Solutions Architect"
+                                }
+                            },
+                            "threads": [
+                                {
+                                    "id": "gap_cert_status",
+                                    "type": "certification_details",
+                                    "focus": "Verify current validity of certificates and any new ones obtained",
+                                    "duration": 8,
+                                    "actual_duration": 0,
+                                    "status": "pending"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "gap_location_current",
+                            "type": "gap",
+                            "reference": {
+                                "section": "basics",
+                                "identifier": {
+                                    "name": "Max Wurst"
+                                }
+                            },
+                            "threads": [
+                                {
+                                    "id": "gap_current_location",
+                                    "type": "core_details",
+                                    "focus": "Verify current location and contact details",
+                                    "duration": 5,
+                                    "actual_duration": 0,
+                                    "status": "pending"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "gap_techgiant_achievements",
+                            "type": "gap",
+                            "reference": {
+                                "section": "work",
+                                "identifier": {
+                                    "name": "TechGiant",
+                                    "startDate": "2024-01"
+                                }
+                            },
+                            "threads": [
+                                {
+                                    "id": "gap_final_achievements",
+                                    "type": "achievements",
+                                    "focus": "Document final achievements and impact at TechGiant",
+                                    "duration": 15,
+                                    "actual_duration": 0,
+                                    "status": "pending"
+                                },
+                                {
+                                    "id": "gap_project_completion",
+                                    "type": "project_specifics",
+                                    "focus": "Status of projects at time of departure",
+                                    "duration": 10,
+                                    "actual_duration": 0,
+                                    "status": "pending"
+                                }
+                            ]
+                        }
+                    ]
                 }
-              ]
-            }        
             """;
         InterviewPlan interviewPlan = new ObjectMapper().readValue(json, InterviewPlan.class);
     }

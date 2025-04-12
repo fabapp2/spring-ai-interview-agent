@@ -1,9 +1,7 @@
 
 package io.promptics.jobagent.interviewplan;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -11,34 +9,29 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-
-/**
- * Structure for planning career data gathering interviews
- * 
- */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "topics"
+    "name",
+    "startDate",
+    "date"
 })
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document("career_data")
-public class InterviewPlan {
+public class Identifier {
 
-    @Id
-    @JsonProperty("career_data_id")
-    private String careerDataId;
-
-    @JsonProperty("topics")
-    @Singular
-    public List<Topic> topics = new ArrayList<Topic>();
-
+    @JsonProperty("name")
+    public String name;
+    @JsonProperty("startDate")
+    public String startDate;
+    @JsonProperty("date")
+    public String date;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
