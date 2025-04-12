@@ -23,7 +23,7 @@ import java.util.Optional;
 public class InterviewPlanner {
 
     private static final String systemPrompt = """
-            You are an interview planning agent. 
+            You are an interview planning agent.
             Create a structured career interview plan that focuses on identifying and filling information gaps before exploring career experiences in depth.
 
              CURRENT DATE TIME: {datetime}
