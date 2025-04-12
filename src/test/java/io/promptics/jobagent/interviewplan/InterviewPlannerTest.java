@@ -54,160 +54,123 @@ class InterviewPlannerTest {
         given(dateTimeProvider.getDateTime()).willReturn("2025-01-13 12:33:45");
         given(careerDataRepository.findById("67e98007bd5c558ba6ad93d6")).willReturn(Optional.of(careerData));
         InterviewContext context = new InterviewContext("67e98007bd5c558ba6ad93d6", "222", "333", "Max");
-        String interviewPlan = interviewPlanner.run(context);
-        System.out.println(interviewPlan);
-        InterviewPlan interviewPlan1 = objectMapper.readValue(interviewPlan, InterviewPlan.class);
-        assertThat(interviewPlan1).isNotNull();
+        InterviewPlan interviewPlan = interviewPlanner.run(context);
+        assertThat(interviewPlan.getTopics()).hasSizeGreaterThan(2);
     }
 
     @Test
+//    @Disabled("Only to verify deserialization if it fails")
     @DisplayName("deserialize")
     void deserialize() throws JsonProcessingException {
         String json = """
                 {
-                    "career_data_id": "12345",
-                    "topics": [
-                        {
-                            "id": "gap_current_status",
-                            "type": "gap",
-                            "reference": {
-                                "section": "work",
-                                "identifier": {
-                                    "name": "TechGiant",
-                                    "startDate": "2024-01"
-                                }
-                            },
-                            "threads": [
-                                {
-                                    "id": "gap_employment_2025",
-                                    "type": "core_details",
-                                    "focus": "Identify current employment status - CV only shows until 2024-12",
-                                    "duration": 15,
-                                    "actual_duration": 0,
-                                    "status": "pending"
-                                }
-                            ]
-                        },
-                        {
-                            "id": "gap_post_techgiant",
-                            "type": "gap",
-                            "reference": {
-                                "section": "work",
-                                "identifier": {
-                                    "name": "TechGiant",
-                                    "startDate": "2024-12"
-                                }
-                            },
-                            "threads": [
-                                {
-                                    "id": "gap_recent_activities",
-                                    "type": "core_details",
-                                    "focus": "Understand activities and employment since TechGiant (2024-12 to present)",
-                                    "duration": 20,
-                                    "actual_duration": 0,
-                                    "status": "pending"
-                                },
-                                {
-                                    "id": "gap_transition_reason",
-                                    "type": "transition",
-                                    "focus": "Explore reasons for leaving TechGiant and career direction",
-                                    "duration": 10,
-                                    "actual_duration": 0,
-                                    "status": "pending"
-                                }
-                            ]
-                        },
-                        {
-                            "id": "gap_skills_update",
-                            "type": "gap",
-                            "reference": {
-                                "section": "skills",
-                                "identifier": {
-                                    "name": "Programming Languages"
-                                }
-                            },
-                            "threads": [
-                                {
-                                    "id": "gap_recent_skills",
-                                    "type": "skill_application",
-                                    "focus": "Update on new skills acquired since last CV update",
-                                    "duration": 10,
-                                    "actual_duration": 0,
-                                    "status": "pending"
-                                }
-                            ]
-                        },
-                        {
-                            "id": "gap_certificates_current",
-                            "type": "gap",
-                            "reference": {
-                                "section": "certificates",
-                                "identifier": {
-                                    "name": "AWS Certified Solutions Architect"
-                                }
-                            },
-                            "threads": [
-                                {
-                                    "id": "gap_cert_status",
-                                    "type": "certification_details",
-                                    "focus": "Verify current validity of certificates and any new ones obtained",
-                                    "duration": 8,
-                                    "actual_duration": 0,
-                                    "status": "pending"
-                                }
-                            ]
-                        },
-                        {
-                            "id": "gap_location_current",
-                            "type": "gap",
-                            "reference": {
-                                "section": "basics",
-                                "identifier": {
-                                    "name": "Max Wurst"
-                                }
-                            },
-                            "threads": [
-                                {
-                                    "id": "gap_current_location",
-                                    "type": "core_details",
-                                    "focus": "Verify current location and contact details",
-                                    "duration": 5,
-                                    "actual_duration": 0,
-                                    "status": "pending"
-                                }
-                            ]
-                        },
-                        {
-                            "id": "gap_techgiant_achievements",
-                            "type": "gap",
-                            "reference": {
-                                "section": "work",
-                                "identifier": {
-                                    "name": "TechGiant",
-                                    "startDate": "2024-01"
-                                }
-                            },
-                            "threads": [
-                                {
-                                    "id": "gap_final_achievements",
-                                    "type": "achievements",
-                                    "focus": "Document final achievements and impact at TechGiant",
-                                    "duration": 15,
-                                    "actual_duration": 0,
-                                    "status": "pending"
-                                },
-                                {
-                                    "id": "gap_project_completion",
-                                    "type": "project_specifics",
-                                    "focus": "Status of projects at time of departure",
-                                    "duration": 10,
-                                    "actual_duration": 0,
-                                    "status": "pending"
-                                }
-                            ]
-                        }
-                    ]
-                }
+                       "$schema": "http://json-schema.org/draft-07/schema#",
+                       "type": "object",
+                       "description": "Structure for planning career data gathering interviews",
+                       "properties": {
+                         "career_data_id": {
+                           "type": "string",
+                           "description": "Foreign key reference to the id of the career data document"
+                         },
+                         "topics": [
+                           {
+                             "id": "gap_current_employment",
+                             "type": "gap",
+                             "reference": {
+                               "section": "work",
+                               "identifier": {
+                                 "name": "TechGiant",
+                                 "startDate": "2024-01"
+                               }
+                             },
+                             "threads": [
+                               {
+                                 "id": "current_status",
+                                 "type": "core_details",
+                                 "focus": "Determine current employment status and activities since December 2024",
+                                 "duration": 15,
+                                 "status": "pending"
+                               }
+                             ]
+                           },
+                           {
+                             "id": "gap_team_context",
+                             "type": "gap",
+                             "reference": {
+                               "section": "work",
+                               "identifier": {
+                                 "name": "TechGiant",
+                                 "startDate": "2024-01"
+                               }
+                             },
+                             "threads": [
+                               {
+                                 "id": "team_details",
+                                 "type": "team_context",
+                                 "focus": "Determine team size, structure, and responsibilities",
+                                 "duration": 10,
+                                 "status": "pending"
+                               }
+                             ]
+                           },
+                           {
+                             "id": "techgiant_achievements",
+                             "type": "work_experience",
+                             "reference": {
+                               "section": "work",
+                               "identifier": {
+                                 "name": "TechGiant",
+                                 "startDate": "2024-01"
+                               }
+                             },
+                             "threads": [
+                               {
+                                 "id": "system_downtime_reduction",
+                                 "type": "achievements",
+                                 "focus": "Details of how system downtime was reduced by 30%",
+                                 "duration": 15,
+                                 "status": "pending"
+                               },
+                               {
+                                 "id": "team_leadership",
+                                 "type": "core_details",
+                                 "focus": "Leadership style and team dynamics",
+                                 "duration": 10,
+                                 "status": "pending"
+                               }
+                             ]
+                           },
+                           {
+                             "id": "skills_development",
+                             "type": "skill_area",
+                             "reference": {
+                               "section": "skills",
+                               "identifier": {
+                                 "name": "Programming Languages"
+                               }
+                             },
+                             "threads": [
+                               {
+                                 "id": "programming_languages_usage",
+                                 "type": "skill_application",
+                                 "focus": "Practical application of programming languages in recent roles",
+                                 "duration": 15,
+                                 "status": "pending",
+                                 "related_threads": ["frameworks_usage"]
+                               },
+                               {
+                                 "id": "frameworks_usage",
+                                 "type": "project_specifics",
+                                 "focus": "Specific frameworks used in projects and their impact",
+                                 "duration": 10,
+                                 "status": "pending"
+                               }
+                             ]
+                           }
+                         ]
+                       },
+                       "required": ["topics"]
+                     }
             """;
         InterviewPlan interviewPlan = new ObjectMapper().readValue(json, InterviewPlan.class);
     }
