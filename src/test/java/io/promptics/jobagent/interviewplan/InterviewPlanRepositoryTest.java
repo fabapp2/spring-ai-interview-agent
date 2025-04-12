@@ -1,9 +1,9 @@
-package io.promptics.jobagent;
+package io.promptics.jobagent.interviewplan;
 
-import io.promptics.jobagent.interviewplan.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -15,7 +15,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
+@DataMongoTest
 @Testcontainers
 class InterviewPlanRepositoryTest {
 
@@ -26,20 +26,11 @@ class InterviewPlanRepositoryTest {
     @Autowired
     InterviewPlanRepository repository;
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
-
-    @Test
-    void testMongoDBConnection() {
-        // Verify MongoDB connection is established
-        assertThat(mongoTemplate).isNotNull();
-        assertThat(mongoDBContainer.isRunning()).isTrue();
-    }
-
     @Test
     @DisplayName("crud")
     void crud() {
         InterviewPlan entity = InterviewPlan.builder()
+                .careerDataId("1234")
                 .topic(InterviewTopic.builder()
                         .reference(Reference.builder()
                                 .section("basics")
@@ -79,5 +70,6 @@ class InterviewPlanRepositoryTest {
                         .build())
                 .build();
         InterviewPlan saved = repository.save(entity);
+        assertThat(saved).isNotNull();
     }
 }

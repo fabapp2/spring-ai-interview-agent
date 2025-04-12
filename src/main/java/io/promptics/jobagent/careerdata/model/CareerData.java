@@ -13,6 +13,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.validation.Valid;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 
 /**
@@ -38,11 +40,13 @@ import jakarta.validation.Valid;
     "projects",
     "meta"
 })
+@Document("career_data")
 public class CareerData {
+    @Id
+    private String id;
 
     /**
      * link to the version of the schema that can validate the resume
-     * 
      */
     @JsonProperty("$schema")
     @JsonPropertyDescription("link to the version of the schema that can validate the resume")

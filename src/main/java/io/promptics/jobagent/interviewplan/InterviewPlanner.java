@@ -27,10 +27,6 @@ public class InterviewPlanner {
             Create a structured career interview plan that first validates all existing data before exploring deeper insights. 
             After validation, organize by specific career experiences as topics, with multiple investigation threads for each topic.
                         
-            TIME LEFT: {time_left} minutes
-            TIME PLANNED: {time_planned} minutes
-            CURRENT DATE TIME: {datetime}
-                        
             GUIDELINES:
                         
             DETAILED EXPLORATION:
@@ -56,6 +52,14 @@ public class InterviewPlanner {
               * Completion criteria
                         
             - Enable dynamic thread creation based on discoveries
+                        
+            TIME PLANNING:
+            Plan realistic time in seconds for every thread.
+            Take the time left into acount and plan accordingly.
+            
+            TIME LEFT: {time_left} minutes
+            TIME PLANNED: {time_planned} minutes
+            CURRENT DATE TIME: {datetime}            
                         
             EXAMPLES:
             
@@ -324,13 +328,11 @@ public class InterviewPlanner {
             """;
 
     private final CareerDataRepository careerDataRepository;
-    private final ChatMemory chatMemory;
     private final ChatClient client;
     private final ObjectMapper objectMapper;
     private final DateTimeProvider datetimeProvider;
 
-    public InterviewPlanner(ChatClient.Builder chatClientBuilder, ChatMemory chatMemory, CareerDataRepository careerDataRepository, ObjectMapper objectMapper, DateTimeProvider datetimeProvider) {
-        this.chatMemory = chatMemory;
+    public InterviewPlanner(ChatClient.Builder chatClientBuilder, CareerDataRepository careerDataRepository, ObjectMapper objectMapper, DateTimeProvider datetimeProvider) {
         this.client = chatClientBuilder.defaultOptions(ChatOptions.builder().temperature(0.0).build()).build();
         this.careerDataRepository = careerDataRepository;
         this.objectMapper = objectMapper;

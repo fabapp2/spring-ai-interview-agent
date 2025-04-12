@@ -1,8 +1,10 @@
 package io.promptics.jobagent.interviewplan;
 
 import lombok.Builder;
+import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@Data
 @Document
 @Builder
 public class Reference {
