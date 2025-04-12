@@ -65,11 +65,6 @@
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>io.github.eaxdev</groupId>
-            <artifactId>jsonresume-validator</artifactId>
-            <version>0.0.2</version>
-        </dependency>
 
         <dependency>
             <groupId>com.sun.codemodel</groupId>
