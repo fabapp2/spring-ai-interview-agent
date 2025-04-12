@@ -21,9 +21,9 @@ import java.util.Optional;
 @Component
 public class InterviewPlanner {
     
-    private static String systemPrompt = """
+    private static final String systemPrompt = """
         You are an interview planning agent. Create a structured career interview plan that focuses on identifying and filling information gaps before exploring career experiences in depth.
-                             
+
          CURRENT DATE TIME: {datetime}
          TIME LEFT: {time_left} minutes
          TIME PLANNED: {time_planned} minutes
@@ -231,7 +231,7 @@ public class InterviewPlanner {
         Do NOT return the JSON wrapped in ```json and ```.q 
         Expected JSON schema:
         {json_schema}
-            """;
+        """;
 
     private final CareerDataRepository careerDataRepository;
     private final ChatClient client;
@@ -275,8 +275,7 @@ public class InterviewPlanner {
         Optional<CareerData> careerDataOpt = careerDataRepository.findById(careerDataId);
         CareerData careerData = careerDataOpt.orElseThrow(() -> new IllegalStateException("No career data found for id from context: %s".formatted(careerDataId)));
         try {
-            String asString = objectMapper.writeValueAsString(careerData);
-            return asString;
+            return objectMapper.writeValueAsString(careerData);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
