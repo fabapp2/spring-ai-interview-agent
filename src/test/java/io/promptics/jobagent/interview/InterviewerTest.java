@@ -39,6 +39,7 @@ class InterviewerTest {
 //        String response4 = interviewer.run(um4);
 //        user(um4);
 //        assistant(response4);
+        /*
         Map<String, String> memory = interviewer.getMemory();
         memory.put("user", "start the interview");
         memory.put("assistant", "Thank you for participating in this interview. To begin, can you please share your current employment status since leaving TechGiant in December 2024?");
@@ -60,6 +61,7 @@ class InterviewerTest {
         String response6 = interviewer.run(context, um6);
         user(um6);
         assistant(response6);
+        */
     }
 
     private void assistant(String message) {

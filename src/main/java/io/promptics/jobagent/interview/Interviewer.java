@@ -16,8 +16,6 @@ import java.util.stream.Collectors;
 @Component
 public class Interviewer {
 
-    private Map<String, String> memory = new HashMap<>();
-
     private static final String systemPrompt = """
             You are an experienced interviewer.
             You are conducting a user interview to gather career data from a user.
@@ -56,9 +54,7 @@ public class Interviewer {
 
         String topicThreadSummary = topicAndThread.render();
 
-        String prompt = systemPrompt
-                .replace("{memory}", renderMemory(memory))
-                .replace("{current_thread}", topicThreadSummary);
+        String prompt = systemPrompt.replace("{current_thread}", topicThreadSummary);
 
         String output = client.prompt()
                 .system(prompt)
@@ -66,7 +62,12 @@ public class Interviewer {
                 .tools(mongoDbTools)
                 .call()
                 .content();
-        memory.put("assistant", output);
+
+        mongoDbService.addToThreadConversation(topicAndThread.getThreadId(), ConversationEntry.builder()
+                .role("assistant")
+                .text(output)
+                .build());
+
         return output;
     }
 
@@ -76,7 +77,4 @@ public class Interviewer {
                 .collect(Collectors.joining("\n\n"));
     }
 
-    public Map<String, String> getMemory() {
-        return memory;
-    }
 }
