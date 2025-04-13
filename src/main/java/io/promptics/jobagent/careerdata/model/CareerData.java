@@ -35,7 +35,7 @@ import java.util.Map;
     "projects",
     "meta"
 })
-@Document(collation = "career_data")
+@Document(collection = "career_data")
 public class CareerData {
     @Id
     private String id;

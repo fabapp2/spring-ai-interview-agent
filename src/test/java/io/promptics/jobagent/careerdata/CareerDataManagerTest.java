@@ -15,6 +15,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -53,8 +54,12 @@ class CareerDataManagerTest {
 
     @Test
     @DisplayName("modify email in basis")
-    void modifyEmailInBasis() {
-        String result = careerDataManager.run("Change email from max.wurst@techgiant.com to max@wurst.com for id 12423");
-        repository.findById(id);
+    void modifyEmailInBasis() throws JsonProcessingException {
+        Optional<CareerData> before = repository.findById(id);
+        String result = careerDataManager.run("Change email from max.wurst@techgiant.com to max@wurst.com for id %s".formatted(id));
+        System.out.println(result);
+        assertThat(result).contains("Successfully updated document using set on basics.email");
+        Optional<CareerData> after = repository.findById(id);
+        assertThat(after.get().getBasics().getEmail()).isEqualTo("max@wurst.com");
     }
 }

@@ -110,7 +110,7 @@ public class MongoUpdateService {
 
             // Execute the update
             UpdateResult result = mongoTemplate.updateFirst(
-                Query.query(Criteria.where("_id").is(new ObjectId(idStr))),
+                Query.query(Criteria.where("_id").is(idStr)),
                 update,
                 "career_data"
             );
