@@ -67,7 +67,7 @@ spring:
     mongodb:
       host: localhost
       port: 27017
-      database: baeldung
+      database: interview
       username: admin
       password: password
 ```
