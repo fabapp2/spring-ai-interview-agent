@@ -6,6 +6,7 @@ import io.promptics.jobagent.InterviewContext;
 import io.promptics.jobagent.careerdata.CareerDataRepository;
 import io.promptics.jobagent.careerdata.model.CareerData;
 import io.promptics.jobagent.utils.DateTimeProvider;
+import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
@@ -21,6 +22,7 @@ import java.nio.file.Files;
 import java.util.Map;
 import java.util.Optional;
 
+@Slf4j
 @Component
 public class InterviewPlanner {
 
@@ -269,7 +271,7 @@ public class InterviewPlanner {
                     .call()
                     .content();
             // Using getEntity() was problematic, Topic.Type was not created
-            System.out.println(content);
+            log.debug(content);
             return new ObjectMapper().readValue(content, InterviewPlan.class);
         } catch (JsonProcessingException e) {
             throw new IllegalStateException(e);
