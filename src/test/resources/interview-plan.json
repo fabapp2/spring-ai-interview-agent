@@ -1,0 +1,119 @@
+{
+  "career_data_id": "max_wurst_career_data",
+  "topics": [
+    {
+      "id": "gap_current_employment",
+      "type": "gap",
+      "reference": {
+        "section": "work",
+        "identifier": {
+          "name": "TechGiant",
+          "startDate": "2024-01"
+        }
+      },
+      "threads": [
+        {
+          "id": "current_status",
+          "type": "core_details",
+          "focus": "Determine current employment status and activities since December 2024",
+          "duration": 15,
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "gap_team_context",
+      "type": "gap",
+      "reference": {
+        "section": "work",
+        "identifier": {
+          "name": "TechGiant",
+          "startDate": "2024-01"
+        }
+      },
+      "threads": [
+        {
+          "id": "team_details",
+          "type": "team_context",
+          "focus": "Determine team size, structure, and responsibilities at TechGiant",
+          "duration": 10,
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "gap_techgiant_achievements",
+      "type": "gap",
+      "reference": {
+        "section": "work",
+        "identifier": {
+          "name": "TechGiant",
+          "startDate": "2024-01"
+        }
+      },
+      "threads": [
+        {
+          "id": "key_achievements",
+          "type": "achievements",
+          "focus": "Gather details on key achievements and their impact at TechGiant",
+          "duration": 10,
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "techgiant_productivity",
+      "type": "work_experience",
+      "reference": {
+        "section": "work",
+        "identifier": {
+          "name": "TechGiant",
+          "startDate": "2024-01"
+        }
+      },
+      "threads": [
+        {
+          "id": "productivity_methods",
+          "type": "core_details",
+          "focus": "Discuss methods used to maintain productivity and team morale",
+          "duration": 10,
+          "status": "pending"
+        },
+        {
+          "id": "tech_stack",
+          "type": "technical_depth",
+          "focus": "Explore the technologies and tools used in projects at TechGiant",
+          "duration": 10,
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "skills_development",
+      "type": "skill_area",
+      "reference": {
+        "section": "skills",
+        "identifier": {
+          "name": "Programming Languages"
+        }
+      },
+      "threads": [
+        {
+          "id": "programming_experience",
+          "type": "skill_application",
+          "focus": "Discuss practical application of programming languages in recent roles",
+          "duration": 15,
+          "status": "pending",
+          "related_threads": ["frameworks_experience"]
+        },
+        {
+          "id": "frameworks_experience",
+          "type": "project_specifics",
+          "focus": "Specific projects involving frameworks and their outcomes",
+          "duration": 10,
+          "status": "pending"
+        }
+      ]
+    }
+  ]
+}
