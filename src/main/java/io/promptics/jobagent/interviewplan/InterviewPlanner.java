@@ -26,6 +26,72 @@ import java.util.Optional;
 @Component
 public class InterviewPlanner {
 
+    private final CareerDataRepository careerDataRepository;
+    private final ChatClient client;
+    private final ObjectMapper objectMapper;
+    private final DateTimeProvider datetimeProvider;
+
+    // find prompts at the end...
+
+    public InterviewPlanner(ChatClient.Builder chatClientBuilder, CareerDataRepository careerDataRepository, ObjectMapper objectMapper, DateTimeProvider datetimeProvider) {
+        this.client = chatClientBuilder.defaultOptions(ChatOptions.builder().temperature(0.0).build()).build();
+        this.careerDataRepository = careerDataRepository;
+        this.objectMapper = objectMapper;
+        this.datetimeProvider = datetimeProvider;
+    }
+
+    public InterviewPlan run(InterviewContext context) {
+        String jsonSchema = getJsonSchema();
+        String careerData = getCareerData(context);
+        PromptTemplate prompt = new PromptTemplate(systemPrompt);
+        String renderedPrompt = prompt.render(Map.of(
+                "json_schema", jsonSchema,
+                "datetime", datetimeProvider.getDateTime(),
+                "time_planned", "60",
+                "time_left", "55",
+                "few_shot", fewShot
+        ));
+
+        String userPrompt = new PromptTemplate("CAREER DATA TO WORK WITH:\n{career_data}")
+                .render(Map.of("career_data", careerData));
+
+        try {
+            String content = client.prompt()
+                    .system(renderedPrompt)
+                    .user(userPrompt)
+                    .advisors(
+                            new SimpleLoggerAdvisor()
+                    )
+                    .call()
+                    .content();
+            // Using getEntity() was problematic, Topic.Type was not created
+            log.debug(content);
+            return new ObjectMapper().readValue(content, InterviewPlan.class);
+        } catch (JsonProcessingException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    private String getCareerData(InterviewContext context) {
+        String careerDataId = context.getCareerDataId();
+        Optional<CareerData> careerDataOpt = careerDataRepository.findById(careerDataId);
+        CareerData careerData = careerDataOpt.orElseThrow(() -> new IllegalStateException("No career data found for id from context: %s".formatted(careerDataId)));
+        try {
+            return objectMapper.writeValueAsString(careerData);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String getJsonSchema() {
+        try {
+            ClassPathResource resource = new ClassPathResource("interview-plan-schema.json");
+            return Files.readString(resource.getFile().toPath(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private static final String systemPrompt = """
             You are an interview planning agent.
             Create a structured career interview plan that focuses on identifying and filling information gaps before exploring career experiences in depth.
@@ -72,6 +138,18 @@ public class InterviewPlanner {
              - Gather more information
              
             EXAMPLES:
+            {few_shot}        
+                    
+                            
+            EXPECTED OUTPUT:
+            Create a structured interview plan following this exact JSON schema:
+            {json_schema}
+            
+            Return an interview plan that follows this schema exactly. Do not return the schema itself.
+            Do not wrap the JSON in ```json and ```                                    
+            """;
+
+    private final String fewShot = """
                     
             ## 1. Recent Employment Gap
             Current Date: 2025-04-12
@@ -224,77 +302,6 @@ public class InterviewPlanner {
                         "status": "pending"
                     }}]
                 }}]
-            }}            
-                    
-                            
-            EXPECTED OUTPUT:
-            Create a structured interview plan following this exact JSON schema:
-            {json_schema}
-            
-            Return an interview plan that follows this schema exactly. Do not return the schema itself.
-            Do not wrap the JSON in ```json and ```                                    
+            }}    
             """;
-
-    private final CareerDataRepository careerDataRepository;
-    private final ChatClient client;
-    private final ObjectMapper objectMapper;
-    private final DateTimeProvider datetimeProvider;
-
-    public InterviewPlanner(ChatClient.Builder chatClientBuilder, CareerDataRepository careerDataRepository, ObjectMapper objectMapper, DateTimeProvider datetimeProvider) {
-        this.client = chatClientBuilder.defaultOptions(ChatOptions.builder().temperature(0.0).build()).build();
-        this.careerDataRepository = careerDataRepository;
-        this.objectMapper = objectMapper;
-        this.datetimeProvider = datetimeProvider;
-    }
-
-    public InterviewPlan run(InterviewContext context) {
-        String jsonSchema = getJsonSchema();
-        String careerData = getCareerData(context);
-        PromptTemplate prompt = new PromptTemplate(systemPrompt);
-        String renderedPrompt = prompt.render(Map.of(
-                "json_schema", jsonSchema,
-                "datetime", datetimeProvider.getDateTime(),
-                "time_planned", "60",
-                "time_left", "55"
-        ));
-
-        String userPrompt = new PromptTemplate("CAREER DATA TO WORK WITH:\n{career_data}")
-                .render(Map.of("career_data", careerData));
-
-        try {
-            String content = client.prompt()
-                    .system(renderedPrompt)
-                    .user(userPrompt)
-                    .advisors(
-                            new SimpleLoggerAdvisor()
-                    )
-                    .call()
-                    .content();
-            // Using getEntity() was problematic, Topic.Type was not created
-            log.debug(content);
-            return new ObjectMapper().readValue(content, InterviewPlan.class);
-        } catch (JsonProcessingException e) {
-            throw new IllegalStateException(e);
-        }
-    }
-
-    private String getCareerData(InterviewContext context) {
-        String careerDataId = context.getCareerDataId();
-        Optional<CareerData> careerDataOpt = careerDataRepository.findById(careerDataId);
-        CareerData careerData = careerDataOpt.orElseThrow(() -> new IllegalStateException("No career data found for id from context: %s".formatted(careerDataId)));
-        try {
-            return objectMapper.writeValueAsString(careerData);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private String getJsonSchema() {
-        try {
-            ClassPathResource resource = new ClassPathResource("interview-plan-schema.json");
-            return Files.readString(resource.getFile().toPath(), StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
