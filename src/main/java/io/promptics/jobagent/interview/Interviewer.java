@@ -1,11 +1,15 @@
 package io.promptics.jobagent.interview;
 
+import io.promptics.jobagent.InterviewContext;
+import io.promptics.jobagent.interviewplan.ConversationEntry;
+import io.promptics.jobagent.interviewplan.InterviewPlanMongoDbService;
+import io.promptics.jobagent.interviewplan.InterviewPlanMongoDbTools;
+import io.promptics.jobagent.interviewplan.TopicAndThread;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -24,7 +28,7 @@ public class Interviewer {
             You decide when the thread is completed.
             
             
-            {topic_thread}
+            {current_thread}
           
             
             # Expected Output:
@@ -32,62 +36,38 @@ public class Interviewer {
             """;
 
     private final ChatClient client;
+    private final InterviewPlanMongoDbTools mongoDbTools;
+    private final InterviewPlanMongoDbService mongoDbService;
 
-    public Interviewer(ChatClient.Builder builder) {
+    public Interviewer(ChatClient.Builder builder, InterviewPlanMongoDbTools mongoDbTools, InterviewPlanMongoDbService mongoDbService) {
         client = builder.defaultOptions(ChatOptions.builder().temperature(0.0).build()).build();
+        this.mongoDbTools = mongoDbTools;
+        this.mongoDbService = mongoDbService;
     }
 
-    public String run(String input) {
-        memory.put("user", input);
-        String topicThreadSummary = createTopicThreadSummary();
+    public String run(InterviewContext context, String input) {
+
+        TopicAndThread topicAndThread = mongoDbService.findCurrentTopicAndThread(context.getCareerDataId());
+
+        mongoDbService.addToThreadConversation(topicAndThread.getThreadId(), ConversationEntry.builder()
+                        .role("user")
+                        .text(input)
+                        .build());
+
+        String topicThreadSummary = topicAndThread.render();
+
         String prompt = systemPrompt
                 .replace("{memory}", renderMemory(memory))
-                .replace("{topic_thread}", topicThreadSummary);
+                .replace("{current_thread}", topicThreadSummary);
+
         String output = client.prompt()
                 .system(prompt)
                 .user(input)
+                .tools(mongoDbTools)
                 .call()
                 .content();
         memory.put("assistant", output);
         return output;
-    }
-
-    private String createTopicThreadSummary() {
-        return """
-            # Current Topic: Employment Gap
-            Type: gap
-            Focus: Current employment status
-            
-            ## Reference
-            - Company: TechGiant
-            - Last Position: Senior Developer
-            - Period: January 2024 - December 2024
-            
-            ## Active Thread
-            ID: current_status
-            Type: core_details
-            Focus: Determine current employment status and activities since December 2024
-            
-            ## Relevant Context
-            Last Known Position:
-            - Company: TechGiant
-            - Role: Senior Developer
-            - Key Achievements:
-              * Led a team of developers
-              * Architected scalable solutions
-              * Reduced system downtime by 30%
-            
-            Gap Period:
-            - From: December 2024
-            - To: Present (April 2024)
-            - Duration: 4 months
-            
-            ## Previous Conversation
-            {memory}
-            
-            ## Current Date
-            2025-04-12
-            """;
     }
 
     private String renderMemory(Map<String, String> memory) {

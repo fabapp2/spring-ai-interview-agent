@@ -7,18 +7,22 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class ConversationEntry {
+    // ISO-8601 format
     @JsonProperty("timestamp")
-    private String timestamp;  // ISO-8601 format
-    
-    @JsonProperty("question")
-    private String question;
-    
-    @JsonProperty("response")
-    private String response;
+    private String timestamp = Instant.now().toString();
+
+    @JsonProperty("role")
+    private String role;
+
+    @JsonProperty("text")
+    private String text;
+
 }

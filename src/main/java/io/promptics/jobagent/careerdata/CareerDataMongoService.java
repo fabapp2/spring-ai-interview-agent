@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.promptics.jobagent.careerdata.model.CareerData;
 import org.springframework.data.mongodb.core.query.Update.Position;
 import com.mongodb.client.result.UpdateResult;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -19,7 +18,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 @Service
-public class MongoUpdateService {
+public class CareerDataMongoService {
 
     @Autowired
     private MongoTemplate mongoTemplate;

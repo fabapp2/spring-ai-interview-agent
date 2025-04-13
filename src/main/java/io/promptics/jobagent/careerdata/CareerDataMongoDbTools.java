@@ -4,20 +4,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.promptics.jobagent.careerdata.model.CareerData;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
 
 @Component
 public class CareerDataMongoDbTools {
 
-    private final MongoUpdateService mongoUpdateService;
+    private final CareerDataMongoService careerDataMongoService;
 
-    public CareerDataMongoDbTools(MongoUpdateService mongoUpdateService) {
-        this.mongoUpdateService = mongoUpdateService;
+    public CareerDataMongoDbTools(CareerDataMongoService careerDataMongoService) {
+        this.careerDataMongoService = careerDataMongoService;
     }
 
     @Tool(description = """
@@ -36,7 +33,7 @@ public class CareerDataMongoDbTools {
                     instead of '67e31ae04b0cd916828428fa' or "67e31ae04b0cd916828428fa"
                     """) String id) {
         try {
-            CareerData careerData = mongoUpdateService.getById(id);
+            CareerData careerData = careerDataMongoService.getById(id);
             return new ObjectMapper().writeValueAsString(careerData);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -62,7 +59,7 @@ public class CareerDataMongoDbTools {
             Returns:
                 Result message
             """) String query) {
-        String s = mongoUpdateService.updateDocument(query);
+        String s = careerDataMongoService.updateDocument(query);
         return s;
     }
 
