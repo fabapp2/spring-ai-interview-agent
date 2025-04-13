@@ -46,7 +46,7 @@ class InterviewerTest {
         memory.put("assistant", "Thank you for participating in this interview. To begin, can you please share your current employment status since leaving TechGiant in December 2024?");
         memory.put("user", "I am unemployed since then.");
         memory.put("assistant", "Thank you for sharing that. Can you tell me what activities or projects you have been involved in during your time since leaving TechGiant?");
-        memory.put("uaer", "I learned abut AI, LLMs andagentic systems implementing different toy projects.");
+        memory.put("uaer", "I learned abut AI, LLMs and agentic systems implementing different toy projects.");
         memory.put("assistant", "Thank you for sharing that. Can you tell me how you have been spending your time since December 2024? Have you been looking for new job opportunities or engaging in any other activities?");
         memory.put("user", "Why is this relevant?");
         memory.put("assistant", "Understanding your current employment status and activities since December 2024 helps us gain insight into your career journey and any factors that may have influenced your employment gap. It allows us to better understand your skills, experiences, and how you are navigating your career path. With that in mind, can you share what you have been doing since December 2024?");
