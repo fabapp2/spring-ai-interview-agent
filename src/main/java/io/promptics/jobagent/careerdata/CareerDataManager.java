@@ -24,11 +24,28 @@ public class CareerDataManager {
         Always strip any quotes or extra characters from the ID string before using it. 
         For example, use 67e31ae04b0cd916828428fa instead of '67e31ae04b0cd916828428fa' or "67e31ae04b0cd916828428fa".
         
-        Expected Result:
-        
+       Expected Result:
        Always return plain JSON without any additional text.
        Do not wrap the returned JSON in ```json and ```
-        """;
+       
+       1. When data was successfully queried by id:
+       Return the data
+       
+       2. When an update was successfully performed or an error occured:
+       Return JSON with a status message.
+       
+       Json: 
+       
+       {
+        "message": "message describing the result"
+       }
+       
+       Examples:
+       - "Successfully changed company name from XXX to YYY"
+       - "Successfully removed XXX from the set of skills"
+       - "Successfully added XXX to certifications"
+       - "Could not remove XXX from set of skills because it does not exist" 
+       """;
 
     //         Also, always verify the schema matches the Resume JSON schema.
 

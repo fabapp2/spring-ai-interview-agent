@@ -3,9 +3,7 @@ package io.promptics.jobagent.careerdata;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.promptics.jobagent.careerdata.model.CareerData;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
@@ -21,6 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Testcontainers
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class CareerDataManagerTest {
 
     @Autowired
@@ -54,12 +53,35 @@ class CareerDataManagerTest {
 
     @Test
     @DisplayName("modify email in basis")
-    void modifyEmailInBasis() throws JsonProcessingException {
+    void modifyEmailInBasis() {
         Optional<CareerData> before = repository.findById(id);
+        assertThat(before.get().getBasics().getEmail()).isEqualTo("max.wurst@techgiant.com");
         String result = careerDataManager.run("Change email from max.wurst@techgiant.com to max@wurst.com for id %s".formatted(id));
-        System.out.println(result);
-        assertThat(result).contains("Successfully updated document using set on basics.email");
+        assertThat(result).contains("Successfully changed email from max.wurst@techgiant.com to max@wurst.com");
         Optional<CareerData> after = repository.findById(id);
         assertThat(after.get().getBasics().getEmail()).isEqualTo("max@wurst.com");
+    }
+
+    @Test
+    @DisplayName("modify company name")
+    void modifyCompanyName() {
+        Optional<CareerData> before = repository.findById(id);
+        assertThat(before.get().getWork().get(1).getName()).isEqualTo("MiniCorp");
+        String result = careerDataManager.run("Change company name MiniCorp to MaxiCorp for id %s".formatted(id));
+        assertThat(result).contains("Successfully changed company name from MiniCorp to MaxiCorp");
+        Optional<CareerData> after = repository.findById(id);
+        assertThat(after.get().getWork().get(1).getName()).isEqualTo("MaxiCorp");
+    }
+
+    @Test
+    @DisplayName("remove Python skill")
+    void removeJavaSkill() {
+        Optional<CareerData> before = repository.findById(id);
+        assertThat(before.get().getSkills().get(0).getKeywords().get(1)).isEqualTo("Python");
+        String result = careerDataManager.run("Remove Python from skills id %s".formatted(id));
+        assertThat(result).contains("Successfully removed Python from the set of skills");
+        Optional<CareerData> after = repository.findById(id);
+        assertThat(after.get().getSkills().get(0).getKeywords().get(1)).isEqualTo("C++");
+        assertThat(after.get().getSkills().get(0).getKeywords()).doesNotContain("Python");
     }
 }
