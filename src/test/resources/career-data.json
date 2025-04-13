@@ -1,7 +1,4 @@
 {
-  "id": {
-    "$oid": "67e98007bd5c558ba6ad93d6"
-  },
   "basics": {
     "name": "Max Wurst",
     "label": "Senior Developer",

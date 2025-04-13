@@ -3,6 +3,7 @@ package io.promptics.jobagent.careerdata;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.promptics.jobagent.careerdata.model.CareerData;
 import org.springframework.data.mongodb.core.query.Update.Position;
 import com.mongodb.client.result.UpdateResult;
 import org.bson.types.ObjectId;
@@ -125,6 +126,10 @@ public class MongoUpdateService {
         } catch (Exception e) {
             return String.format("Error updating MongoDB: %s", e.getMessage());
         }
+    }
+
+    public CareerData getById(String id) {
+        return mongoTemplate.findById(id, CareerData.class);
     }
 
     private Object parseValue(String valueStr) {

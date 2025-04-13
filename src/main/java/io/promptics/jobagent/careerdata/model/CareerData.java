@@ -2,10 +2,10 @@
 package io.promptics.jobagent.careerdata.model;
 
 import com.fasterxml.jackson.annotation.*;
-import jakarta.validation.Valid;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -35,7 +35,7 @@ import java.util.Map;
     "projects",
     "meta"
 })
-@Document("career_data")
+@Document(collation = "career_data")
 public class CareerData {
     @Id
     private String id;
@@ -128,6 +128,14 @@ public class CareerData {
     @JsonIgnore
     @Valid
     private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     /**
      * link to the version of the schema that can validate the resume

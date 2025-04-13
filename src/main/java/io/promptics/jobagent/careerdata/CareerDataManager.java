@@ -23,6 +23,11 @@ public class CareerDataManager {
         IMPORTANT: When updating documents in MongoDB, be careful with the ID format. 
         Always strip any quotes or extra characters from the ID string before using it. 
         For example, use 67e31ae04b0cd916828428fa instead of '67e31ae04b0cd916828428fa' or "67e31ae04b0cd916828428fa".
+        
+        Expected Result:
+        
+       Always return plain JSON without any additional text.
+       Do not wrap the returned JSON in ```json and ```
         """;
 
     //         Also, always verify the schema matches the Resume JSON schema.
