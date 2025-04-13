@@ -17,7 +17,8 @@ import java.util.*;
     "duration",
     "actual_duration",
     "status",
-    "related_threads"
+    "related_threads",
+    "conversation"
 })
 @Builder
 @Data
@@ -59,6 +60,8 @@ public class Thread {
     public Thread.Status status;
     @JsonProperty("related_threads")
     public List<String> relatedThreads = new ArrayList<String>();
+    @JsonProperty("conversation")
+    public List<ConversationEntry> conversation = new ArrayList<>();
     @JsonIgnore
     private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
