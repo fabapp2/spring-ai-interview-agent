@@ -53,10 +53,10 @@ class InterviewerTest {
 //        String response5 = interviewer.run(um5);
 //        user(um5);
 //        assistant(response5);
-        memory.put("user", "  I spent time working on different projects using AI codegeneration tools like OpenHands and Claude code. I built a job search tool with a set of AI workflows to gather career data and enrich my CV data through an interview. Another workflow reads job offers from linkedin and filters them using the cv data. THius project is still ongoiing. Additionally, I did a AWS certification about AI.");
+        memory.put("user", "  I spent time working on different projects using AI codegeneration tools like OpenHands and Claude code. I built a job search tool with a set of AI workflows to gather career data and enrich my CV data through an interview. Another workflow reads job offers from linkedin and filters them using the cv data. This project is still ongoing. Additionally, I did a AWS certification about AI.");
         memory.put("assistant", "That sounds like a productive use of your time! Can you tell me more about the job search tool you built? What specific features does it have, and how do you envision it helping users in their job search?");
 
-        String um6 = "I spent time working on different projects using AI codegeneration tools like OpenHands and Claude code. I built a job search tool with a set of AI workflows to gather career data and enrich my CV data through an interview. Another workflow readds job offers from linkedin and filters them using the cv data. THius project is still ongoiing. Additionally, I did a AWS certification about AI.";
+        String um6 = "I spent time working on different projects using AI codegeneration tools like OpenHands and Claude code. I built a job search tool with a set of AI workflows to gather career data and enrich my CV data through an interview. Another workflow readds job offers from linkedin and filters them using the cv data. This project is still ongoing. Additionally, I did a AWS certification about AI.";
         String response6 = interviewer.run(context, um6);
         user(um6);
         assistant(response6);
