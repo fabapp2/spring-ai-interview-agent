@@ -7,14 +7,12 @@ import io.promptics.jobagent.careerdata.CareerDataRepository;
 import io.promptics.jobagent.careerdata.model.CareerData;
 import io.promptics.jobagent.utils.DateTimeProvider;
 import lombok.extern.slf4j.Slf4j;
-import org.bson.types.ObjectId;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
-import org.bson.types.ObjectId;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

@@ -3,15 +3,15 @@ package io.promptics.jobagent.careerdata;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.promptics.jobagent.careerdata.model.CareerData;
-import org.springframework.data.mongodb.core.query.Update.Position;
 import com.mongodb.client.result.UpdateResult;
+import io.promptics.jobagent.careerdata.model.CareerData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.stereotype.Service;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.data.mongodb.core.query.Update.Position;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;

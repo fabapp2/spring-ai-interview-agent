@@ -1,7 +1,6 @@
 package io.promptics.jobagent;
 
 import lombok.Getter;
-import org.bson.types.ObjectId;
 
 @Getter
 public class InterviewContext {

@@ -5,7 +5,6 @@ import io.promptics.jobagent.InterviewContext;
 import io.promptics.jobagent.careerdata.CareerDataRepository;
 import io.promptics.jobagent.careerdata.model.CareerData;
 import io.promptics.jobagent.utils.DateTimeProvider;
-import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
