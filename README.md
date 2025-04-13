@@ -72,6 +72,16 @@ spring:
       password: password
 ```
 
+### API Key Setup
+
+This project requires an OpenAI API key to run. Set it as an environment variable:
+
+```bash
+export SPRING_AI_OPENAI_API_KEY=your-api-key-here
+```
+
+Without this environment variable, the application will fail to start and tests will not run properly.
+
 ## 🧪 Testing
 
 The project includes both unit and integration tests:
