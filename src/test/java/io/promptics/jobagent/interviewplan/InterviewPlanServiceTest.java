@@ -2,7 +2,6 @@ package io.promptics.jobagent.interviewplan;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.intellij.lang.annotations.Language;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -51,62 +50,22 @@ class InterviewPlanServiceTest {
     @DisplayName("store interview plan")
     void saveInterviewPlan() throws IOException {
         InterviewPlan found = template.findById(planId, InterviewPlan.class);
-        System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(found));
         assertThat(found).isNotNull();
     }
 
     @Test
-    @DisplayName("deserialize")
-    void deserialize() throws JsonProcessingException {
-        @Language("json")
-        String json = """
-                {
-                    "topic": {
-                      "id": "gap_current_employment",
-                      "type": "gap",
-                      "reference": {
-                        "section": "work",
-                        "identifier": {
-                          "name": "TechGiant",
-                          "startDate": "2024-01"
-                        }
-                      },
-                      "thread": {
-                        "id": "current_status",
-                        "type": "core_details",
-                        "focus": "Determine current employment status and activities since December 2024",
-                        "duration": 15,
-                        "status": "in_progress"
-                      }
-                }}
-                """;
-        TopicAndThread topicAndThread = new ObjectMapper().readValue(json, TopicAndThread.class);
-    }
-
-    @Test
     public void verifyConnection() {
-        System.out.println("Database: " + mongoTemplate.getDb().getName());
-        System.out.println("Collection exists: " +
-                mongoTemplate.collectionExists("interview_plan"));
+        assertThat(mongoTemplate.getDb().getName()).isEqualTo("interview");
+        assertThat(mongoTemplate.collectionExists("interview_plan")).isTrue();
     }
 
     @Test
     @DisplayName("get currently active thread")
     void getCurrentlyActiveThread() throws JsonProcessingException {
-
-        InterviewPlan found = template.findById(planId, InterviewPlan.class);
-        System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(found));
-        assertThat(found).isNotNull();
-        assertThat(mongoTemplate.getDb().getName()).isEqualTo("interview");
-        assertThat(mongoTemplate.collectionExists("interview_plan")).isTrue();
-
         TopicAndThread currentTopicAndThread = interviewPlanService.findCurrentTopicAndThread(planId);
 
         Thread thread = currentTopicAndThread.getThread();
         Topic topic = currentTopicAndThread.getTopic();
-
-        System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(thread));
-        System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(topic));
 
         assertThat(currentTopicAndThread).isNotNull();
         assertThat(thread.getId()).isEqualTo("current_status");
