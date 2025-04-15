@@ -36,36 +36,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class Interviewer {
 
-    private static final String systemPrompt = """
-            You are an experienced interviewer.
-            You are conducting a user interview to gather career data from a user.
-            
-            The interview follows a given plan.
-            The plan has broad topics and a set of threads per topic.
-            Your task is to define questions with the goal to extract the targeted information per thread.
-            You decide when the thread is completed.
-            
-            
-            {current_thread}
-          
-            
-            # Expected Output:
-            Ask one question at a time.
-            """;
-
     private final ChatClient client;
     private final InterviewPlanMongoTools mongoDbTools;
     private final InterviewPlanService interviewPlanService;
-
+    private final InterviewPromptBuilder promptBuilder;
     /**
      * @param builder
      * @param mongoDbTools
      * @param interviewPlanService
      */
-    public Interviewer(ChatClient.Builder builder, InterviewPlanMongoTools mongoDbTools, InterviewPlanService interviewPlanService) {
+    public Interviewer(ChatClient.Builder builder, InterviewPlanMongoTools mongoDbTools, InterviewPlanService interviewPlanService, InterviewPromptBuilder promptBuilder) {
         client = builder.defaultOptions(ChatOptions.builder().temperature(0.0).build()).build();
         this.mongoDbTools = mongoDbTools;
         this.interviewPlanService = interviewPlanService;
+        this.promptBuilder = promptBuilder;
     }
 
     /**
@@ -78,11 +62,16 @@ public class Interviewer {
 
         TopicAndThread topicAndThread = getCurrentlyActiveThread(context);
 
-        String topicThreadSummary = topicAndThread.render();
+        ThreadConversation conversation = addUserInputToConversation(input, topicAndThread);
 
-        addUserInputToConversation(input, topicAndThread);//context.getPlanId(), topicAndThread.getThread().getIdentifier());
+        String additionalContext = "";
 
-        String prompt = systemPrompt.replace("{current_thread}", topicThreadSummary);
+        String prompt = promptBuilder.buildPrompt(
+                topicAndThread.getTopic(),
+                topicAndThread.getThread(),
+                conversation,
+                additionalContext
+        );
 
         String output = client.prompt()
                 .system(prompt)
