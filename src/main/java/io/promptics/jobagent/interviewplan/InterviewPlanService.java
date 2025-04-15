@@ -1,6 +1,7 @@
 package io.promptics.jobagent.interviewplan;
 
 import io.promptics.jobagent.interview.ConversationEntry;
+import io.promptics.jobagent.interview.ThreadConversation;
 import org.bson.types.ObjectId;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -25,9 +26,13 @@ public class InterviewPlanService {
      * Add a new message to the conversation of a thread.
      */
     public void addToThreadConversation(String threadId, ConversationEntry entry) {
-        Thread thread = mongoTemplate.findById(threadId, Thread.class);
-        thread.getConversation().add(entry);
-        mongoTemplate.save(thread);
+        ThreadConversation conversation = mongoTemplate.findById(threadId, ThreadConversation.class);
+        if(conversation == null) {
+            conversation = new ThreadConversation();
+            conversation.setThreadId(threadId);
+        }
+        conversation.getEntries().add(entry);
+        mongoTemplate.save(conversation);
     }
 
     /**
