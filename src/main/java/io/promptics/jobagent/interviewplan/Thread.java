@@ -122,7 +122,7 @@ public class Thread {
         ACHIEVEMENTS("achievements"),
         RESPONSIBILITIES("responsibilities"),
         SKILLS_USED("skills_used"),
-        TEAM_CONTEXT("team_context"),
+        TEAM_CONTEXT    ("team_context"),
         CHALLENGES("challenges"),
         TRANSITION("transition"),
         IMPACT("impact"),
@@ -135,7 +135,9 @@ public class Thread {
         SKILL_APPLICATION("skill_application"),
         LANGUAGE_USAGE("language_usage"),
         INTEREST_RELEVANCE("interest_relevance");
+
         private final String value;
+
         private final static Map<String, Thread.Type> CONSTANTS = new HashMap<String, Thread.Type>();
 
         static {
@@ -159,13 +161,12 @@ public class Thread {
         }
 
         @JsonCreator
-        public static Thread.Type fromValue(String value) {
-            Thread.Type constant = CONSTANTS.get(value);
+        public static Type fromValue(String value) {
+            Type constant = CONSTANTS.get(value);
             if (constant == null) {
                 throw new IllegalArgumentException(value);
-            } else {
-                return constant;
             }
+            return constant;
         }
 
     }

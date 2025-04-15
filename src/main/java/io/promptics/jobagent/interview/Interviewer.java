@@ -2,17 +2,38 @@ package io.promptics.jobagent.interview;
 
 import io.promptics.jobagent.InterviewContext;
 import io.promptics.jobagent.interviewplan.ConversationEntry;
-import io.promptics.jobagent.interviewplan.InterviewPlanMongoDbService;
-import io.promptics.jobagent.interviewplan.InterviewPlanMongoDbTools;
+import io.promptics.jobagent.interviewplan.InterviewPlanMongoTools;
+import io.promptics.jobagent.interviewplan.InterviewPlanService;
 import io.promptics.jobagent.interviewplan.TopicAndThread;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
-
+/**
+ * The Interviewer agent conducts the interview.
+ * 
+ * It has access to the currently active Topic and Thread and decides about how to proceed.
+ * The agent can:
+ *
+ * <p>
+ * <b>Ask a new question in the current thread:</b>
+ * The agent decides that more information is required to complete the current thread, 
+ * decides which question to ask next and returns the question as response.
+ * </p>
+ * <p>
+ * <b>Create a new, follow-up thread:</b>
+ * The agent realizes that the user's reply requires a follow-up question and creates a new thread to follow-up upon.
+ *  </p>
+ *  <p>
+ * <b>Complete the current thread:</b>
+ * The agent can decide that the gathered information is enough to complete the current thread.
+ * It will then either retrieve the next thread or
+ *</p>
+ * <p>
+ * <b>finish the interview:</b>
+ * The agent completed the last thread and can thus declare the imterview as finished.
+ * </p>
+ */
 @Component
 public class Interviewer {
 
@@ -34,25 +55,33 @@ public class Interviewer {
             """;
 
     private final ChatClient client;
-    private final InterviewPlanMongoDbTools mongoDbTools;
-    private final InterviewPlanMongoDbService mongoDbService;
+    private final InterviewPlanMongoTools mongoDbTools;
+    private final InterviewPlanService interviewPlanService;
 
-    public Interviewer(ChatClient.Builder builder, InterviewPlanMongoDbTools mongoDbTools, InterviewPlanMongoDbService mongoDbService) {
+    /**
+     * @param builder
+     * @param mongoDbTools
+     * @param interviewPlanService
+     */
+    public Interviewer(ChatClient.Builder builder, InterviewPlanMongoTools mongoDbTools, InterviewPlanService interviewPlanService) {
         client = builder.defaultOptions(ChatOptions.builder().temperature(0.0).build()).build();
         this.mongoDbTools = mongoDbTools;
-        this.mongoDbService = mongoDbService;
+        this.interviewPlanService = interviewPlanService;
     }
 
+    /**
+     * Run the interview.
+     *
+     * @param context the InterviewContext
+     * @param input the
+     */
     public String run(InterviewContext context, String input) {
 
-        TopicAndThread topicAndThread = mongoDbService.findCurrentTopicAndThread(context.getCareerDataId());
-
-        mongoDbService.addToThreadConversation(topicAndThread.getThreadId(), ConversationEntry.builder()
-                        .role("user")
-                        .text(input)
-                        .build());
+        TopicAndThread topicAndThread = getCurrentlyActiveThread(context);
 
         String topicThreadSummary = topicAndThread.render();
+
+        addUserInputToConversation(input, topicAndThread);
 
         String prompt = systemPrompt.replace("{current_thread}", topicThreadSummary);
 
@@ -63,18 +92,27 @@ public class Interviewer {
                 .call()
                 .content();
 
-        mongoDbService.addToThreadConversation(topicAndThread.getThreadId(), ConversationEntry.builder()
-                .role("assistant")
-                .text(output)
-                .build());
+        addAssistantOutputToConversation(topicAndThread, output);
 
         return output;
     }
 
-    private String renderMemory(Map<String, String> memory) {
-        return memory.entrySet().stream()
-                .map(e -> e.getKey() + ": " + e.getValue())
-                .collect(Collectors.joining("\n\n"));
+    private void addAssistantOutputToConversation(TopicAndThread topicAndThread, String output) {
+        interviewPlanService.addToThreadConversation(topicAndThread.getThreadId(), ConversationEntry.builder()
+                .role("assistant")
+                .text(output)
+                .build());
+    }
+
+    private void addUserInputToConversation(String input, TopicAndThread topicAndThread) {
+        interviewPlanService.addToThreadConversation(topicAndThread.getThreadId(), ConversationEntry.builder()
+                        .role("user")
+                        .text(input)
+                        .build());
+    }
+
+    private TopicAndThread getCurrentlyActiveThread(InterviewContext context) {
+        return interviewPlanService.findCurrentTopicAndThread(context.getCareerDataId());
     }
 
 }

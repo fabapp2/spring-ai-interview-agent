@@ -1,0 +1,155 @@
+package io.promptics.jobagent.interviewplan;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.intellij.lang.annotations.Language;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.testcontainers.containers.MongoDBContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
+
+import java.io.IOException;
+
+import static org.assertj.core.api.Assertions.as;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
+
+@SpringBootTest
+@Testcontainers
+class InterviewPlanServiceTest {
+
+    @Container
+    @ServiceConnection
+    final static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:7.0");
+
+    @Autowired
+    InterviewPlanService interviewPlanService;
+
+    @Autowired
+    MongoTemplate mongoTemplate;
+
+    @Autowired
+    MongoTemplate template;
+    private static InterviewPlan plan;
+    private InterviewPlan saved;
+    private String planId;
+
+    @BeforeEach
+    void beforeEach() throws IOException {
+        plan = loadInterviewPlan();
+        saved = interviewPlanService.saveInterviewPlan(plan);
+        planId = saved.getId();
+    }
+
+    @Test
+    @DisplayName("store interview plan")
+    void saveInterviewPlan() throws IOException {
+        InterviewPlan found = template.findById(planId, InterviewPlan.class);
+        System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(found));
+        assertThat(found).isNotNull();
+    }
+
+    @Test
+    @DisplayName("deserialize")
+    void deserialize() throws JsonProcessingException {
+        @Language("json")
+        String json = """
+                {
+                    "topic": {
+                      "id": "gap_current_employment",
+                      "type": "gap",
+                      "reference": {
+                        "section": "work",
+                        "identifier": {
+                          "name": "TechGiant",
+                          "startDate": "2024-01"
+                        }
+                      },
+                      "thread": {
+                        "id": "current_status",
+                        "type": "core_details",
+                        "focus": "Determine current employment status and activities since December 2024",
+                        "duration": 15,
+                        "status": "in_progress"
+                      }
+                }}
+                """;
+        TopicAndThread topicAndThread = new ObjectMapper().readValue(json, TopicAndThread.class);
+    }
+
+    @Test
+    public void verifyConnection() {
+        System.out.println("Database: " + mongoTemplate.getDb().getName());
+        System.out.println("Collection exists: " +
+                mongoTemplate.collectionExists("interview_plan"));
+    }
+
+    @Test
+    @DisplayName("get currently active thread")
+    void getCurrentlyActiveThread() throws JsonProcessingException {
+
+        InterviewPlan found = template.findById(planId, InterviewPlan.class);
+        System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(found));
+        assertThat(found).isNotNull();
+        assertThat(mongoTemplate.getDb().getName()).isEqualTo("interview");
+        assertThat(mongoTemplate.collectionExists("interview_plan")).isTrue();
+
+        TopicAndThread currentTopicAndThread = interviewPlanService.findCurrentTopicAndThread(planId);
+
+        Thread thread = currentTopicAndThread.getThread();
+        Topic topic = currentTopicAndThread.getTopic();
+
+        System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(thread));
+        System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(topic));
+
+        assertThat(currentTopicAndThread).isNotNull();
+        assertThat(thread.getId()).isEqualTo("current_status");
+        assertThat(thread.getType()).isEqualTo(Thread.Type.CORE_DETAILS);
+        assertThat(thread.getStatus()).isEqualTo(Thread.Status.IN_PROGRESS);
+        assertThat(thread.getFocus()).isEqualTo("Determine current employment status and activities since December 2024");
+
+        assertThat(topic.getType()).isEqualTo(Topic.Type.GAP);
+        assertThat(topic.getReference().getSection()).isEqualTo(Reference.Section.WORK);
+        assertThat(topic.getReference().getIdentifier().getName()).isEqualTo("TechGiant");
+        assertThat(topic.getReference().getIdentifier().getStartDate()).isEqualTo("2024-01");
+    }
+
+    @Test
+    @DisplayName("add to conversation")
+    void addToConversation() {
+        fail("Not implemented");
+    }
+
+    @Test
+    @DisplayName("complete thread and get next")
+    void completeThreadAndGetNext() {
+
+        fail("Not implemented");
+    }
+
+    @Test
+    @DisplayName("complete thread")
+    void completeThread() {
+        fail("Not implemented");
+    }
+
+    @Test
+    @DisplayName("add follow-up thread")
+    void addFollowUpThread() {
+        fail("Not implemented");
+    }
+
+    private static InterviewPlan loadInterviewPlan() throws IOException {
+        ClassPathResource resource = new ClassPathResource("interview-plan.json");
+        InterviewPlan interviewPlan = new ObjectMapper().readValue(resource.getFile(), InterviewPlan.class);
+        return interviewPlan;
+    }
+}

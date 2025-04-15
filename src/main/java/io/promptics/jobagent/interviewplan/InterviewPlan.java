@@ -24,10 +24,12 @@ import java.util.Map;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document("career_data")
+@Document("interview_plan")
 public class InterviewPlan {
 
     @Id
+    private String id;
+
     @JsonProperty("career_data_id")
     private String careerDataId;
 
