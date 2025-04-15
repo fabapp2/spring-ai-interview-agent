@@ -35,13 +35,12 @@ class InterviewPlanServiceTest {
 
     @Autowired
     MongoTemplate template;
-    private static InterviewPlan plan;
     private InterviewPlan saved;
     private String planId;
 
     @BeforeEach
     void beforeEach() throws IOException {
-        plan = loadInterviewPlan();
+        InterviewPlan plan = loadInterviewPlan();
         saved = interviewPlanService.saveInterviewPlan(plan);
         planId = saved.getId();
     }
