@@ -5,13 +5,13 @@ import lombok.Getter;
 @Getter
 public class InterviewContext {
     private final String careerDataId;
-    private final String userId;
+    private final String planId;
     private final String sessionId;
     private final String username;
 
-    public InterviewContext(String careerDataId, String userId, String sessionId, String username) {
+    public InterviewContext(String careerDataId, String planId, String sessionId, String username, String max) {
         this.careerDataId = careerDataId;
-        this.userId = userId;
+        this.planId = planId;
         this.sessionId = sessionId;
         this.username = username;
     }
