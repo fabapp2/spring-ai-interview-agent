@@ -1,5 +1,6 @@
 package io.promptics.jobagent.interviewplan;
 
+import io.promptics.jobagent.interview.ConversationEntry;
 import lombok.Data;
 
 @Data
@@ -9,7 +10,7 @@ public class TopicAndThread {
     private Thread thread;
 
     public String getThreadId() {
-        return thread.getId();
+        return thread.getIdentifier();
     }
 
     public String render() {
@@ -17,7 +18,7 @@ public class TopicAndThread {
 
         // Topic Section
         md.append("# Current Topic\n");
-        md.append("- ID: ").append(topic.getId()).append("\n");
+        md.append("- ID: ").append(topic.getIdentifier()).append("\n");
         md.append("- Type: ").append(topic.getType()).append("\n");
         md.append("- Reference: ").append(topic.getReference().getSection());
         if (topic.getReference().getIdentifier() != null) {
@@ -31,7 +32,7 @@ public class TopicAndThread {
 
         // Thread Section
         md.append("# Active Thread\n");
-        md.append("- ID: ").append(thread.getId()).append("\n");
+        md.append("- ID: ").append(thread.getIdentifier()).append("\n");
         md.append("- Type: ").append(thread.getType()).append("\n");
         md.append("- Focus: ").append(thread.getFocus()).append("\n");
         md.append("- Status: ").append(thread.getStatus()).append("\n\n");

@@ -67,7 +67,7 @@ class InterviewPlanServiceTest {
         Topic topic = currentTopicAndThread.getTopic();
 
         assertThat(currentTopicAndThread).isNotNull();
-        assertThat(thread.getId()).isEqualTo("current_status");
+        assertThat(thread.getIdentifier()).isEqualTo("current_status");
         assertThat(thread.getType()).isEqualTo(Thread.Type.CORE_DETAILS);
         assertThat(thread.getStatus()).isEqualTo(Thread.Status.IN_PROGRESS);
         assertThat(thread.getFocus()).isEqualTo("Determine current employment status and activities since December 2024");

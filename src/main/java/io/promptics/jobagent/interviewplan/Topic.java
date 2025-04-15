@@ -27,8 +27,8 @@ public class Topic {
      * (Required)
      * 
      */
-    @JsonProperty("id")
-    public String id;
+    @JsonProperty("identifier")
+    public String identifier;
     /**
      * 
      * (Required)

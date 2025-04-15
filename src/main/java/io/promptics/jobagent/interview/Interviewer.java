@@ -1,7 +1,6 @@
 package io.promptics.jobagent.interview;
 
 import io.promptics.jobagent.InterviewContext;
-import io.promptics.jobagent.interviewplan.ConversationEntry;
 import io.promptics.jobagent.interviewplan.InterviewPlanMongoTools;
 import io.promptics.jobagent.interviewplan.InterviewPlanService;
 import io.promptics.jobagent.interviewplan.TopicAndThread;
@@ -81,7 +80,7 @@ public class Interviewer {
 
         String topicThreadSummary = topicAndThread.render();
 
-        addUserInputToConversation(input, topicAndThread);
+        addUserInputToConversation(input, topicAndThread);//context.getPlanId(), topicAndThread.getThread().getIdentifier());
 
         String prompt = systemPrompt.replace("{current_thread}", topicThreadSummary);
 

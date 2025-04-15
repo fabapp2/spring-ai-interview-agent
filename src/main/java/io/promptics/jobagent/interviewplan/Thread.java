@@ -2,6 +2,7 @@
 package io.promptics.jobagent.interviewplan;
 
 import com.fasterxml.jackson.annotation.*;
+import io.promptics.jobagent.interview.ConversationEntry;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,8 +32,8 @@ public class Thread {
      * (Required)
      * 
      */
-    @JsonProperty("id")
-    public String id;
+    @JsonProperty("identifier")
+    public String identifier;
     /**
      * 
      * (Required)

@@ -1,7 +1,7 @@
 package io.promptics.jobagent.interviewplan;
 
+import io.promptics.jobagent.interview.ConversationEntry;
 import org.bson.types.ObjectId;
-import org.springframework.boot.autoconfigure.context.PropertyPlaceholderAutoConfiguration;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.*;
@@ -61,7 +61,7 @@ public class InterviewPlanService {
         GroupOperation groupOperation = group().first("$$ROOT").as("doc");
         ReplaceRootOperation replaceRoot = replaceRoot("doc");
         ProjectionOperation projectionOperation = project()
-                .and("topics._id").as("topic.id")
+                .and("topics.identifier").as("topic.identifier")
                 .and("topics.type").as("topic.type")
                 .and("topics.reference").as("topic.reference")
                 .and("topics.threads").as("thread");

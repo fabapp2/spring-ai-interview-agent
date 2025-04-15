@@ -1,4 +1,4 @@
-package io.promptics.jobagent.interviewplan;
+package io.promptics.jobagent.interview;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
