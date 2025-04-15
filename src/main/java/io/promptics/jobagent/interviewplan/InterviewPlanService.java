@@ -4,7 +4,7 @@ import org.bson.types.ObjectId;
 import org.springframework.boot.autoconfigure.context.PropertyPlaceholderAutoConfiguration;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Component;
 
@@ -16,11 +16,9 @@ import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 public class InterviewPlanService {
 
     private final MongoTemplate mongoTemplate;
-    private final PropertyPlaceholderAutoConfiguration propertyPlaceholderAutoConfiguration;
 
-    public InterviewPlanService(MongoTemplate mongoTemplate, PropertyPlaceholderAutoConfiguration propertyPlaceholderAutoConfiguration) {
+    public InterviewPlanService(MongoTemplate mongoTemplate) {
         this.mongoTemplate = mongoTemplate;
-        this.propertyPlaceholderAutoConfiguration = propertyPlaceholderAutoConfiguration;
     }
 
     /**
@@ -50,23 +48,37 @@ public class InterviewPlanService {
      * Find the next active topic and thread.
      */
     public TopicAndThread findCurrentTopicAndThread(String planId) {
+
+        MatchOperation byId = match(Criteria.where("_id").is(new ObjectId(planId)));
+        UnwindOperation unwindTopics = unwind("topics", true);
+        UnwindOperation unwindTopicsThreads = unwind("topics.threads", true);
+        MatchOperation matchStatus = match(new Criteria().orOperator(
+                Criteria.where("topics.threads.status").is("IN_PROGRESS"),
+                Criteria.where("topics.threads.status").is("PENDING")
+        ));
+        SortOperation sort = sort(Sort.by("topics.threads.status"));
+        LimitOperation limit = limit(1);
+        GroupOperation groupOperation = group().first("$$ROOT").as("doc");
+        ReplaceRootOperation replaceRoot = replaceRoot("doc");
+        ProjectionOperation projectionOperation = project()
+                .and("topics._id").as("topic.id")
+                .and("topics.type").as("topic.type")
+                .and("topics.reference").as("topic.reference")
+                .and("topics.threads").as("thread");
+
+        // debug
+        // mongoTemplate.aggregate(Aggregation.newAggregation(byId, unwindTopics), "interview_plan", org.bson.Document.class);
+
         Aggregation aggregation = Aggregation.newAggregation(
-                match(Criteria.where("_id").is(new ObjectId(planId))),
-                unwind("topics", true),
-                unwind("topics.threads", true),
-                match(new Criteria().orOperator(
-                        Criteria.where("topics.threads.status").is("IN_PROGRESS"),
-                        Criteria.where("topics.threads.status").is("PENDING")
-                )),
-                sort(Sort.by("topics.threads.status")),
-                limit(1),
-                group().first("$$ROOT").as("doc"),
-                replaceRoot("doc"),
-                project()
-                        .and("topics._id").as("topic.id")
-                        .and("topics.type").as("topic.type")
-                        .and("topics.reference").as("topic.reference")
-                        .and("topics.threads").as("thread")
+                byId,
+                unwindTopics,
+                unwindTopicsThreads,
+                matchStatus,
+                sort,
+                limit,
+                groupOperation,
+                replaceRoot,
+                projectionOperation
         );
 
         return mongoTemplate.aggregate(
