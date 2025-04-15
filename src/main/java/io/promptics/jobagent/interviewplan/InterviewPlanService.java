@@ -50,7 +50,7 @@ public class InterviewPlanService {
      * Find the next active topic and thread.
      */
     public TopicAndThread findCurrentTopicAndThread(String planId) {
-        Aggregation aggregation2 = Aggregation.newAggregation(
+        Aggregation aggregation = Aggregation.newAggregation(
                 match(Criteria.where("_id").is(new ObjectId(planId))),
                 unwind("topics", true),
                 unwind("topics.threads", true),
@@ -70,7 +70,7 @@ public class InterviewPlanService {
         );
 
         return mongoTemplate.aggregate(
-                aggregation2,
+                aggregation,
                 "interview_plan",
                 TopicAndThread.class
         ).getUniqueMappedResult();
