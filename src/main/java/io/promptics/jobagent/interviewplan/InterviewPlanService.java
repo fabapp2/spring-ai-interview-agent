@@ -25,14 +25,14 @@ public class InterviewPlanService {
     /**
      * Add a new message to the conversation of a thread.
      */
-    public void addToThreadConversation(String threadId, ConversationEntry entry) {
+    public ThreadConversation addToThreadConversation(String threadId, ConversationEntry entry) {
         ThreadConversation conversation = mongoTemplate.findById(threadId, ThreadConversation.class);
         if(conversation == null) {
             conversation = new ThreadConversation();
             conversation.setThreadId(threadId);
         }
         conversation.getEntries().add(entry);
-        mongoTemplate.save(conversation);
+        return mongoTemplate.save(conversation);
     }
 
     /**

@@ -97,17 +97,17 @@ public class Interviewer {
     }
 
     private void addAssistantOutputToConversation(TopicAndThread topicAndThread, String output) {
-        interviewPlanService.addToThreadConversation(topicAndThread.getThreadId(), ConversationEntry.builder()
+        interviewPlanService.addToThreadConversation(topicAndThread.getThread().getIdentifier(), ConversationEntry.builder()
                 .role("assistant")
                 .text(output)
                 .build());
     }
 
-    private void addUserInputToConversation(String input, TopicAndThread topicAndThread) {
-        interviewPlanService.addToThreadConversation(topicAndThread.getThreadId(), ConversationEntry.builder()
-                        .role("user")
-                        .text(input)
-                        .build());
+    private ThreadConversation addUserInputToConversation(String input, TopicAndThread topicAndThread) {
+        return interviewPlanService.addToThreadConversation(topicAndThread.getThread().getIdentifier(), ConversationEntry.builder()
+                .role("user")
+                .text(input)
+                .build());
     }
 
     private TopicAndThread getCurrentlyActiveThread(InterviewContext context) {
