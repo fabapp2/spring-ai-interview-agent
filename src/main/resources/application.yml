@@ -9,11 +9,6 @@ logging:
             client:
               advisor: WARN
 
-        data:
-          mongodb:
-            core:
-              MongoTemplate: DEBUG
-
 spring:
   ai:
     chat:
