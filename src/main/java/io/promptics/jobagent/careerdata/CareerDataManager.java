@@ -45,6 +45,8 @@ public class CareerDataManager {
        - "Successfully removed XXX from the set of skills"
        - "Successfully added XXX to certifications"
        - "Could not remove XXX from set of skills because it does not exist" 
+       
+       The career data is: {careerDataId}
        """;
 
     //         Also, always verify the schema matches the Resume JSON schema.
@@ -54,10 +56,10 @@ public class CareerDataManager {
         this.mongoDbTools = mongoDbTools;
     }
 
-    public String run(String userPrompt) {
+    public String run(String userPrompt, String careerDataId) {
 
         String content = client.prompt()
-                .system(systemPrompt)
+                .system(systemPrompt.replace("{careerDataId}", careerDataId))
                 .user(userPrompt)
                 .tools(mongoDbTools)
                 .advisors(

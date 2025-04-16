@@ -46,7 +46,7 @@ class CareerDataManagerTest {
     @Test
     @DisplayName("get career data by id")
     void getCareerDataById() throws JsonProcessingException {
-        String result = careerDataManager.run("Get data for id %s".formatted(id));
+        String result = careerDataManager.run("Get data", id);
         CareerData careerDataFromDb = objectMapper.readValue(result, CareerData.class);
         assertThat(careerDataFromDb).usingRecursiveComparison().isEqualTo(careerDataPersisted);
     }
@@ -56,7 +56,7 @@ class CareerDataManagerTest {
     void modifyEmailInBasis() {
         Optional<CareerData> before = repository.findById(id);
         assertThat(before.get().getBasics().getEmail()).isEqualTo("max.wurst@techgiant.com");
-        String result = careerDataManager.run("Change email from max.wurst@techgiant.com to max@wurst.com for id %s".formatted(id));
+        String result = careerDataManager.run("Change email from max.wurst@techgiant.com to max@wurst.com", id);
         assertThat(result).contains("Successfully changed email from max.wurst@techgiant.com to max@wurst.com");
         Optional<CareerData> after = repository.findById(id);
         assertThat(after.get().getBasics().getEmail()).isEqualTo("max@wurst.com");
@@ -67,7 +67,7 @@ class CareerDataManagerTest {
     void modifyCompanyName() {
         Optional<CareerData> before = repository.findById(id);
         assertThat(before.get().getWork().get(1).getName()).isEqualTo("MiniCorp");
-        String result = careerDataManager.run("Change company name MiniCorp to MaxiCorp for id %s".formatted(id));
+        String result = careerDataManager.run("Change company name MiniCorp to MaxiCorp.", id);
         assertThat(result).contains("Successfully changed company name from MiniCorp to MaxiCorp");
         Optional<CareerData> after = repository.findById(id);
         assertThat(after.get().getWork().get(1).getName()).isEqualTo("MaxiCorp");
@@ -78,7 +78,7 @@ class CareerDataManagerTest {
     void removeJavaSkill() {
         Optional<CareerData> before = repository.findById(id);
         assertThat(before.get().getSkills().get(0).getKeywords().get(1)).isEqualTo("Python");
-        String result = careerDataManager.run("Remove Python from skills id %s".formatted(id));
+        String result = careerDataManager.run("Remove Python from skills", id);
         assertThat(result).contains("Successfully removed Python from the set of skills");
         Optional<CareerData> after = repository.findById(id);
         assertThat(after.get().getSkills().get(0).getKeywords().get(1)).isEqualTo("C++");
