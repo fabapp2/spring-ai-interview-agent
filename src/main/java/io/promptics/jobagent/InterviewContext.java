@@ -9,7 +9,7 @@ public class InterviewContext {
     private final String sessionId;
     private final String username;
 
-    public InterviewContext(String careerDataId, String planId, String sessionId, String username, String max) {
+    public InterviewContext(String careerDataId, String planId, String sessionId, String username) {
         this.careerDataId = careerDataId;
         this.planId = planId;
         this.sessionId = sessionId;
