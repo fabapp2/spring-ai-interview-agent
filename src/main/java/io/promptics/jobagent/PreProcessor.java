@@ -1,6 +1,7 @@
 package io.promptics.jobagent;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.AbstractChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.PromptChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
@@ -20,7 +21,8 @@ public class PreProcessor {
         
         ## Task
         - Read the user input
-        - Corrrect obvious spelling errors
+        - Correct obvious spelling errors
+        - Set the isCorrected falg to 'true' when the user message was corrected.
         - Recognize the user intent
         
         ## Expected output
@@ -28,12 +30,12 @@ public class PreProcessor {
         Use this structure: 
         
         {{
-            "intent": "QnA or Verification, Invalid",
+            "intent": "QNA, VERIFICATION or INVALID",
             "reason": "The reason for the intent",
-            "was_corrected": "true|false depending if the user message was corrected",
-            "previous": "The previous ai response if any",
-            "original": "The original usesr input",
-            "corrected": "The corrected user input"
+            "isCorrected": "true|false depending if the user message was corrected",
+            "previousMessage": "The previous ai response if any",
+            "originalMessage": "The original usesr input",
+            "correctedMessage": "The corrected user input"
         }}
         """;
 
@@ -42,10 +44,10 @@ public class PreProcessor {
         this.client = chatClientBuilder.build();
     }
 
-    public String run() {
-        chatMemory.add("id", new AssistantMessage("What was you last job?"));
-        chatMemory.add("id", new UserMessage("I worked at Mc Donalds"));
-        chatMemory.add("id", new AssistantMessage("How long did you work there?"));
+    public MessageAnalysis execute(String userMessage) {
+        chatMemory.add(AbstractChatMemoryAdvisor.DEFAULT_CHAT_MEMORY_CONVERSATION_ID, new AssistantMessage("What was you last job?"));
+        chatMemory.add(AbstractChatMemoryAdvisor.DEFAULT_CHAT_MEMORY_CONVERSATION_ID, new UserMessage("I worked at Mc Donalds"));
+        chatMemory.add(AbstractChatMemoryAdvisor.DEFAULT_CHAT_MEMORY_CONVERSATION_ID, new AssistantMessage("How long did you work there?"));
 
         return client.prompt()
                 .system(prompt)
@@ -53,8 +55,10 @@ public class PreProcessor {
                         new PromptChatMemoryAdvisor(chatMemory),
                         new SimpleLoggerAdvisor()
                 )
-                .user("What was your question?")
+                .user(userMessage)
                 .call()
-                .content();
+                .responseEntity(MessageAnalysis.class)
+                .getEntity();
+
     }
 }
