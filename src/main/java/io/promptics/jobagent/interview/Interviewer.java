@@ -58,7 +58,7 @@ public class Interviewer {
      * @param context the InterviewContext
      * @param input the
      */
-    public String run(InterviewContext context, String input) {
+    public String execute(InterviewContext context, String input) {
 
         TopicAndThread topicAndThread = getCurrentlyActiveThread(context);
 

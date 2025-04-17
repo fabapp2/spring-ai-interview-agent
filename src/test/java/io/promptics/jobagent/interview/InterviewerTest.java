@@ -45,7 +45,7 @@ class InterviewerTest {
     @DisplayName("start interview")
     void startInterview() {
         InterviewContext context = new InterviewContext(careerDataId, planId, "userid", "sessionid", "Max");
-        String output = interviewer.run(context, "Start interview");
+        String output = interviewer.execute(context, "Start interview");
         System.out.println(output);
     }
 

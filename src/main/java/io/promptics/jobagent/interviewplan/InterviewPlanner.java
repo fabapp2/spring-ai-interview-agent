@@ -38,7 +38,7 @@ public class InterviewPlanner {
         this.datetimeProvider = datetimeProvider;
     }
 
-    public InterviewPlan run(InterviewContext context) {
+    public InterviewPlan execute(InterviewContext context) {
         String jsonSchema = getJsonSchema();
         String careerData = getCareerData(context);
         PromptTemplate prompt = new PromptTemplate(systemPrompt);
