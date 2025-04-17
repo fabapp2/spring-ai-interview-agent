@@ -19,7 +19,7 @@ spring:
   data:
     mongodb:
       host: localhost
-      port: 27017
+      port: 27018
       database: interview
-      username: admin
-      password: password
+      username: mongouser
+      password: mongopw
