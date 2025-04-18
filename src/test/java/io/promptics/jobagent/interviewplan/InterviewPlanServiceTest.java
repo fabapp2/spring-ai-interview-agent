@@ -1,6 +1,5 @@
 package io.promptics.jobagent.interviewplan;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.promptics.jobagent.MongoDbConfig;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,19 +36,19 @@ class InterviewPlanServiceTest {
     @Autowired
     MongoTemplate template;
     private InterviewPlan saved;
-    private String planId;
+    private String careerDataId = "67e98007bd5c558ba6ad93d6";
 
     @BeforeEach
     void beforeEach() throws IOException {
         InterviewPlan plan = loadInterviewPlan();
+        plan.setCareerDataId(careerDataId);
         saved = interviewPlanService.saveInterviewPlan(plan);
-        planId = saved.getId();
     }
 
     @Test
     @DisplayName("store interview plan")
     void saveInterviewPlan() {
-        InterviewPlan found = template.findById(planId, InterviewPlan.class);
+        InterviewPlan found = template.findById(saved.getId(), InterviewPlan.class);
         assertThat(found).isNotNull();
     }
 
@@ -62,7 +61,7 @@ class InterviewPlanServiceTest {
     @Test
     @DisplayName("get currently active thread")
     void getCurrentlyActiveThread() {
-        TopicAndThread currentTopicAndThread = interviewPlanService.findCurrentTopicAndThread(planId);
+        TopicAndThread currentTopicAndThread = interviewPlanService.findCurrentTopicAndThread(careerDataId);
 
         Thread thread = currentTopicAndThread.getThread();
         Topic topic = currentTopicAndThread.getTopic();
@@ -88,7 +87,6 @@ class InterviewPlanServiceTest {
     @Test
     @DisplayName("complete thread and get next")
     void completeThreadAndGetNext() {
-
         fail("Not implemented");
     }
 
