@@ -6,5 +6,14 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=root
     volumes:
       - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js
+      - mongodb-data:/data/db
     ports:
       - "27018:27017"
+
+volumes:
+  mongodb-data:
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: size=512m
