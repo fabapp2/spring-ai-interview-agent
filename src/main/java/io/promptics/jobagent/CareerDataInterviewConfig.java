@@ -1,5 +1,6 @@
 package io.promptics.jobagent;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.InMemoryChatMemory;
@@ -13,8 +14,11 @@ public class CareerDataInterviewConfig {
         return new InMemoryChatMemory();
     }
 
+    // Workaround for https://github.com/spring-projects/spring-ai/issues/2449
     @Bean
-    ObjectMapper objectMapper() {
-        return new ObjectMapper();
+    public ObjectMapper objectMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        return mapper;
     }
 }
