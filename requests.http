@@ -2,3 +2,10 @@
 GET http://localhost:8080/api/career-interview/start
 Content-Type: application/json
 ###
+
+POST http://localhost:8080/api/career-interview/message
+Content-Type: application/json
+
+{
+   "message": "I did a deepdive into large language models and AI agents"
+}

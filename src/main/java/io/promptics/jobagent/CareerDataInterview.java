@@ -23,8 +23,7 @@ public class CareerDataInterview {
     }
 
     public String message(String userMessage) {
-        // TODO: context from "session"
-        InterviewContext context = new InterviewContext(null, null, null, null);
+        InterviewContext context = contextHolder.getContext();
 
         // pre processing
         MessageAnalysis analysis = preProcessor.execute(userMessage);

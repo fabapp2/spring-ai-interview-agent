@@ -1,8 +1,8 @@
 package io.promptics.jobagent.web;
 
 import io.promptics.jobagent.CareerDataInterview;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.Data;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/career-interview")
@@ -14,13 +14,18 @@ public class CareerDataInterviewApi {
         this.careerDataInterview = careerDataInterview;
     }
 
-    @RequestMapping("/start")
+    @GetMapping("/start")
     public String startInterview() {
         return careerDataInterview.start();
     }
 
-    @RequestMapping("/message")
-    public String message(String userMessage) {
-        return careerDataInterview.message(userMessage);
+    @PostMapping("/message")
+    public String message(@RequestBody UserReply userMessage) {
+        return careerDataInterview.message(userMessage.getMessage());
+    }
+
+    @Data
+    public static class UserReply {
+        private String message;
     }
 }
