@@ -16,7 +16,7 @@ import java.io.IOException;
 
 @Slf4j
 @Configuration
-@Profile("mongo-in-docker")
+@Profile("mongo-init")
 public class MongoDbInitializer implements ApplicationRunner {
     private static final int MAX_RETRIES = 12;
     private static final int RETRY_DELAY_SEC = 10;
