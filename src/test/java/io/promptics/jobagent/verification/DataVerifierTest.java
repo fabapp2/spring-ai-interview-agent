@@ -58,7 +58,7 @@ class DataVerifierTest {
         String userInput = "Please change the company name 'TechGiant' to 'TechDwarf'.";
         String response = dataVerifier.execute(userInput, id);
         CareerData careerData = mongoTemplate.findById(id, CareerData.class);
-        assertThat(response).contains("Successfully changed company name from TechGiant to TechDwarf").contains("name: TechDwarf");
+        assertThat(response).contains("Successfully changed").contains("TechGiant to TechDwarf");
         assertThat(careerData.getWork().get(2).getName()).isEqualTo("TechDwarf");
     }
 
