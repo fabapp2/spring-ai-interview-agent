@@ -48,7 +48,7 @@ class InterviewPlanServiceTest {
 
     @Test
     @DisplayName("store interview plan")
-    void saveInterviewPlan() throws IOException {
+    void saveInterviewPlan() {
         InterviewPlan found = template.findById(planId, InterviewPlan.class);
         assertThat(found).isNotNull();
     }
@@ -61,7 +61,7 @@ class InterviewPlanServiceTest {
 
     @Test
     @DisplayName("get currently active thread")
-    void getCurrentlyActiveThread() throws JsonProcessingException {
+    void getCurrentlyActiveThread() {
         TopicAndThread currentTopicAndThread = interviewPlanService.findCurrentTopicAndThread(planId);
 
         Thread thread = currentTopicAndThread.getThread();
