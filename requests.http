@@ -1,0 +1,4 @@
+### GET request to example server
+GET http://localhost:8080/api/career-interview/start
+Content-Type: application/json
+###

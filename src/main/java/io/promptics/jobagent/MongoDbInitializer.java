@@ -18,7 +18,6 @@ import java.io.IOException;
 @Configuration
 @Profile("mongo-in-docker")
 public class MongoDbInitializer implements ApplicationRunner {
-    private static final int MONGO_PORT = 27017;
     private static final int MAX_RETRIES = 12;
     private static final int RETRY_DELAY_SEC = 10;
 
@@ -63,7 +62,7 @@ public class MongoDbInitializer implements ApplicationRunner {
         initDatabase();
     }
     private void waitForMongoDb() {
-            int retries = 0;
+        int retries = 0;
         while (retries < MAX_RETRIES) {
             try {
                 mongoClient.getDatabase(mongoTemplate.getDb().getName());
