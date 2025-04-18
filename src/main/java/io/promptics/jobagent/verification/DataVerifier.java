@@ -3,7 +3,6 @@ package io.promptics.jobagent.verification;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.promptics.jobagent.careerdata.CareerDataManager;
-import io.promptics.jobagent.careerdata.CareerDataMongoDbTools;
 import io.promptics.jobagent.careerdata.CareerDataMongoService;
 import io.promptics.jobagent.careerdata.model.CareerData;
 import org.springframework.ai.chat.client.ChatClient;

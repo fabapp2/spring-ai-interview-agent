@@ -1,12 +1,9 @@
 package io.promptics.jobagent.interview;
 
-import io.promptics.jobagent.interviewplan.Topic;
-import lombok.Data;
-import org.springframework.ai.chat.prompt.PromptTemplate;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Service;
 import io.promptics.jobagent.interviewplan.Thread;
+import io.promptics.jobagent.interviewplan.Topic;
+import org.springframework.ai.chat.prompt.PromptTemplate;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;

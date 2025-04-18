@@ -2,7 +2,6 @@ package io.promptics.jobagent.interviewplan;
 
 import io.promptics.jobagent.interview.ConversationEntry;
 import io.promptics.jobagent.interview.ThreadConversation;
-import org.bson.types.ObjectId;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.*;

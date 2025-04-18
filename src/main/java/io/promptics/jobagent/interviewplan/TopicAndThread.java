@@ -1,6 +1,5 @@
 package io.promptics.jobagent.interviewplan;
 
-import io.promptics.jobagent.interview.ConversationEntry;
 import lombok.Data;
 
 @Data

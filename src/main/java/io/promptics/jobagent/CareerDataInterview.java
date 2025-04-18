@@ -1,7 +1,6 @@
 package io.promptics.jobagent;
 
 import io.promptics.jobagent.interview.Interviewer;
-import io.promptics.jobagent.interviewplan.InterviewPlan;
 import io.promptics.jobagent.interviewplan.InterviewPlanner;
 import io.promptics.jobagent.verification.DataVerifier;
 import org.springframework.stereotype.Service;
