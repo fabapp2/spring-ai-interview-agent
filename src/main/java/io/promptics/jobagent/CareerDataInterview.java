@@ -1,6 +1,7 @@
 package io.promptics.jobagent;
 
 import io.promptics.jobagent.interview.Interviewer;
+import io.promptics.jobagent.interviewplan.InterviewPlan;
 import io.promptics.jobagent.interviewplan.InterviewPlanner;
 import io.promptics.jobagent.verification.DataVerifier;
 import org.springframework.stereotype.Service;
@@ -12,12 +13,14 @@ public class CareerDataInterview {
     private final InterviewPlanner interviewPlanner;
     private final Interviewer interviewer;
     private final DataVerifier verifier;
+    private final InterviewContextHolder contextHolder;
 
-    public CareerDataInterview(PreProcessor preProcessor, InterviewPlanner interviewPlanner, Interviewer interviewer, DataVerifier verifier) {
+    public CareerDataInterview(PreProcessor preProcessor, InterviewPlanner interviewPlanner, Interviewer interviewer, DataVerifier verifier, InterviewContextHolder contextHolder) {
         this.preProcessor = preProcessor;
         this.interviewPlanner = interviewPlanner;
         this.interviewer = interviewer;
         this.verifier = verifier;
+        this.contextHolder = contextHolder;
     }
 
     public String message(String userMessage) {
@@ -39,11 +42,11 @@ public class CareerDataInterview {
     }
 
     public String start() {
-        String careerDataId = ""; // TODO: init mongoDB and provide id here
-        String sessionId = "1";
-//        InterviewContext context = new InterviewContext(careerDataId, null, sessionId, "Max");
-//        InterviewPlan plan = interviewPlanner.execute(context);
-//        interviewer.execute()
+        InterviewContext context = contextHolder.getContext();
+        String careerDataId = context.getCareerDataId();
+        String sessionId = context.getSessionId();
+        interviewPlanner.execute(context);
+        interviewer.execute(context, "Please start the interview");
         return null;
     }
 }
