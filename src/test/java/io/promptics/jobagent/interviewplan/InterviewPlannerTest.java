@@ -2,6 +2,7 @@ package io.promptics.jobagent.interviewplan;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.promptics.jobagent.InterviewContext;
+import io.promptics.jobagent.MongoDbConfig;
 import io.promptics.jobagent.careerdata.CareerDataRepository;
 import io.promptics.jobagent.careerdata.model.CareerData;
 import io.promptics.jobagent.utils.DateTimeProvider;
@@ -10,8 +11,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.testcontainers.containers.MongoDBContainer;
+import org.testcontainers.junit.jupiter.Container;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +26,10 @@ import static org.mockito.BDDMockito.given;
 
 @SpringBootTest
 class InterviewPlannerTest {
+
+    @Container
+    @ServiceConnection
+    final static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:%s".formatted(MongoDbConfig.MONGODB_VERSION));
 
     @Autowired
     private InterviewPlanner interviewPlanner;
