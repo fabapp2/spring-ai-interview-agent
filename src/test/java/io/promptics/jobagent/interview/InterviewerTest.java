@@ -2,6 +2,7 @@ package io.promptics.jobagent.interview;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.promptics.jobagent.InterviewContext;
+import io.promptics.jobagent.MongoDbConfig;
 import io.promptics.jobagent.careerdata.model.CareerData;
 import io.promptics.jobagent.interviewplan.InterviewPlan;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +32,7 @@ class InterviewerTest {
 
     @Container
     @ServiceConnection
-    final static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:7.0");
+    final static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:%s".formatted(MongoDbConfig.MONGODB_VERSION));
 
     @Autowired
     MongoTemplate mongoTemplate;

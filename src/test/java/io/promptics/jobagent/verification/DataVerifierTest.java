@@ -1,6 +1,7 @@
 package io.promptics.jobagent.verification;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.promptics.jobagent.MongoDbConfig;
 import io.promptics.jobagent.careerdata.model.CareerData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -24,7 +25,7 @@ class DataVerifierTest {
 
     @Container
     @ServiceConnection
-    final static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:7.0");
+    final static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:%s".formatted(MongoDbConfig.MONGODB_VERSION));
 
     @Autowired
     MongoTemplate mongoTemplate;

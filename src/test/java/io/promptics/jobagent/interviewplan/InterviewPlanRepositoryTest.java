@@ -2,6 +2,7 @@ package io.promptics.jobagent.interviewplan;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.promptics.jobagent.MongoDbConfig;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ class InterviewPlanRepositoryTest {
 
     @Container
     @ServiceConnection
-    final static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:7.0");
+    final static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:%s".formatted(MongoDbConfig.MONGODB_VERSION));
 
     @Autowired
     InterviewPlanRepository repository;

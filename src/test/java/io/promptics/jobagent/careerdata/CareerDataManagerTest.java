@@ -2,6 +2,7 @@ package io.promptics.jobagent.careerdata;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.promptics.jobagent.MongoDbConfig;
 import io.promptics.jobagent.careerdata.model.CareerData;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ class CareerDataManagerTest {
 
     @Container
     @ServiceConnection
-    final static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:7.0");
+    final static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:%s".formatted(MongoDbConfig.MONGODB_VERSION));
     private ObjectMapper objectMapper;
     private CareerData careerDataPersisted;
 
