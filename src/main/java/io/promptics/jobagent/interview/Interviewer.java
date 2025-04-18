@@ -8,6 +8,10 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.stereotype.Component;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+
 /**
  * The Interviewer agent conducts the interview.
  * 
@@ -86,16 +90,20 @@ public class Interviewer {
     }
 
     private void addAssistantOutputToConversation(TopicAndThread topicAndThread, String output) {
-        interviewPlanService.addToThreadConversation(topicAndThread.getThread().getIdentifier(), ConversationEntry.builder()
-                .role("assistant")
-                .text(output)
-                .build());
+        String role = "assistant";
+        addToConversation(topicAndThread, output, role);
     }
 
     private ThreadConversation addUserInputToConversation(String input, TopicAndThread topicAndThread) {
+        String role = "user";
+        return addToConversation(topicAndThread, input, role);
+    }
+
+    private ThreadConversation addToConversation(TopicAndThread topicAndThread, String output, String role) {
         return interviewPlanService.addToThreadConversation(topicAndThread.getThread().getIdentifier(), ConversationEntry.builder()
-                .role("user")
-                .text(input)
+                .timestamp(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").withZone(ZoneId.of("UTC")).format(Instant.now()))
+                .role(role)
+                .text(output)
                 .build());
     }
 

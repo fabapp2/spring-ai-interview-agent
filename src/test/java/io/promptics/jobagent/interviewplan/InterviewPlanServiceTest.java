@@ -17,6 +17,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertWith;
 import static org.junit.jupiter.api.Assertions.fail;
 
 @SpringBootTest
@@ -72,6 +73,8 @@ class InterviewPlanServiceTest {
         assertThat(thread.getStatus()).isEqualTo(Thread.Status.IN_PROGRESS);
         assertThat(thread.getFocus()).isEqualTo("Determine current employment status and activities since December 2024");
 
+        assertThat(topic.getIdentifier()).isNotNull();
+        assertThat(topic.getIdentifier()).isEqualTo("gap_current_employment");
         assertThat(topic.getType()).isEqualTo(Topic.Type.GAP);
         assertThat(topic.getReference().getSection()).isEqualTo(Reference.Section.WORK);
         assertThat(topic.getReference().getIdentifier().getName()).isEqualTo("TechGiant");

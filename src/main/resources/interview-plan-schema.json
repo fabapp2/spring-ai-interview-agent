@@ -3,7 +3,7 @@
   "type": "object",
   "description": "Structure for planning career data gathering interviews",
   "properties": {
-    "career_data_id": {
+    "careerDataId": {
       "type": "string",
       "description": "Foreign key reference to the id of the career data document"
     },
@@ -11,9 +11,9 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "type", "reference", "threads"],
+        "required": ["identifier", "type", "reference", "threads"],
         "properties": {
-          "id": { "type": "string" },
+          "identifier": { "type": "string" },
           "type": {
             "type": "string",
             "enum": [
@@ -71,9 +71,9 @@
             "type": "array",
             "items": {
               "type": "object",
-              "required": ["id", "type", "focus", "status"],
+              "required": ["identifier", "type", "focus", "status"],
               "properties": {
-                "id": { "type": "string" },
+                "identifier": { "type": "string" },
                 "type": {
                   "type": "string",
                   "enum": [

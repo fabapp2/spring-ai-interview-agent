@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
@@ -17,7 +19,7 @@ import java.time.Instant;
 public class ConversationEntry {
     // ISO-8601 format
     @JsonProperty("timestamp")
-    private String timestamp = Instant.now().toString();
+    private String timestamp;
 
     @JsonProperty("role")
     private String role;

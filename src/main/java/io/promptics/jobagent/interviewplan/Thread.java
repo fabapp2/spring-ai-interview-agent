@@ -13,7 +13,7 @@ import java.util.*;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "id",
+    "identifier",
     "type",
     "focus",
     "duration",
@@ -27,9 +27,6 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Thread {
-
-    @Id
-    private String id;
 
     /**
      * 

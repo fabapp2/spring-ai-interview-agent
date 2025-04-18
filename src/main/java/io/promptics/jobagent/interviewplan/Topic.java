@@ -12,7 +12,7 @@ import java.util.*;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "id",
+    "identifier",
     "type",
     "reference",
     "threads"
@@ -22,9 +22,6 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Topic {
-
-    @Id
-    private String id;
 
     /**
      * 

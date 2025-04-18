@@ -65,7 +65,6 @@ public class InterviewPlanService {
         GroupOperation groupOperation = group().first("$$ROOT").as("doc");
         ReplaceRootOperation replaceRoot = replaceRoot("doc");
         ProjectionOperation projectionOperation = project()
-                .and("topics.id").as("topic.id")
                 .and("topics.identifier").as("topic.identifier")
                 .and("topics.type").as("topic.type")
                 .and("topics.reference").as("topic.reference")

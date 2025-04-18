@@ -30,14 +30,12 @@ public class InterviewPlan {
     @Id
     private String id;
 
-    @JsonProperty("career_data_id")
     private String careerDataId;
 
     @JsonProperty("topics")
     @Singular
     public List<Topic> topics = new ArrayList<Topic>();
 
-    @JsonIgnore
     private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
     @JsonAnyGetter
