@@ -17,7 +17,6 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertWith;
 import static org.junit.jupiter.api.Assertions.fail;
 
 @SpringBootTest
@@ -37,7 +36,7 @@ class InterviewPlanServiceTest {
     @Autowired
     MongoTemplate template;
     private InterviewPlan saved;
-    private String careerDataId = "67e98007bd5c558ba6ad93d6";
+    private final String careerDataId = "67e98007bd5c558ba6ad93d6";
 
     @BeforeEach
     void beforeEach() throws IOException {
@@ -107,7 +106,6 @@ class InterviewPlanServiceTest {
 
     private static InterviewPlan loadInterviewPlan() throws IOException {
         ClassPathResource resource = new ClassPathResource("interview-plan.json");
-        InterviewPlan interviewPlan = new ObjectMapper().readValue(resource.getFile(), InterviewPlan.class);
-        return interviewPlan;
+        return  new ObjectMapper().readValue(resource.getFile(), InterviewPlan.class);
     }
 }

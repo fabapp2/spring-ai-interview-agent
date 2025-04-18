@@ -38,7 +38,7 @@ public class InterviewPlanService {
      * Mark a {@link Thread} as completed and get the next {@link TopicAndThread} in return.
      */
     public Optional<TopicAndThread> completeThreadAndGetNext(TopicAndThread topicAndThread) {
-        return null;
+        return Optional.empty();
     }
 
     /**

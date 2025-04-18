@@ -14,7 +14,6 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * The Interviewer agent conducts the interview.
- * 
  * It has access to the currently active Topic and Thread and decides about how to proceed.
  * The agent can:
  *

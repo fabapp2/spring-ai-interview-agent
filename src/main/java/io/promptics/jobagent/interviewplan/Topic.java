@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 
 import java.util.*;
 
@@ -50,9 +49,9 @@ public class Topic {
      * 
      */
     @JsonProperty("threads")
-    public List<Thread> threads = new ArrayList<Thread>();
+    public List<Thread> threads = new ArrayList<>();
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
+    private Map<String, Object> additionalProperties = new LinkedHashMap<>();
 
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
@@ -81,7 +80,7 @@ public class Topic {
         ROLE("role");
 
         private final String value;
-        private final static Map<String, Topic.Type> CONSTANTS = new HashMap<String, Topic.Type>();
+        private final static Map<String, Topic.Type> CONSTANTS = new HashMap<>();
 
         static {
             for (Topic.Type c: values()) {

@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 
 import java.util.*;
 
@@ -61,11 +60,11 @@ public class Thread {
     @JsonProperty("status")
     public Thread.Status status;
     @JsonProperty("related_threads")
-    public List<String> relatedThreads = new ArrayList<String>();
+    public List<String> relatedThreads = new ArrayList<>();
     @JsonProperty("conversation")
     public List<ConversationEntry> conversation = new ArrayList<>();
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
+    private Map<String, Object> additionalProperties = new LinkedHashMap<>();
 
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
@@ -84,7 +83,7 @@ public class Thread {
         COMPLETED("completed"),
         SKIPPED("skipped");
         private final String value;
-        private final static Map<String, Thread.Status> CONSTANTS = new HashMap<String, Thread.Status>();
+        private final static Map<String, Thread.Status> CONSTANTS = new HashMap<>();
 
         static {
             for (Thread.Status c: values()) {
@@ -140,7 +139,7 @@ public class Thread {
 
         private final String value;
 
-        private final static Map<String, Thread.Type> CONSTANTS = new HashMap<String, Thread.Type>();
+        private final static Map<String, Thread.Type> CONSTANTS = new HashMap<>();
 
         static {
             for (Thread.Type c: values()) {
