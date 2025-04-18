@@ -28,14 +28,16 @@ public class InterviewPlanner {
     private final ChatClient client;
     private final ObjectMapper objectMapper;
     private final DateTimeProvider datetimeProvider;
+    private final InterviewPlanService interviewPlanService;
 
     // find prompts at the end...
 
-    public InterviewPlanner(ChatClient.Builder chatClientBuilder, CareerDataRepository careerDataRepository, ObjectMapper objectMapper, DateTimeProvider datetimeProvider) {
-        this.client = chatClientBuilder.defaultOptions(ChatOptions.builder().temperature(0.0).build()).build();
+    public InterviewPlanner(ChatClient.Builder chatClientBuilder, CareerDataRepository careerDataRepository, ObjectMapper objectMapper, DateTimeProvider datetimeProvider, InterviewPlanService interviewPlanService) {
+        this.client = chatClientBuilder.defaultOptions(ChatOptions.builder().model("gpt-3.5-turbo").temperature(0.0).build()).build();
         this.careerDataRepository = careerDataRepository;
         this.objectMapper = objectMapper;
         this.datetimeProvider = datetimeProvider;
+        this.interviewPlanService = interviewPlanService;
     }
 
     public InterviewPlan execute(InterviewContext context) {
@@ -63,8 +65,10 @@ public class InterviewPlanner {
                     .call()
                     .content();
             // Using getEntity() was problematic, Topic.Type was not created
-            log.debug(content);
-            return new ObjectMapper().readValue(content, InterviewPlan.class);
+            log.debug("Generated interview plan: %s".formatted(content));
+            InterviewPlan interviewPlan = objectMapper.readValue(content, InterviewPlan.class);
+            InterviewPlan saved = interviewPlanService.saveInterviewPlan(interviewPlan);
+            return saved;
         } catch (JsonProcessingException e) {
             throw new IllegalStateException(e);
         }
