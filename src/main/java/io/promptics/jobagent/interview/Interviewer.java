@@ -100,7 +100,7 @@ public class Interviewer {
     }
 
     private TopicAndThread getCurrentlyActiveThread(InterviewContext context) {
-        return interviewPlanService.findCurrentTopicAndThread(context.getPlanId());
+        return interviewPlanService.findCurrentTopicAndThread(context.getCareerDataId());
     }
 
 }

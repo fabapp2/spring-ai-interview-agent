@@ -52,9 +52,9 @@ public class InterviewPlanService {
     /**
      * Find the next active topic and thread.
      */
-    public TopicAndThread findCurrentTopicAndThread(String planId) {
+    public TopicAndThread findCurrentTopicAndThread(String careerDataId) {
 
-        MatchOperation byId = match(Criteria.where("_id").is(new ObjectId(planId)));
+        MatchOperation byId = match(Criteria.where("careerDataId").is(careerDataId));
         UnwindOperation unwindTopics = unwind("topics", true);
         UnwindOperation unwindTopicsThreads = unwind("topics.threads", true);
         MatchOperation matchStatus = match(new Criteria().orOperator(
