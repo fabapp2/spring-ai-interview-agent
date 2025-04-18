@@ -49,7 +49,6 @@ class DataVerifierTest {
     @DisplayName("should render career data")
     void shouldRenderCareerData() {
         String response = dataVerifier.execute(null, id);
-        System.out.println(response);
         assertThat(response).contains("TechGiant");
     }
     
@@ -58,8 +57,8 @@ class DataVerifierTest {
     void shouldChangeCompanyName() {
         String userInput = "Please change the company name 'TechGiant' to 'TechDwarf'.";
         String response = dataVerifier.execute(userInput, id);
-        System.out.println(response);
         CareerData careerData = mongoTemplate.findById(id, CareerData.class);
+        assertThat(response).contains("Successfully changed company name from TechGiant to TechDwarf").contains("name: TechDwarf");
         assertThat(careerData.getWork().get(2).getName()).isEqualTo("TechDwarf");
     }
 

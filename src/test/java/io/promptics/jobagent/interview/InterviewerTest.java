@@ -19,6 +19,8 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.io.IOException;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @SpringBootTest
 @Testcontainers
 class InterviewerTest {
@@ -47,15 +49,7 @@ class InterviewerTest {
     void startInterview() {
         InterviewContext context = new InterviewContext(careerDataId, planId, "sessionid", "Max");
         String output = interviewer.execute(context, "Start interview");
-        System.out.println(output);
-    }
-
-    private void assistant(String message) {
-        System.out.println("Assistant:\n  %s\n".formatted(message));
-    }
-
-    private void user(String message) {
-        System.out.println("User:\n  %s\n".formatted(message));
+        assertThat(output).contains("current").contains("since").contains("2024");
     }
 
     private void intializeMongoDb() throws IOException {
