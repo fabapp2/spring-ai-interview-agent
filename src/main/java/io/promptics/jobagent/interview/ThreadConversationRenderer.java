@@ -9,7 +9,7 @@ public class ThreadConversationRenderer {
 
     public String renderConversation(ThreadConversation conversation) {
         return conversation.getEntries().stream()
-                .map(e -> e.getRole() + ": " + e.getText() + "\n")
+                .map(e -> " " + e.getRole() + " (" + e.getTimestamp() + "): " + e.getText() + "\n")
                 .collect(Collectors.joining("\n"));
     }
 

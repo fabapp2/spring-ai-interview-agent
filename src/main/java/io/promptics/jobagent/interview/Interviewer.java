@@ -43,16 +43,18 @@ public class Interviewer {
     private final InterviewPlanMongoTools mongoDbTools;
     private final InterviewPlanService interviewPlanService;
     private final InterviewPromptBuilder promptBuilder;
+    private final ConversationAnalyzer analyzer;
     /**
      * @param builder
      * @param mongoDbTools
      * @param interviewPlanService
      */
-    public Interviewer(ChatClient.Builder builder, InterviewPlanMongoTools mongoDbTools, InterviewPlanService interviewPlanService, InterviewPromptBuilder promptBuilder) {
+    public Interviewer(ChatClient.Builder builder, InterviewPlanMongoTools mongoDbTools, InterviewPlanService interviewPlanService, InterviewPromptBuilder promptBuilder, ConversationAnalyzer analyzer) {
         client = builder.defaultOptions(ChatOptions.builder().temperature(0.0).build()).build();
         this.mongoDbTools = mongoDbTools;
         this.interviewPlanService = interviewPlanService;
         this.promptBuilder = promptBuilder;
+        this.analyzer = analyzer;
     }
 
     /**
@@ -66,6 +68,8 @@ public class Interviewer {
         TopicAndThread topicAndThread = getCurrentlyActiveThread(context);
 
         ThreadConversation conversation = addUserInputToConversation(input, topicAndThread);
+
+        analyzer.analyzeUserInput(topicAndThread, conversation, input);
 
         String additionalContext = "";
 
