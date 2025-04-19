@@ -33,7 +33,7 @@ import java.time.format.DateTimeFormatter;
  *</p>
  * <p>
  * <b>finish the interview:</b>
- * The agent completed the last thread and can thus declare the imterview as finished.
+ * The agent completed the last thread and can thus declare the interview as finished.
  * </p>
  */
 @Component
