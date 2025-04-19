@@ -37,40 +37,40 @@ class TopicAndThreadRendererTest {
             """;
     public static final String EXPECTED_OUTPUT = """
             # Current Topic: gap_current_employment
-                            
+            
             Type: Career Gap
             - Duration and timing
             - Reason and context
             - Skills maintained/developed
             - Professional development
             - Return to work transition
-                            
-                            
-                            
+            
+            
+            
             ## Reference Information
             - Section: work
             - Organization: TechGiant
             - Start Date: 2024-01
-                            
-                            
+            
+            
             # Current Thread: current_status
-                            
+            
             Type: Core Details
             - Essential information about the topic
             - Main responsibilities and activities
             - Key methods and approaches used
             - Regular duties and tasks
             - Overall context and environment
-                            
-                            
-                            
+            
+            
+            
             ## Focus Area
             Determine current employment status and activities since December 2024
-                            
+            
             ## Thread Parameters
             - Allocated Time: 15 minutes
             - Current Status: in_progress
-                            
+            
             """;
 
     @Test

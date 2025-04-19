@@ -1,6 +1,5 @@
 package io.promptics.jobagent.interview;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.promptics.jobagent.MongoDbConfig;
 import io.promptics.jobagent.careerdata.model.CareerData;

@@ -36,12 +36,11 @@ public class ConversationAnalyzer {
     public String analyzeUserInput(TopicAndThread topicAndThread, ThreadConversation conversation, String input) {
         String prompt = renderPrompt(topicAndThread, conversation);
         System.out.println(prompt);
-        String response = chatClient.prompt()
+        return chatClient.prompt()
                 .system(prompt)
                 .user(input)
                 .call()
                 .content();
-        return response;
     }
 
     private String renderPrompt(TopicAndThread topicAndThread, ThreadConversation conversation) {

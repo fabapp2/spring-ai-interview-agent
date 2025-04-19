@@ -41,8 +41,6 @@ public class CareerDataInterview {
 
     public String start() {
         InterviewContext context = contextHolder.getContext();
-        String careerDataId = context.getCareerDataId();
-        String sessionId = context.getSessionId();
         interviewPlanner.execute(context);
         return interviewer.execute(context, "Please start the interview");
     }

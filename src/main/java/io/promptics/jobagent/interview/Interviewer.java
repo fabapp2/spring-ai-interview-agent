@@ -44,11 +44,7 @@ public class Interviewer {
     private final InterviewPlanService interviewPlanService;
     private final InterviewPromptBuilder promptBuilder;
     private final ConversationAnalyzer analyzer;
-    /**
-     * @param builder
-     * @param mongoDbTools
-     * @param interviewPlanService
-     */
+
     public Interviewer(ChatClient.Builder builder, InterviewPlanMongoTools mongoDbTools, InterviewPlanService interviewPlanService, InterviewPromptBuilder promptBuilder, ConversationAnalyzer analyzer) {
         client = builder.defaultOptions(ChatOptions.builder().temperature(0.0).build()).build();
         this.mongoDbTools = mongoDbTools;
