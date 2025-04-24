@@ -37,6 +37,7 @@ import java.util.Map;
 })
 @Document(collection = "career_data")
 public class CareerData {
+
     @Id
     private String id;
 

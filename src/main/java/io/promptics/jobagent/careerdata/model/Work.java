@@ -25,6 +25,33 @@ import java.util.Map;
 
 public class Work {
 
+    @JsonIgnore
+    private String id;
+
+    @JsonProperty("id")
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        if ("id".equals(name)) {
+            this.id = value.toString();
+        } else {
+            this.additionalProperties.put(name, value);
+        }
+    }
+
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
     /**
      * e.g. Facebook
      * 
@@ -91,6 +118,7 @@ public class Work {
     @JsonPropertyDescription("Specify multiple accomplishments")
     @Valid
     private List<String> highlights;
+
     @JsonIgnore
     @Valid
     private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
@@ -255,16 +283,6 @@ public class Work {
     @JsonProperty("highlights")
     public void setHighlights(List<String> highlights) {
         this.highlights = highlights;
-    }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
     }
 
 }
