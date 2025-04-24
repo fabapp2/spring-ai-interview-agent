@@ -16,7 +16,7 @@ import java.util.Map;
     "url",
     "issuer"
 })
-public class Certificate {
+public class Certificate extends SectionWithId  {
 
     /**
      * e.g. Certified Kubernetes Administrator

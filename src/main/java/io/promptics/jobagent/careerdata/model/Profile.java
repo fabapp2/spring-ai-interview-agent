@@ -15,7 +15,7 @@ import java.util.Map;
     "url"
 })
 
-public class Profile {
+public class Profile extends SectionWithId {
 
     /**
      * e.g. Facebook or Twitter

@@ -21,7 +21,7 @@ import java.util.Map;
     "highlights"
 })
 
-public class Volunteer {
+public class Volunteer extends SectionWithId {
 
     /**
      * e.g. Facebook

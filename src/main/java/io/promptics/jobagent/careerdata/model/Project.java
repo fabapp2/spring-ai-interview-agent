@@ -24,7 +24,7 @@ import java.util.Map;
     "type"
 })
 
-public class Project {
+public class Project extends SectionWithId {
 
     /**
      * e.g. The World Wide Web

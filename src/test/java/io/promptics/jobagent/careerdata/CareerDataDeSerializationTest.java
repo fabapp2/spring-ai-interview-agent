@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.networknt.schema.*;
 import io.promptics.jobagent.careerdata.model.CareerData;
 import org.intellij.lang.annotations.Language;
-import org.junit.jupiter.api.Assertions;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
@@ -19,22 +19,19 @@ public class CareerDataDeSerializationTest {
     private ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
-    @DisplayName("should deserialize JSON with id as additionalFields")
-    void shouldDeSerializeJsonWithIdAsAdditionalFields() throws IOException {
-        CareerData cd = objectMapper.readValue(new ClassPathResource("career-data.json").getFile(), CareerData.class);
+    @DisplayName("should deserialize JSON with section ids")
+    void shouldDeSerializeJsonWithSectionIds() throws IOException {
+        CareerData cd = objectMapper.readValue(JSON, CareerData.class);
         assertThat(cd.getWork().get(0).getId()).isEqualTo("111111");
-
+        assertThat(cd.getCertificates().get(0).getId()).isEqualTo("csp_1");
         String json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(cd);
-//        assertThat(json).isEqualTo(JSON);
+        assertJsonSchemaCompliant(json);
+    }
 
+    private static @NotNull Set<ValidationMessage> assertJsonSchemaCompliant(String json) throws IOException {
         Set<ValidationMessage> validate = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7).getSchema(new ClassPathResource("resume-schema.json").getInputStream()).validate(json, InputFormat.JSON);
         assertThat(validate.size()).isEqualTo(0);
-        System.out.println(validate);
-
-        cd.getWork().get(1).setId("222222");
-
-        String json2 = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(cd);
-//        System.out.println(json2);
+        return validate;
     }
 
     @Language("json")
@@ -71,6 +68,7 @@ public class CareerDataDeSerializationTest {
               ],
               "skills": [
                 {
+                  "id": "skills_id_1",
                   "name": "Programming Languages",
                   "keywords": [
                     "Java",
@@ -186,15 +184,20 @@ public class CareerDataDeSerializationTest {
               ],
               "certificates": [
                 {
-                  "name": "Certified Sarcasm Practitioner (CSP)"
+                  "id": "csp_1",
+                  "name": "Certified Sarcasm Practitioner (CSP)",
+                  "issuer": "Certificate Issuer"
                 },
                 {
+                  "id": "mc",
                   "name": "Master of Caffeination (MC)"
                 },
                 {
+                  "id": "csm",
                   "name": "Certified Scrum Master"
                 },
                 {
+                  "id": "AWSsa",
                   "name": "AWS Certified Solutions Architect"
                 }
               ],

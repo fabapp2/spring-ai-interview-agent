@@ -13,7 +13,7 @@ import java.util.Map;
     "fluency"
 })
 
-public class Language {
+public class Language extends SectionWithId {
 
     /**
      * e.g. English, Spanish

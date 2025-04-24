@@ -13,7 +13,7 @@ import java.util.Map;
     "reference"
 })
 
-public class Reference {
+public class Reference extends SectionWithId  {
 
     /**
      * e.g. Timothy Cook

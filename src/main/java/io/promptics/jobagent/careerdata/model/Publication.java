@@ -18,7 +18,7 @@ import java.util.Map;
     "summary"
 })
 
-public class Publication {
+public class Publication extends SectionWithId  {
 
     /**
      * e.g. The World Wide Web

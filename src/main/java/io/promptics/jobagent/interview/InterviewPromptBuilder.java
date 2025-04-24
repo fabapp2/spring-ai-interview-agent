@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class InterviewPromptBuilder {
@@ -37,8 +38,8 @@ public class InterviewPromptBuilder {
         {previousContext}
         
         ## Next Question
-        Based on this context, particularly focusing on ${threadFocus}, please ask your next interview question.
-        Remember to consider the ${topicType} context and maintain a professional, understanding tone.
+        Based on this context, particularly focusing on {threadFocus}, please ask your next interview question.
+        Remember to consider the {topicType} context and maintain a professional, understanding tone.
         
         """;
 
@@ -59,6 +60,8 @@ public class InterviewPromptBuilder {
         variables.put("previousContext", additionalContext);
         variables.put("conversation", renderedConversation);
         variables.put("topicAndThread", topicAndThread);
+        variables.put("threadFocus", thread.getFocus());
+        variables.put("topicType", topic.getType().value());
 
         return new PromptTemplate(PROMPT_TEMPLATE, variables).render();
     }

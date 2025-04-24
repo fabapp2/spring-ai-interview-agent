@@ -22,7 +22,7 @@ import java.util.Map;
     "courses"
 })
 
-public class Education {
+public class Education extends SectionWithId {
 
     /**
      * e.g. Massachusetts Institute of Technology

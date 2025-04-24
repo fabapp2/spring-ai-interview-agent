@@ -15,7 +15,7 @@ import java.util.Map;
     "keywords"
 })
 
-public class Skill {
+public class Skill extends SectionWithId {
 
     /**
      * e.g. Web Development

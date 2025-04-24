@@ -62,6 +62,7 @@ class ConversationAnalyzerTest {
                         .text("What did you do after leaving TechGiant January 2024 and now?")
                 .build());
         String s = analyzer.analyzeUserInput(topicAndThread, conversation, "I got certified with AWS and did a deepdive into AI and large language models.");
+        // FIXME: finish test
         System.out.println(s);
     }
     

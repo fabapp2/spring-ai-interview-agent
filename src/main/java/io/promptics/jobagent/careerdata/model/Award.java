@@ -16,7 +16,7 @@ import java.util.Map;
     "summary"
 })
 
-public class Award {
+public class Award extends SectionWithId {
 
     /**
      * e.g. One of the 100 greatest minds of the century

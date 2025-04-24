@@ -14,7 +14,7 @@ import java.util.Map;
     "keywords"
 })
 
-public class Interest {
+public class Interest extends SectionWithId {
 
     /**
      * e.g. Philosophy
