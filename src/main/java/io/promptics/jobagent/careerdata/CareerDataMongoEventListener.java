@@ -1,5 +1,6 @@
 package io.promptics.jobagent.careerdata;
 
+import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
 import io.promptics.jobagent.careerdata.model.CareerData;
 import io.promptics.jobagent.careerdata.model.SectionWithId;
 import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
@@ -7,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.event.BeforeConvertEvent;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 @Component
@@ -38,6 +40,6 @@ public class CareerDataMongoEventListener extends AbstractMongoEventListener<Car
     }
 
     private String getId() {
-        return UUID.randomUUID().toString();
+        return NanoIdUtils.randomNanoId(new Random(), "0123456789abcdefghijklmnopqrstuvwxyz".toCharArray(), 8);
     }
 }
