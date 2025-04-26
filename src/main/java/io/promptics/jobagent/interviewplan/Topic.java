@@ -20,6 +20,7 @@ import java.util.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Deprecated
 public class Topic {
 
     /**

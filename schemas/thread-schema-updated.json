@@ -1,0 +1,118 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "id",
+    "topicId",
+    "type",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "MongoDB ObjectId (24 character hex string) uniquely identifies the document"
+    },
+    "topicId": {
+      "type": "string",
+      "description": "MongoDB ObjectId (24 character hex string) of the topic this thread belongs to"
+    },
+    "type": {
+      "type": "string",
+      "description": "Defines the inquiry focus of the thread.",
+      "enum": [
+        "core_details",
+        "achievements",
+        "responsibilities",
+        "skills_used",
+        "team_context",
+        "challenges",
+        "transition",
+        "impact",
+        "learning",
+        "collaboration",
+        "technical_depth",
+        "project_specifics",
+        "certification_details",
+        "publication_impact",
+        "skill_application",
+        "language_usage",
+        "interest_relevance"
+      ]
+    },
+    "focus": {
+      "type": "string",
+      "description": "Optional freeform text providing additional focus or nuance for the thread."
+    },
+    "status": {
+      "type": "string",
+      "description": "Current lifecycle status of the thread.",
+      "enum": [
+        "pending",
+        "in_progress",
+        "on_hold",
+        "completed",
+        "skipped"
+      ]
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Estimated intended duration for handling this thread, in seconds.",
+      "minimum": 1
+    },
+    "actualDuration": {
+      "type": "integer",
+      "description": "Actual recorded duration spent on this thread, in seconds.",
+      "minimum": 0
+    },
+    "relatedThreads": {
+      "type": "array",
+      "description": "IDs of threads related to this one for cross-context purposes.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "contextObject": {
+      "type": "object",
+      "description": "Optional structured context data to enhance thread prompting.",
+      "additionalProperties": true
+    },
+    "contextAction": {
+      "type": "string",
+      "description": "Optional field describing the preferred agent behavior for this thread, such as 'ask', 'confirm', 'summarize'.",
+      "enum": [
+        "ask",
+        "confirm",
+        "validate",
+        "summarize",
+        "generate",
+        "reflect"
+      ]
+    },
+    "contextGoal": {
+      "type": "string",
+      "description": "Optional field describing the specific goal of the thread, such as 'extract_responsibilities' or 'capture_achievements'.",
+      "enum": [
+        "extract_responsibilities",
+        "capture_achievements",
+        "understand_team_context",
+        "validate_timeframes",
+        "enrich_skill_application",
+        "describe_challenges",
+        "identify_learning_outcomes",
+        "assess_language_usage",
+        "map_interest_relevance"
+      ]
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when this thread was created."
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when this thread was last updated."
+    }
+  },
+  "additionalProperties": false
+}

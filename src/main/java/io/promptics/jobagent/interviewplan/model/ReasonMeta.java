@@ -1,35 +1,28 @@
 
-package io.promptics.jobagent.interviewplan;
-
-import com.fasterxml.jackson.annotation.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+package io.promptics.jobagent.interviewplan.model;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import jakarta.validation.Valid;
 
+
+/**
+ * Optional machine-readable metadata that explains how this topic was created.
+ * 
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "name",
-    "startDate",
-    "date"
-})
-@Builder
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Deprecated
-public class Identifier {
 
-    @JsonProperty("name")
-    public String name;
-    @JsonProperty("startDate")
-    public String startDate;
-    @JsonProperty("date")
-    public String date;
+})
+public class ReasonMeta {
+
     @JsonIgnore
+    @Valid
     private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
     @JsonAnyGetter

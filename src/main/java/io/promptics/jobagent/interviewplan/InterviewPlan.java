@@ -25,6 +25,7 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document("interview_plan")
+@Deprecated
 public class InterviewPlan {
 
     @Id

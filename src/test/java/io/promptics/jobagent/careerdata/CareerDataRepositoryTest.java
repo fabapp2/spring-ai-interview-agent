@@ -48,7 +48,7 @@ class CareerDataRepositoryTest {
 
     @Test
     @DisplayName("crud")
-    void crud() {
+    void crud() throws JsonProcessingException {
         CareerData careerData = readCareerData();
         CareerData saved = repository.save(careerData);
 
@@ -66,6 +66,8 @@ class CareerDataRepositoryTest {
         assertThatIdsWereSet(saved.getSkills());
         assertThatIdsWereSet(saved.getVolunteer());
         assertThatIdsWereSet(saved.getWork());
+
+        System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(saved));
     }
 
     private void assertThatIdsWereSet(List<? extends SectionWithId> section) {

@@ -1,19 +1,46 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "description": "Structure for planning career data gathering interviews",
+  "description": "Schema for structuring AI-led interview plans to enrich structured resume data. Each plan consists of high-level topics (like specific roles or career gaps), which are further broken down into structured threads. Threads can be paused and resumed to support flexible, real-world interviews.",
   "properties": {
     "careerDataId": {
       "type": "string",
-      "description": "Foreign key reference to the id of the career data document"
+      "description": "Id of the associated resume/career data document"
+    },
+    "meta": {
+      "type": "object",
+      "description": "Metadata describing the origin, version, and creation of the plan",
+      "properties": {
+        "planVersion": {
+          "type": "string"
+        },
+        "resumeSchemaVersion": {
+          "type": "string"
+        },
+        "generatedBy": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": true
     },
     "topics": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["identifier", "type", "reference", "threads"],
+        "required": [
+          "identifier",
+          "type",
+          "threads"
+        ],
         "properties": {
-          "identifier": { "type": "string" },
+          "identifier": {
+            "type": "string",
+            "description": "NanoID for this topic"
+          },
           "type": {
             "type": "string",
             "enum": [
@@ -29,51 +56,114 @@
               "interest",
               "reference",
               "gap",
-              "role"
-            ]
+              "career_transition",
+              "freelance_period",
+              "timeline_arc",
+              "role",
+              "narrative"
+            ],
+            "description": "Type of topic, either resume-aligned or inferred/narrative"
           },
           "reference": {
             "type": "object",
+            "description": "Varied reference structure depending on topic type",
             "properties": {
-              "section": {
-                "type": "string",
-                "enum": [
-                  "work",
-                  "volunteer",
-                  "education",
-                  "awards",
-                  "certificates",
-                  "publications",
-                  "skills",
-                  "languages",
-                  "interests",
-                  "references",
-                  "projects"
-                ]
+              "resumeItemId": {
+                "type": "string"
               },
-              "identifier": {
-                "type": "object",
-                "properties": {
-                  "name": { "type": "string" },
-                  "startDate": {
-                    "type": "string",
-                    "pattern": "^[1-2][0-9]{3}-[0-1][0-9]$"
-                  },
-                  "date": {^^
-                    "type": "string",
-                    "pattern": "^[1-2][0-9]{3}-[0-1][0-9]$"
-                  }
+              "spans": {
+                "type": "array",
+                "items": {
+                  "type": "string"
                 }
+              },
+              "startDate": {
+                "type": "string",
+                "pattern": "^[1-2][0-9]{3}(-[0-1][0-9])?$"
+              },
+              "endDate": {
+                "type": "string",
+                "pattern": "^[1-2][0-9]{3}(-[0-1][0-9])?$"
+              },
+              "resumeItemBeforeId": {
+                "type": "string"
+              },
+              "resumeItemAfterId": {
+                "type": "string"
               }
-            }
+            },
+            "additionalProperties": true
+          },
+          "gapType": {
+            "type": "string",
+            "enum": [
+              "time",
+              "timeline_boundary"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          },
+          "reasonMeta": {
+            "type": "object",
+            "properties": {
+              "detectedBy": {
+                "type": "string"
+              },
+              "gapDurationInMonths": {
+                "type": "integer"
+              },
+              "missingSectionCandidates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time"
+              }
+            },
+            "additionalProperties": true
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ]
+          },
+          "priorityScore": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
           },
           "threads": {
             "type": "array",
             "items": {
               "type": "object",
-              "required": ["identifier", "type", "focus", "status"],
+              "required": [
+                "identifier",
+                "type",
+                "status",
+                "topicId"
+              ],
               "properties": {
-                "identifier": { "type": "string" },
+                "identifier": {
+                  "type": "string"
+                },
+                "topicId": {
+                  "type": "string"
+                },
                 "type": {
                   "type": "string",
                   "enum": [
@@ -93,51 +183,66 @@
                     "publication_impact",
                     "skill_application",
                     "language_usage",
-                    "interest_relevance"
+                    "interest_relevance",
+                    "narrative_context"
                   ]
                 },
-                "focus": { "type": "string" },
+                "focus": {
+                  "type": "string"
+                },
+                "contextObject": {
+                  "type": "string"
+                },
+                "contextAction": {
+                  "type": "string"
+                },
+                "contextGoal": {
+                  "type": "string"
+                },
                 "duration": {
                   "type": "integer",
                   "minimum": 1
                 },
-                "actual_duration": {
+                "actualDuration": {
                   "type": "integer",
                   "minimum": 0
                 },
                 "status": {
                   "type": "string",
-                  "enum": ["pending", "in_progress", "completed", "skipped"]
+                  "enum": [
+                    "pending",
+                    "in_progress",
+                    "on_hold",
+                    "completed",
+                    "skipped"
+                  ],
+                  "description": "Thread status. Use 'on_hold' when the thread was started but paused due to a topic switch or deferred question."
                 },
-                "related_threads": {
-                  "type": "array",
-                  "items": { "type": "string" }
-                },
-                "conversation": {
+                "relatedThreads": {
                   "type": "array",
                   "items": {
-                    "type": "object",
-                    "required": ["timestamp", "question", "response"],
-                    "properties": {
-                      "timestamp": {
-                        "type": "string",
-                        "format": "date-time"
-                      },
-                      "question": {
-                        "type": "string"
-                      },
-                      "response": {
-                        "type": "string"
-                      }
-                    }
+                    "type": "string"
                   }
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
                 }
-              }
+              },
+              "additionalProperties": true
             }
           }
-        }
+        },
+        "additionalProperties": true
       }
     }
   },
-  "required": ["topics"]
+  "required": [
+    "careerDataId",
+    "topics"
+  ]
 }

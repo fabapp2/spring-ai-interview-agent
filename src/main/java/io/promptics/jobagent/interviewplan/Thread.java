@@ -12,39 +12,34 @@ import java.util.*;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "identifier",
-    "type",
-    "focus",
-    "duration",
-    "actual_duration",
-    "status",
-    "related_threads",
-    "conversation"
+        "identifier",
+        "type",
+        "focus",
+        "duration",
+        "actual_duration",
+        "status",
+        "related_threads",
+        "conversation"
 })
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Deprecated
 public class Thread {
 
     /**
-     * 
      * (Required)
-     * 
      */
     @JsonProperty("identifier")
     public String identifier;
     /**
-     * 
      * (Required)
-     * 
      */
     @JsonProperty("type")
     public Thread.Type type;
     /**
-     * 
      * (Required)
-     * 
      */
     @JsonProperty("focus")
     public String focus;
@@ -53,9 +48,7 @@ public class Thread {
     @JsonProperty("actual_duration")
     public Integer actualDuration;
     /**
-     * 
      * (Required)
-     * 
      */
     @JsonProperty("status")
     public Thread.Status status;
@@ -86,7 +79,7 @@ public class Thread {
         private final static Map<String, Thread.Status> CONSTANTS = new HashMap<>();
 
         static {
-            for (Thread.Status c: values()) {
+            for (Thread.Status c : values()) {
                 CONSTANTS.put(c.value, c);
             }
         }
@@ -123,7 +116,7 @@ public class Thread {
         ACHIEVEMENTS("achievements"),
         RESPONSIBILITIES("responsibilities"),
         SKILLS_USED("skills_used"),
-        TEAM_CONTEXT    ("team_context"),
+        TEAM_CONTEXT("team_context"),
         CHALLENGES("challenges"),
         TRANSITION("transition"),
         IMPACT("impact"),
@@ -142,7 +135,7 @@ public class Thread {
         private final static Map<String, Thread.Type> CONSTANTS = new HashMap<>();
 
         static {
-            for (Thread.Type c: values()) {
+            for (Thread.Type c : values()) {
                 CONSTANTS.put(c.value, c);
             }
         }

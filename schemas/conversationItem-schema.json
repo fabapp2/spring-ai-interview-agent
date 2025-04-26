@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "id",
+    "threadId",
+    "timestamp",
+    "role",
+    "content"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "that uniquely identifies this conversation entry."
+    },
+    "threadId": {
+      "type": "string",
+      "description": "ID linking back to the thread this conversation belongs to."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the message occurred."
+    },
+    "role": {
+      "type": "string",
+      "description": "Role of the message sender.",
+      "enum": [
+        "user",
+        "assistant",
+        "system"
+      ]
+    },
+    "content": {
+      "type": "string",
+      "description": "The actual text content of the conversation message."
+    },
+    "type": {
+      "type": "string",
+      "description": "Optional label classifying the message as question, answer, command, note, etc.",
+      "enum": [
+        "question",
+        "answer",
+        "command",
+        "note"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

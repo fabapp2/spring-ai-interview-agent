@@ -1,0 +1,107 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "id",
+    "type"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "MongoDB ObjectId (24 character hex string) uniquely identifies the document"
+    },
+    "type": {
+      "type": "string",
+      "description": "Defines the high-level topic area linked to resume sections or narrative concepts.",
+      "enum": [
+        "basics",
+        "work",
+        "volunteer",
+        "education",
+        "projects",
+        "awards",
+        "certificates",
+        "publications",
+        "skills",
+        "languages",
+        "interests",
+        "references",
+        "gap",
+        "career_transition",
+        "freelance_period",
+        "timeline_arc",
+        "role",
+        "narrative"
+      ]
+    },
+    "reference": {
+      "type": "object",
+      "description": "Links to specific resume entries or spans (optional).",
+      "properties": {
+        "resumeItemId": {
+          "type": "string"
+        },
+        "spans": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        },
+        "resumeItemBeforeId": {
+          "type": "string"
+        },
+        "resumeItemAfterId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "gapType": {
+      "type": "string",
+      "description": "Specifies if a gap is a timeline boundary or time-based.",
+      "enum": [
+        "time",
+        "timeline_boundary"
+      ]
+    },
+    "reason": {
+      "type": "string",
+      "description": "Optional human-readable explanation for why this topic exists."
+    },
+    "reasonMeta": {
+      "type": "object",
+      "description": "Optional machine-readable metadata that explains how this topic was created.",
+      "additionalProperties": true
+    },
+    "priorityScore": {
+      "type": "integer",
+      "description": "Priority of the topic, from 0 to 100, for machine-based sorting."
+    },
+    "priority": {
+      "type": "string",
+      "description": "Human-readable priority label, derived from priorityScore.",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the topic was created."
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the topic was last updated."
+    }
+  },
+  "additionalProperties": false
+}

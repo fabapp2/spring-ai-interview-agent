@@ -1,0 +1,134 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "id",
+    "type"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "NanoID of the topic, used for stable reference"
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of the topic, either a resume section or narrative concept",
+      "enum": [
+        "work",
+        "volunteer",
+        "education",
+        "projects",
+        "awards",
+        "certificates",
+        "publications",
+        "skills",
+        "languages",
+        "interests",
+        "references",
+        "gap",
+        "career_transition",
+        "freelance_period",
+        "timeline_arc",
+        "role",
+        "narrative"
+      ]
+    },
+    "reference": {
+      "type": "object",
+      "description": "Points to resume elements or a time span relevant to this topic",
+      "properties": {
+        "resumeItemId": {
+          "type": "string"
+        },
+        "spans": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        },
+        "resumeItemBeforeId": {
+          "type": "string"
+        },
+        "resumeItemAfterId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "gapType": {
+      "type": "string",
+      "enum": [
+        "time",
+        "timeline_boundary"
+      ]
+    },
+    "reason": {
+      "type": "string",
+      "description": "Human-readable explanation of the topic's origin"
+    },
+    "reasonMeta": {
+      "type": "object",
+      "description": "Machine-readable structured metadata about topic generation",
+      "properties": {
+        "detectedBy": {
+          "type": "string"
+        },
+        "gapDurationInMonths": {
+          "type": "integer"
+        },
+        "missingSectionCandidates": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "patternType": {
+          "type": "string"
+        },
+        "confidenceScore": {
+          "type": "number"
+        },
+        "relatedResumeItems": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": true
+    },
+    "priorityScore": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "description": "Optional derived label from priorityScore"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}

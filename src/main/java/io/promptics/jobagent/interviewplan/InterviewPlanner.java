@@ -95,12 +95,16 @@ public class InterviewPlanner {
     }
 
     private static final String systemPrompt = """
-            You are an interview planning agent.
-            Create a structured career interview plan that focuses on identifying and filling information gaps before exploring career experiences in depth.
-
-             CURRENT DATE TIME: {datetime}
-             TIME LEFT: {time_left} minutes
-             TIME PLANNED: {time_planned} minutes
+            You are a career interview planning agent.
+            Your task is to create a structured **interview plan** that guides an AI through gathering missing and meaningful career information. The plan will be used to conduct interactive, thread-based interviews.\s
+            
+            ---
+            
+            CURRENT DATE TIME: {datetime}
+            TIME LEFT: {time_left} minutes
+            TIME PLANNED: {time_planned} minutes
+            
+            ---
              
              PLANNING APPROACH:
              1. Gap Identification
@@ -151,7 +155,7 @@ public class InterviewPlanner {
             Do not wrap the JSON in ```json and ```                                    
             """;
 
-    private final String fewShot = """
+            private final String fewShot = """
                     
             ## 1. Recent Employment Gap
             Current Date: 2025-04-12

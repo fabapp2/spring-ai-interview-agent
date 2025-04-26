@@ -20,6 +20,7 @@ import java.util.Map;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Deprecated
 public class Reference {
 
     @JsonProperty("section")
