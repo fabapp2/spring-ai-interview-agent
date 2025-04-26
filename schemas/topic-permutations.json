@@ -1,0 +1,4444 @@
+[
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z"
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time"
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary"
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "endDate": "2023-12-31"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "endDate": "2023-12-31"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "endDate": "2023-12-31"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "endDate": "2023-12-31",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "endDate": "2023-12-31",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "endDate": "2023-12-31",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "startDate": "2023-01-01"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "startDate": "2023-01-01"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "startDate": "2023-01-01"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "startDate": "2023-01-01",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "startDate": "2023-01-01",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "startDate": "2023-01-01",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "startDate": "2023-01-01",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "startDate": "2023-01-01",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "startDate": "2023-01-01",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "startDate": "2023-01-01",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "startDate": "2023-01-01",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "startDate": "2023-01-01",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ]
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ]
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ]
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "endDate": "2023-12-31"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "endDate": "2023-12-31"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "endDate": "2023-12-31"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "endDate": "2023-12-31",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "endDate": "2023-12-31",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "endDate": "2023-12-31",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "endDate": "2023-12-31"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "endDate": "2023-12-31"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "endDate": "2023-12-31"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "endDate": "2023-12-31",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "endDate": "2023-12-31",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "endDate": "2023-12-31",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "startDate": "2023-01-01"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "startDate": "2023-01-01"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "startDate": "2023-01-01"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "startDate": "2023-01-01",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "startDate": "2023-01-01",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "startDate": "2023-01-01",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "startDate": "2023-01-01",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "startDate": "2023-01-01",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "startDate": "2023-01-01",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "startDate": "2023-01-01",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "startDate": "2023-01-01",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "startDate": "2023-01-01",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ]
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ]
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ]
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "endDate": "2023-12-31"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "endDate": "2023-12-31"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "endDate": "2023-12-31"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "endDate": "2023-12-31",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "endDate": "2023-12-31",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "endDate": "2023-12-31",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "time",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  },
+  {
+    "id": "662a2cf3b931226b6dcb3001",
+    "type": "basics",
+    "reason": "Update basic personal details",
+    "reasonMeta": {
+      "detectedFields": [
+        "name",
+        "email"
+      ],
+      "triggeredBy": "manual_review"
+    },
+    "priorityScore": 90,
+    "priority": "high",
+    "createdAt": "2025-04-25T08:00:00Z",
+    "updatedAt": "2025-04-25T08:10:00Z",
+    "gapType": "timeline_boundary",
+    "reference": {
+      "resumeItemId": "basics123",
+      "spans": [
+        "span1",
+        "span2"
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "resumeItemBeforeId": "before123",
+      "resumeItemAfterId": "after123"
+    }
+  }
+]

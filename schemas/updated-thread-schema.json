@@ -5,7 +5,10 @@
     "id",
     "topicId",
     "type",
-    "status"
+    "status",
+    "duration",
+    "contextAction",
+    "contextGoal"
   ],
   "properties": {
     "id": {
@@ -78,7 +81,7 @@
     },
     "contextAction": {
       "type": "string",
-      "description": "Optional field describing the preferred agent behavior for this thread, such as 'ask', 'confirm', 'summarize'.",
+      "description": "Describes the preferred agent behavior for this thread, such as 'ask', 'confirm', 'summarize'.",
       "enum": [
         "ask",
         "confirm",
@@ -90,7 +93,7 @@
     },
     "contextGoal": {
       "type": "string",
-      "description": "Optional field describing the specific goal of the thread, such as 'extract_responsibilities' or 'capture_achievements'.",
+      "description": "Describes the specific goal of the thread, such as 'extract_responsibilities' or 'capture_achievements'.",
       "enum": [
         "extract_responsibilities",
         "capture_achievements",

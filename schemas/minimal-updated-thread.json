@@ -1,0 +1,9 @@
+{
+  "id": "662a2cf3b931226b6dcb4001",
+  "topicId": "662a2cf3b931226b6dcb3001",
+  "type": "core_details",
+  "status": "pending",
+  "duration": 300,
+  "contextAction": "ask",
+  "contextGoal": "extract_responsibilities"
+}
