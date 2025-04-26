@@ -21,7 +21,7 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Deprecated
-public class Topic {
+public class TopicDep {
 
     /**
      * 
@@ -36,7 +36,7 @@ public class Topic {
      * 
      */
     @JsonProperty("type")
-    public Topic.Type type;
+    public TopicDep.Type type;
     /**
      * 
      * (Required)
@@ -81,10 +81,10 @@ public class Topic {
         ROLE("role");
 
         private final String value;
-        private final static Map<String, Topic.Type> CONSTANTS = new HashMap<>();
+        private final static Map<String, TopicDep.Type> CONSTANTS = new HashMap<>();
 
         static {
-            for (Topic.Type c: values()) {
+            for (TopicDep.Type c: values()) {
                 CONSTANTS.put(c.value, c);
             }
         }
@@ -104,8 +104,8 @@ public class Topic {
         }
 
         @JsonCreator
-        public static Topic.Type fromValue(String value) {
-            Topic.Type constant = CONSTANTS.get(value);
+        public static TopicDep.Type fromValue(String value) {
+            TopicDep.Type constant = CONSTANTS.get(value);
             if (constant == null) {
                 throw new IllegalArgumentException(value);
             } else {

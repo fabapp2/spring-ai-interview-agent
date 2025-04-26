@@ -1,13 +1,12 @@
 package io.promptics.jobagent.interview;
 
 import io.promptics.jobagent.interviewplan.Thread;
-import io.promptics.jobagent.interviewplan.Topic;
+import io.promptics.jobagent.interviewplan.TopicDep;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 @Service
 public class InterviewPromptBuilder {
@@ -51,7 +50,7 @@ public class InterviewPromptBuilder {
         this.topicAndThreadRenderer = topicAndThreadRenderer;
     }
 
-    public String buildPrompt(Topic topic, Thread thread, ThreadConversation conversation, String additionalContext) {
+    public String buildPrompt(TopicDep topic, Thread thread, ThreadConversation conversation, String additionalContext) {
 
         String topicAndThread = topicAndThreadRenderer.renderTopicAndThread(topic, thread);
         String renderedConversation = conversationRenderer.renderConversation(conversation);

@@ -64,7 +64,7 @@ class InterviewPlanServiceTest {
         TopicAndThread currentTopicAndThread = interviewPlanService.findCurrentTopicAndThread(careerDataId);
 
         Thread thread = currentTopicAndThread.getThread();
-        Topic topic = currentTopicAndThread.getTopic();
+        TopicDep topic = currentTopicAndThread.getTopic();
 
         assertThat(currentTopicAndThread).isNotNull();
         assertThat(thread.getIdentifier()).isEqualTo("current_status");
@@ -74,7 +74,7 @@ class InterviewPlanServiceTest {
 
         assertThat(topic.getIdentifier()).isNotNull();
         assertThat(topic.getIdentifier()).isEqualTo("gap_current_employment");
-        assertThat(topic.getType()).isEqualTo(Topic.Type.GAP);
+        assertThat(topic.getType()).isEqualTo(TopicDep.Type.GAP);
         assertThat(topic.getReference().getSection()).isEqualTo(Reference.Section.WORK);
         assertThat(topic.getReference().getIdentifier().getName()).isEqualTo("TechGiant");
         assertThat(topic.getReference().getIdentifier().getStartDate()).isEqualTo("2024-01");

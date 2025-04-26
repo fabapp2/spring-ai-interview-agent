@@ -16,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataMongoTest
 @Testcontainers
+@Deprecated
 class InterviewPlanRepositoryTest {
 
     @Container

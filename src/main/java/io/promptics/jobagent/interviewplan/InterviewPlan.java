@@ -35,7 +35,7 @@ public class InterviewPlan {
 
     @JsonProperty("topics")
     @Singular
-    public List<Topic> topics = new ArrayList<>();
+    public List<TopicDep> topics = new ArrayList<>();
 
     private Map<String, Object> additionalProperties = new LinkedHashMap<>();
 

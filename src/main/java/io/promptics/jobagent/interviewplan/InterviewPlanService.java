@@ -42,7 +42,7 @@ public class InterviewPlanService {
     }
 
     /**
-     * Add a new {@link Thread} to current {@link Topic} to followup.
+     * Add a new {@link Thread} to current {@link TopicDep} to followup.
      */
     public void addThreadToCurrentTopic(Thread newThread, String relatedThreadId) {
 

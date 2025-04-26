@@ -1,7 +1,7 @@
 package io.promptics.jobagent.interview;
 
 import io.promptics.jobagent.interviewplan.Thread;
-import io.promptics.jobagent.interviewplan.Topic;
+import io.promptics.jobagent.interviewplan.TopicDep;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.stereotype.Component;
@@ -47,7 +47,7 @@ public class TopicAndThreadRenderer {
     private final TopicTypeDescriptionMapper topicMapper;
     private final ThreadTypeDescriptionMapper threadMapper;
 
-    public String renderTopicAndThread(Topic topic, Thread thread) {
+    public String renderTopicAndThread(TopicDep topic, Thread thread) {
 
         String topicSection = buildTopicSection(topic);
         String threadSection = buildThreadSection(thread);
@@ -64,7 +64,7 @@ public class TopicAndThreadRenderer {
         return new PromptTemplate(PROMPT_TEMPLATE, variables).render();
     }
 
-    private String buildTopicSection(Topic topic) {
+    private String buildTopicSection(TopicDep topic) {
         String typeDescription = topicMapper.mapType(topic.getType().value());
 
         Map<String, Object> variables = new HashMap<>();
