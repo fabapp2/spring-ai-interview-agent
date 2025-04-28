@@ -11,15 +11,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 class BasicsTopicPlanningAgentTest {
 
     @Autowired
     BasicsTopicPlanningAgent agent;
-    @Autowired
-    private BasicsTopicPlanningAgent basicsTopicPlanningAgent;
+
     @Autowired
     ObjectMapper objectMapper;
 
@@ -27,10 +26,11 @@ class BasicsTopicPlanningAgentTest {
     @DisplayName("plan")
     void plan() throws JsonProcessingException {
         Basics basicsSection = objectMapper.readValue("""
-                {
+                {x
                   "name": "Max Müller",
                   "email": "max@foo.com",
                   "summary": "",
+                  "id": "1133776655",
                   "location": {
                     "city": "",
                     "countryCode": "DE"
@@ -47,6 +47,18 @@ class BasicsTopicPlanningAgentTest {
                 """, Basics.class);
 
         List<Topic> topics = agent.planTopics(basicsSection);
+        assertThat(topics).isNotEmpty();
+        List<Topic> generalBasicsTopics = topics.stream().filter(t -> t.getReference().getResumeItemId().equals("1133776655")).toList();
+        List<Topic> profilesBasicsTopics = topics.stream().filter(t -> t.getReference().getResumeItemId().equals("1111111111")).toList();
+
+        assertThat(generalBasicsTopics).hasSize(2);
+        assertThat(generalBasicsTopics).extracting(Topic::getReason)
+                        .contains(
+                                "Candidate's city information is missing.",
+                                "Candidate's professional summary is missing."
+                        );
+        assertThat(profilesBasicsTopics).hasSize(1);
+        assertThat(profilesBasicsTopics.get(0).getReason()).contains("username", "URL");
     }
 
 }
