@@ -3,6 +3,7 @@ package io.promptics.jobagent.careerdata;
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
 import io.promptics.jobagent.careerdata.model.CareerData;
 import io.promptics.jobagent.careerdata.model.SectionWithId;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
 import org.springframework.data.mongodb.core.mapping.event.BeforeConvertEvent;
 import org.springframework.stereotype.Component;
@@ -12,7 +13,11 @@ import java.util.Random;
 import java.util.UUID;
 
 @Component
+@RequiredArgsConstructor
 public class CareerDataMongoEventListener extends AbstractMongoEventListener<CareerData> {
+
+    private final SectionIdProvider idProvider;
+
     @Override
     public void onBeforeConvert(BeforeConvertEvent<CareerData> event) {
         CareerData source = event.getSource();
@@ -35,11 +40,8 @@ public class CareerDataMongoEventListener extends AbstractMongoEventListener<Car
         if (section != null) {
             section.stream()
                     .filter(w -> w.getId() == null)
-                    .forEach(w -> w.setId(getId()));
+                    .forEach(w -> w.setId(idProvider.getId()));
         }
     }
 
-    private String getId() {
-        return NanoIdUtils.randomNanoId(new Random(), "0123456789abcdefghijklmnopqrstuvwxyz".toCharArray(), 8);
-    }
 }
