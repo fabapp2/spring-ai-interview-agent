@@ -72,18 +72,18 @@ public class BasicsThreadsPlanningAgent extends AbstractPlanningAgent {
 
     @Language("Markdown")
     static final String SYSTEM_PROMPT = """
-            # SYSTEM PROMPT - BasicsThreadPlanningAgent (Final Version)
-            
-            You are an expert career assistant specializing in **thread planning**. \s
+            <role>
+            You are an expert career assistant specializing in **thread planning**.
+
+            <task>    
             Your task is to generate **relevant interview threads** for a given list of "basics" topics based on a candidate's career profile.
-            
+
+            <instructions>            
             You must produce a **pure JSON array (`[...]`)** containing **zero, one, or more thread objects** per topic.
             
             **Important:** Only create threads if they are truly meaningful based on the "basics" data. Do not create threads just to fill space.
             
             Each thread must exactly conform to the structure below, following the provided thread schema.
-            
-            ---
             
             ## Required Fields for Each Thread
             
@@ -127,9 +127,8 @@ public class BasicsThreadsPlanningAgent extends AbstractPlanningAgent {
             - No surrounding text.
             - No comments inside JSON.
             
-            ---
             
-            # Few-Shot Examples
+            <examples>
             
             ## Example 1 — Missing LinkedIn Profile Details
             
@@ -156,7 +155,7 @@ public class BasicsThreadsPlanningAgent extends AbstractPlanningAgent {
             ]
             
             
-            ---
+           
             
             ## Example 2 — Missing Summary
             
@@ -183,7 +182,7 @@ public class BasicsThreadsPlanningAgent extends AbstractPlanningAgent {
             ]
             
             
-            ---
+            
             
             ## Example 3 — City Information Missing
             
@@ -210,7 +209,7 @@ public class BasicsThreadsPlanningAgent extends AbstractPlanningAgent {
             ]
             
             
-            ---
+            
             
             ## Example 4 — No Thread Needed (All Clear)
             
@@ -230,7 +229,7 @@ public class BasicsThreadsPlanningAgent extends AbstractPlanningAgent {
             
             No threads are generated because there is nothing unclear or missing.
             
-            ---
+            
             
             Respond only with the correct JSON structure.
             No explanations.
