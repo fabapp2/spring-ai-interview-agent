@@ -1,23 +1,23 @@
 package io.promptics.jobagent.interviewplan;
 
-import org.intellij.lang.annotations.Language;
+import io.promptics.jobagent.interviewplan.model.TopicThread;
 import org.json.JSONException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public class TopicThreadRepositoryTest extends RepositoryTest<Thread, String, ThreadRepository> {
+public class TopicThreadRepositoryTest extends RepositoryTest<TopicThread, String, TopicThreadRepository> {
 
     @Autowired
-    ThreadRepository threadRepository;
+    TopicThreadRepository threadRepository;
 
     public TopicThreadRepositoryTest() {
-        super(Thread.class);
+        super(TopicThread.class);
     }
 
     @Override
-    protected MongoRepository<Thread, String> getRepository() {
+    protected MongoRepository<TopicThread, String> getRepository() {
         return threadRepository;
     }
 
