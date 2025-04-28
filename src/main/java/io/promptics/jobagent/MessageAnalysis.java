@@ -24,7 +24,7 @@ public class MessageAnalysis {
     }
 
     public enum Intent {
-        QNA("QnA"),
+        INTERVIEW("QnA"),
         VERIFICATION("Verification"),
         INVALID("Invalid");
 

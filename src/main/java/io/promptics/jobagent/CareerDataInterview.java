@@ -32,7 +32,7 @@ public class CareerDataInterview {
 
         if (analysis.getIntent() == MessageAnalysis.Intent.VERIFICATION) {
             verifier.execute(message, context.getCareerDataId());
-        } else if(analysis.getIntent() == MessageAnalysis.Intent.QNA) {
+        } else if(analysis.getIntent() == MessageAnalysis.Intent.INTERVIEW) {
             response = interviewer.execute(context, message);
         }
 
