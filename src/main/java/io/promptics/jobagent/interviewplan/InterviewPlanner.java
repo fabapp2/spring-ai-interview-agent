@@ -40,7 +40,7 @@ public class InterviewPlanner {
         this.interviewPlanService = interviewPlanService;
     }
 
-    public InterviewPlan execute(InterviewContext context) {
+    public InterviewPlan createPlan(InterviewContext context) {
         String jsonSchema = getJsonSchema();
         String careerData = getCareerData(context);
         PromptTemplate prompt = new PromptTemplate(systemPrompt);

@@ -41,7 +41,7 @@ public class CareerDataInterviewEngine {
 
     public String start() {
         InterviewContext context = contextHolder.getContext();
-        interviewPlanner.execute(context);
+        interviewPlanner.createPlan(context);
         return interviewer.execute(context, "Please start the interview");
     }
 }

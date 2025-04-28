@@ -61,7 +61,7 @@ class InterviewPlannerTest {
         given(dateTimeProvider.getDateTime()).willReturn("2025-01-13 12:33:45");
         given(careerDataRepository.findById("67e98007bd5c558ba6ad93d6")).willReturn(Optional.of(careerData));
         InterviewContext context = new InterviewContext("67e98007bd5c558ba6ad93d6", "222", "333", "Max");
-        InterviewPlan interviewPlan = interviewPlanner.execute(context);
+        InterviewPlan interviewPlan = interviewPlanner.createPlan(context);
         assertThat(interviewPlan.getTopics()).hasSizeGreaterThan(2);
     }
 
