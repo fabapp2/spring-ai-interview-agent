@@ -23,6 +23,9 @@ public class CareerDataService {
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    @Autowired
+    private CareerDataRepository repository;
+
     public String updateDocument(String toolInput) {
         try {
             String idStr;
@@ -128,7 +131,7 @@ public class CareerDataService {
     }
 
     public CareerData getById(String id) {
-        return mongoTemplate.findById(id, CareerData.class);
+        return repository.findById(id).orElseThrow(() -> new IllegalStateException("No career data for id %s".formatted(id)));
     }
 
     private Object parseValue(String valueStr) {
