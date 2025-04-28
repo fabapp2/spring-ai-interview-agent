@@ -14,7 +14,7 @@ import java.util.Iterator;
 public class ResumeSchemaSplitter {
     public static void main(String[] args) throws IOException {
         ResumeSchemaSplitter splitter = new ResumeSchemaSplitter();
-        splitter.splitSchema(new ClassPathResource("resume-schema.json").getFile(), Path.of("./target").toFile());
+        splitter.splitSchema(new ClassPathResource("career-schema-full.json").getFile(), Path.of("./target").toFile());
     }
 
     public void splitSchema(File fullSchemaFile, File outputDirectory) throws IOException {
