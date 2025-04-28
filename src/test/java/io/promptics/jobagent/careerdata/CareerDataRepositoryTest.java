@@ -22,14 +22,22 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@TestClassOrder(ClassOrderer.OrderAnnotation.class)
 @DataMongoTest
-@Import({CareerDataRepository.class, CareerDataMongoEventListener.class, SectionIdProvider.class})
+@Import({CareerDataRepository.class})
 @Testcontainers
 class CareerDataRepositoryTest {
 
     private ObjectMapper objectMapper = new ObjectMapper();
+
     private static String careerDataId;
+
+    @Container
+    @ServiceConnection
+    final static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:%s".formatted(MongoDbConfig.MONGODB_VERSION));
+
+    @Autowired
+    private CareerDataRepository repository;
 
     private CareerData readCareerData() {
         try {
@@ -40,63 +48,66 @@ class CareerDataRepositoryTest {
         }
     }
 
-    @Container
-    @ServiceConnection
-    final static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:%s".formatted(MongoDbConfig.MONGODB_VERSION));
-
-    @Autowired
-    private CareerDataRepository repository;
-
-    @Test
+    @Nested
     @Order(1)
-    @DisplayName("crud")
-    void crud() throws JsonProcessingException {
-        CareerData careerData = readCareerData();
-        CareerData saved = repository.save(careerData);
-        careerDataId = saved.getId();
+    class CrudCareerDataTest {
 
-        assertThat(careerData).usingRecursiveComparison().ignoringFields("id").isEqualTo(saved);
+        @Test
+        @DisplayName("crud")
+        void crud() throws JsonProcessingException {
+            CareerData careerData = readCareerData();
+            CareerData saved = repository.save(careerData);
+            careerDataId = saved.getId();
 
-        assertThatIdsWereSet(careerData.getSkills());
-        assertThatIdsWereSet(saved.getAwards());
-        assertThatIdsWereSet(saved.getCertificates());
-        assertThatIdsWereSet(saved.getEducation());
-        assertThatIdsWereSet(saved.getInterests());
-        assertThatIdsWereSet(saved.getLanguages());
-        assertThatIdsWereSet(saved.getProjects());
-        assertThatIdsWereSet(saved.getPublications());
-        assertThatIdsWereSet(saved.getReferences());
-        assertThatIdsWereSet(saved.getSkills());
-        assertThatIdsWereSet(saved.getVolunteer());
-        assertThatIdsWereSet(saved.getWork());
+            assertThat(careerData).usingRecursiveComparison().ignoringFields("id").isEqualTo(saved);
+
+            assertThatIdsWereSet(careerData.getSkills());
+            assertThatIdsWereSet(saved.getAwards());
+            assertThatIdsWereSet(saved.getCertificates());
+            assertThatIdsWereSet(saved.getEducation());
+            assertThatIdsWereSet(saved.getInterests());
+            assertThatIdsWereSet(saved.getLanguages());
+            assertThatIdsWereSet(saved.getProjects());
+            assertThatIdsWereSet(saved.getPublications());
+            assertThatIdsWereSet(saved.getReferences());
+            assertThatIdsWereSet(saved.getSkills());
+            assertThatIdsWereSet(saved.getVolunteer());
+            assertThatIdsWereSet(saved.getWork());
 
 //        System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(saved));
+        }
+
     }
-    
-    @Test
+
     @Order(2)
-    @DisplayName("update and read work section")
-    void updateAndReadWorkSection() throws JsonProcessingException {
+    @Nested
+    class SectionsCrudTest {
+        @Test
+        @DisplayName("update and read work section")
+        void updateAndReadWorkSection() throws JsonProcessingException {
 
-        List<Work> worksBefore = repository.readSection(careerDataId, Work.class);
-        assertThat(worksBefore).hasSize(3);
+            List<Work> worksBefore = repository.readSection(careerDataId, Work.class);
+            assertThat(worksBefore).hasSize(3);
 
-        Work work = objectMapper.readValue("""
-              {
-                  "name": "SomeCompany",
-                  "position": "Lead Developer",
-                  "startDate": "2020-07",
-                  "endDate": "2022-12",
-                  "summary": "what a ride.",
-                  "highlights": [
-                    "Did a great job."
-                  ]
-              }
-              """, Work.class);
-        repository.addWork(careerDataId, work);
-        List<Work> worksAfter = repository.readSection(careerDataId, Work.class);
-        assertThat(worksAfter).hasSize(4);
-        assertThatIdsWereSet(worksAfter);
+            Work work = objectMapper.readValue("""
+                    {
+                        "name": "SomeCompany",
+                        "position": "Lead Developer",
+                        "startDate": "2020-07",
+                        "endDate": "2022-12",
+                        "summary": "what a ride.",
+                        "highlights": [
+                          "Did a great job."
+                        ]
+                    }
+                    """, Work.class);
+            repository.addWork(careerDataId, work);
+            List<Work> worksAfter = repository.readSection(careerDataId, Work.class);
+            assertThat(worksAfter).hasSize(4);
+            assertThatIdsWereSet(worksAfter);
+        }
+
+
     }
 
     private void assertThatIdsWereSet(List<? extends SectionWithId> section) {

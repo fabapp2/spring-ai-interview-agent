@@ -1,5 +1,6 @@
 package io.promptics.jobagent.careerdata;
 
+import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
 import com.mongodb.client.result.UpdateResult;
 import io.promptics.jobagent.careerdata.model.*;
 import lombok.RequiredArgsConstructor;
@@ -10,10 +11,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Repository
@@ -38,7 +36,6 @@ public class CareerDataRepository {
 
 
     private final MongoTemplate mongoTemplate;
-    private final SectionIdProvider idProvider;
 
     <T extends SectionWithId> List<T> readSection(String careerDataId, Class<T> section) {
         String fieldName = SECTION_FIELDS.get(section);
@@ -63,7 +60,7 @@ public class CareerDataRepository {
     void updateBasics(String careerDataId, Basics basics) {
         basics.getProfiles().stream()
                 .filter(s -> s.getId() == null)
-                .forEach(s -> s.setId(idProvider.getId()));
+                .forEach(s -> s.setId(generateId()));
         Query query = new Query(Criteria.where("_id").is(careerDataId));
         Update update = new Update().set("basics", basics);
         mongoTemplate.updateFirst(query, update, CareerData.class);
@@ -128,7 +125,7 @@ public class CareerDataRepository {
     private Query prep(String careerDataId, List<? extends SectionWithId> sectionData) {
         sectionData.stream()
                 .filter(s -> s.getId() == null)
-                .forEach(s -> s.setId(idProvider.getId()));
+                .forEach(s -> s.setId(generateId()));
         Query query = new Query(Criteria.where("_id").is(careerDataId));
         return query;
     }
@@ -139,6 +136,18 @@ public class CareerDataRepository {
     }
 
     public CareerData save(CareerData careerData) {
+        setMissingIds(careerData.getAwards());
+        setMissingIds(careerData.getCertificates());
+        setMissingIds(careerData.getEducation());
+        setMissingIds(careerData.getInterests());
+        setMissingIds(careerData.getLanguages());
+        setMissingIds(careerData.getProjects());
+        setMissingIds(careerData.getPublications());
+        setMissingIds(careerData.getReferences());
+        setMissingIds(careerData.getSkills());
+        setMissingIds(careerData.getVolunteer());
+        setMissingIds(careerData.getWork());
+        setMissingIds(careerData.getBasics().getProfiles());
         return mongoTemplate.save(careerData);
     }
 
@@ -146,5 +155,17 @@ public class CareerDataRepository {
         Query query = prep(careerDataId, List.of(work));
         Update update = new Update().push("work", work);
         mongoTemplate.updateFirst(query, update, CareerData.class);
+    }
+
+    private void setMissingIds(List<? extends SectionWithId> section) {
+        if (section != null) {
+            section.stream()
+                    .filter(w -> w.getId() == null)
+                    .forEach(w -> w.setId(generateId()));
+        }
+    }
+
+    public String generateId() {
+        return NanoIdUtils.randomNanoId(new Random(), "0123456789abcdefghijklmnopqrstuvwxyz".toCharArray(), 8);
     }
 }
