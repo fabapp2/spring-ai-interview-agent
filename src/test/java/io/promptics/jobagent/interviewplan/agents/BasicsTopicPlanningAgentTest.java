@@ -37,6 +37,44 @@ class BasicsTopicPlanningAgentTest {
     }
 
     @Test
+    @DisplayName("minimal basics valid")
+    void minimalBasicsValid() throws JsonProcessingException {
+        Basics basicsSection = objectMapper.readValue("""
+                {
+                  "name": "Max Müller",
+                  "email": "max@foo.com",
+                  "summary": "Hi I am Max!",
+                  "id": "1133776655",
+                  "location": {
+                    "country": "Germany",
+                    "city": "Berlin"
+                  }
+                }
+                """, Basics.class);
+        List<Topic> topics = agent.planTopics(basicsSection);
+        assertThat(topics).hasSize(0);
+    }
+
+    @Test
+    @DisplayName("no city")
+    void noCity() throws JsonProcessingException {
+        Basics basicsSection = objectMapper.readValue("""
+                {
+                  "name": "Max Müller",
+                  "email": "max@foo.com",
+                  "summary": "Hi I am Max!",
+                  "id": "1133776655",
+                  "location": {
+                    "country": "Germany"
+                  }
+                }
+                """, Basics.class);
+        List<Topic> topics = agent.planTopics(basicsSection);
+        assertThat(topics).hasSize(1);
+        assertThat(topics.get(0).getReason()).contains("city");
+    }
+    
+    @Test
     @DisplayName("plan")
     void plan() throws JsonProcessingException {
         Basics basicsSection = objectMapper.readValue("""
