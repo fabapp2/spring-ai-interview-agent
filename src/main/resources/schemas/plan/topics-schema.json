@@ -12,8 +12,9 @@
     },
     "type": {
       "type": "string",
-      "description": "The type of the topic, either a resume section or narrative concept",
+      "description": "The type of the topic, either aligned to a resume section or a narrative element",
       "enum": [
+        "basics",
         "work",
         "volunteer",
         "education",
@@ -35,7 +36,7 @@
     },
     "reference": {
       "type": "object",
-      "description": "Points to resume elements or a time span relevant to this topic",
+      "description": "Reference to resume item(s) or time period for this topic",
       "properties": {
         "resumeItemId": {
           "type": "string"
@@ -47,10 +48,14 @@
           }
         },
         "startDate": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^[1-2][0-9]{3}(-[0-1][0-9])?$",
+          "description": "Optional start date in YYYY or YYYY-MM format"
         },
         "endDate": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^[1-2][0-9]{3}(-[0-1][0-9])?$",
+          "description": "Optional end date in YYYY or YYYY-MM format"
         },
         "resumeItemBeforeId": {
           "type": "string"
@@ -66,15 +71,16 @@
       "enum": [
         "time",
         "timeline_boundary"
-      ]
+      ],
+      "description": "Required if type is 'gap'; specifies the type of gap."
     },
     "reason": {
       "type": "string",
-      "description": "Human-readable explanation of the topic's origin"
+      "description": "Human-readable explanation for the existence of this topic"
     },
     "reasonMeta": {
       "type": "object",
-      "description": "Machine-readable structured metadata about topic generation",
+      "description": "Machine-readable structured metadata about topic creation",
       "properties": {
         "detectedBy": {
           "type": "string"
@@ -110,7 +116,8 @@
     "priorityScore": {
       "type": "integer",
       "minimum": 0,
-      "maximum": 100
+      "maximum": 100,
+      "description": "Priority score from 0 to 100"
     },
     "priority": {
       "type": "string",
@@ -119,7 +126,7 @@
         "medium",
         "high"
       ],
-      "description": "Optional derived label from priorityScore"
+      "description": "Priority label derived from priorityScore"
     },
     "createdAt": {
       "type": "string",

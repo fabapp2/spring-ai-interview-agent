@@ -94,7 +94,7 @@ public class BasicsTopicPlanningAgent {
             {basics}
             """;
 
-    private static final String SYSTEM_PROMPT = """
+    static final String SYSTEM_PROMPT = """
             You are an expert career assistant. Your task is to analyze the "basics" section of a candidate's career profile and generate a meaningful list of interview topics.
              Each topic must focus on clarifying, enriching, or verifying important information based on the provided Basics data.
              
