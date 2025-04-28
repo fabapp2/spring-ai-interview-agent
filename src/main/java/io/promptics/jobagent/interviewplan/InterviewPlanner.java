@@ -4,7 +4,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.promptics.jobagent.InterviewContext;
 import io.promptics.jobagent.careerdata.CareerDataRepository;
+import io.promptics.jobagent.careerdata.CareerDataService;
+import io.promptics.jobagent.careerdata.model.Basics;
 import io.promptics.jobagent.careerdata.model.CareerData;
+import io.promptics.jobagent.interviewplan.agents.BasicsThreadsPlanningAgent;
+import io.promptics.jobagent.interviewplan.agents.BasicsTopicPlanningAgent;
+import io.promptics.jobagent.interviewplan.model.Thread;
+import io.promptics.jobagent.interviewplan.model.ThreadTopic;
 import io.promptics.jobagent.utils.DateTimeProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
@@ -17,6 +23,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -24,31 +31,40 @@ import java.util.Optional;
 @Component
 public class InterviewPlanner {
 
-    private final CareerDataRepository careerDataRepository;
+    private final CareerDataService careerDataService;
     private final ChatClient client;
     private final ObjectMapper objectMapper;
     private final DateTimeProvider datetimeProvider;
     private final InterviewPlanService interviewPlanService;
+    private final BasicsTopicPlanningAgent basicsTopicPlanningAgent;
+    private final BasicsThreadsPlanningAgent basicsThreadsPlanningAgent;
 
     // find prompts at the end...
 
-    public InterviewPlanner(ChatClient.Builder chatClientBuilder, CareerDataRepository careerDataRepository, ObjectMapper objectMapper, DateTimeProvider datetimeProvider, InterviewPlanService interviewPlanService) {
+    public InterviewPlanner(ChatClient.Builder chatClientBuilder, CareerDataService careerDataService, ObjectMapper objectMapper, DateTimeProvider datetimeProvider, InterviewPlanService interviewPlanService, BasicsTopicPlanningAgent basicsTopicPlanningAgent, BasicsThreadsPlanningAgent basicsThreadsPlanningAgent) {
         this.client = chatClientBuilder.defaultOptions(ChatOptions.builder().model("gpt-3.5-turbo").temperature(0.0).build()).build();
-        this.careerDataRepository = careerDataRepository;
+        this.careerDataService = careerDataService;
         this.objectMapper = objectMapper;
         this.datetimeProvider = datetimeProvider;
         this.interviewPlanService = interviewPlanService;
+        this.basicsTopicPlanningAgent = basicsTopicPlanningAgent;
+        this.basicsThreadsPlanningAgent = basicsThreadsPlanningAgent;
     }
 
     public InterviewPlan createPlan(InterviewContext context) {
         // retrieve career data
+        String careerDataId = context.getCareerDataId();
+        CareerData careerData = careerDataService.getById(careerDataId);
+
+        Basics basics = careerData.getBasics();
+        List<ThreadTopic> topics = basicsTopicPlanningAgent.planTopics(basics);
+        List<Thread> threads = basicsThreadsPlanningAgent.planThreads(basics, topics);
         return null;
     }
 
     private String getCareerData(InterviewContext context) {
         String careerDataId = context.getCareerDataId();
-        Optional<CareerData> careerDataOpt = careerDataRepository.findById(careerDataId);
-        CareerData careerData = careerDataOpt.orElseThrow(() -> new IllegalStateException("No career data found for id from context: %s".formatted(careerDataId)));
+        CareerData careerData = careerDataService.getById(careerDataId);
         try {
             return objectMapper.writeValueAsString(careerData);
         } catch (JsonProcessingException e) {
