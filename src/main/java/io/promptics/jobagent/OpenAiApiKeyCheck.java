@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ConditionalOnProperty(name = "ignoreApiKeyCheck", havingValue = "true", matchIfMissing = false)
-public class OpenAiApiKeyVerifier  implements ApplicationListener<ApplicationReadyEvent> {
+public class OpenAiApiKeyCheck implements ApplicationListener<ApplicationReadyEvent> {
 
     public static void main(String[] args) {
         SpringApplication.run(InterviewApplication.class, args);
