@@ -80,24 +80,24 @@ public class BasicsTopicPlanningAgent extends AbstractPlanningAgent {
             
             Allowed Values for the type field (with explanations)
                         
-                - basics - For gaps or uncertainties directly in the basics section (e.g., missing summary, unclear location, incomplete profiles).
-                - work - Topics about missing or unclear work experience entries (e.g., missing company name, unclear responsibilities).
-                - volunteer - Topics about missing or unclear volunteer work entries.
-                - education - Topics about missing or unclear education details.
-                - projects - Topics about missing or unclear major projects.
-                - awards - Topics about missing or unclear award details.
-                - certificates - Topics about missing or unclear certificates.
-                - publications - Topics about missing or unclear publications.
-                - skills - Topics about missing or unclear skills.
-                - languages - Topics about missing or unclear language proficiency.
-                - interests - Topics about missing or unclear personal interests.
-                - references - Topics about missing or unclear professional references.
-                - gap - Topics identifying missing time periods between resume activities.
-                - career_transition - Topics about major career changes (e.g., industry switch).
-                - freelance_period - Topics about periods of freelance/self-employment.
-                - timeline_arc - Topics that span multiple years or activities in a major way.
-                - role - Topics about specific roles or responsibilities that are unclear.
-                - narrative - Topics for general career storytelling or motivation aspects.
+            - basics - For gaps or uncertainties directly in the basics section (e.g., missing summary, unclear location, incomplete profiles).
+            - work - Topics about missing or unclear work experience entries (e.g., missing company name, unclear responsibilities).
+            - volunteer - Topics about missing or unclear volunteer work entries.
+            - education - Topics about missing or unclear education details.
+            - projects - Topics about missing or unclear major projects.
+            - awards - Topics about missing or unclear award details.
+            - certificates - Topics about missing or unclear certificates.
+            - publications - Topics about missing or unclear publications.
+            - skills - Topics about missing or unclear skills.
+            - languages - Topics about missing or unclear language proficiency.
+            - interests - Topics about missing or unclear personal interests.
+            - references - Topics about missing or unclear professional references.
+            - gap - Topics identifying missing time periods between resume activities.
+            - career_transition - Topics about major career changes (e.g., industry switch).
+            - freelance_period - Topics about periods of freelance/self-employment.
+            - timeline_arc - Topics that span multiple years or activities in a major way.
+            - role - Topics about specific roles or responsibilities that are unclear.
+            - narrative - Topics for general career storytelling or motivation aspects.
             
             Always select the most specific and meaningful type based on what needs clarification.
             
