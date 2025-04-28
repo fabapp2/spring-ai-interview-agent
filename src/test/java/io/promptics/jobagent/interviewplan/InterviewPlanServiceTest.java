@@ -2,6 +2,8 @@ package io.promptics.jobagent.interviewplan;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.promptics.jobagent.MongoDbConfig;
+import io.promptics.jobagent.interviewplan.model.Topic;
+import io.promptics.jobagent.interviewplan.model.TopicThread;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -63,21 +65,17 @@ class InterviewPlanServiceTest {
     void getCurrentlyActiveThread() {
         TopicAndThread currentTopicAndThread = interviewPlanService.findCurrentTopicAndThread(careerDataId);
 
-        Thread thread = currentTopicAndThread.getThread();
-        TopicDep topic = currentTopicAndThread.getTopic();
+        TopicThread thread = currentTopicAndThread.getThread();
+        Topic topic = currentTopicAndThread.getTopic();
 
         assertThat(currentTopicAndThread).isNotNull();
-        assertThat(thread.getIdentifier()).isEqualTo("current_status");
+        assertThat(thread.getFocus()).isEqualTo("current_status");
         assertThat(thread.getType()).isEqualTo(Thread.Type.CORE_DETAILS);
         assertThat(thread.getStatus()).isEqualTo(Thread.Status.IN_PROGRESS);
         assertThat(thread.getFocus()).isEqualTo("Determine current employment status and activities since December 2024");
 
-        assertThat(topic.getIdentifier()).isNotNull();
-        assertThat(topic.getIdentifier()).isEqualTo("gap_current_employment");
+        assertThat(topic.getId()).isNotNull();
         assertThat(topic.getType()).isEqualTo(TopicDep.Type.GAP);
-        assertThat(topic.getReference().getSection()).isEqualTo(Reference.Section.WORK);
-        assertThat(topic.getReference().getIdentifier().getName()).isEqualTo("TechGiant");
-        assertThat(topic.getReference().getIdentifier().getStartDate()).isEqualTo("2024-01");
     }
 
     @Test

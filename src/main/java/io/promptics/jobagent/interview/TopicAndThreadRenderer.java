@@ -1,7 +1,7 @@
 package io.promptics.jobagent.interview;
 
-import io.promptics.jobagent.interviewplan.Thread;
-import io.promptics.jobagent.interviewplan.TopicDep;
+import io.promptics.jobagent.interviewplan.model.Topic;
+import io.promptics.jobagent.interviewplan.model.TopicThread;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.stereotype.Component;
@@ -47,7 +47,7 @@ public class TopicAndThreadRenderer {
     private final TopicTypeDescriptionMapper topicMapper;
     private final ThreadTypeDescriptionMapper threadMapper;
 
-    public String renderTopicAndThread(TopicDep topic, Thread thread) {
+    public String renderTopicAndThread(Topic topic, TopicThread thread) {
 
         String topicSection = buildTopicSection(topic);
         String threadSection = buildThreadSection(thread);
@@ -55,34 +55,34 @@ public class TopicAndThreadRenderer {
         Map<String, Object> variables = new HashMap<>();
         variables.put("topicSection", topicSection);
         variables.put("threadSection", threadSection);
-        variables.put("threadName", thread.getIdentifier());
+        variables.put("threadName", thread.getFocus());
         variables.put("threadFocus", thread.getFocus());
         variables.put("topicType", topic.getType().value());
 
-        variables.put("organization", topic.getReference().getIdentifier().getName());
+        variables.put("organization", topic.getReference().getResumeItemId());
 
         return new PromptTemplate(PROMPT_TEMPLATE, variables).render();
     }
 
-    private String buildTopicSection(TopicDep topic) {
+    private String buildTopicSection(Topic topic) {
         String typeDescription = topicMapper.mapType(topic.getType().value());
 
         Map<String, Object> variables = new HashMap<>();
-        variables.put("topicName", topic.getIdentifier());
+        variables.put("topicName", topic.getReason());
         variables.put("topicTypeName", topic.getType().value());
         variables.put("topicTypeDescription", typeDescription);
-        variables.put("section", topic.getReference().getSection());
-        variables.put("organization", topic.getReference().getIdentifier().getName());
-        variables.put("startDate", topic.getReference().getIdentifier().getStartDate());
+        variables.put("section", topic.getReference().getResumeItemId());
+        variables.put("organization", topic.getReference().getResumeItemId());
+        variables.put("startDate", topic.getReference().getStartDate());
 
         return new PromptTemplate(TOPIC_SECTION_TEMPLATE, variables).render();
     }
 
-    private String buildThreadSection(Thread thread) {
+    private String buildThreadSection(TopicThread thread) {
         String typeDescription = threadMapper.mapType(thread.getType().value());
 
         Map<String, Object> variables = new HashMap<>();
-        variables.put("threadName", thread.getIdentifier());
+        variables.put("threadName", thread.getFocus());
         variables.put("threadTypeName", thread.getType().value());
         variables.put("threadTypeDescription", typeDescription);
         variables.put("focus", thread.getFocus());

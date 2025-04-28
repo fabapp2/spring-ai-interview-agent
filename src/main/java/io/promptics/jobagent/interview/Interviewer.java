@@ -99,7 +99,7 @@ public class Interviewer {
     }
 
     private ThreadConversation addToConversation(TopicAndThread topicAndThread, String output, String role) {
-        return interviewPlanService.addToThreadConversation(topicAndThread.getThread().getIdentifier(), ConversationEntry.builder()
+        return interviewPlanService.addToThreadConversation(topicAndThread.getThread().getTopicId(), ConversationEntry.builder()
                 .timestamp(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").withZone(ZoneId.of("UTC")).format(Instant.now()))
                 .role(role)
                 .text(output)
