@@ -29,7 +29,7 @@ public class CareerDataDeSerializationTest {
     }
 
     private static @NotNull Set<ValidationMessage> assertJsonSchemaCompliant(String json) throws IOException {
-        Set<ValidationMessage> validate = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7).getSchema(new ClassPathResource("resume-schema.json").getInputStream()).validate(json, InputFormat.JSON);
+        Set<ValidationMessage> validate = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7).getSchema(new ClassPathResource("schemas/career-schema-full.json").getInputStream()).validate(json, InputFormat.JSON);
         assertThat(validate.size()).isEqualTo(0);
         return validate;
     }
