@@ -21,6 +21,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 
 @SpringBootTest
 class BasicsThreadsPlanningAgentTest {
@@ -50,18 +51,18 @@ class BasicsThreadsPlanningAgentTest {
 
         assertThat(threads).hasSize(3);
         Thread thread1 = findThreadById(threads, "topic-1");
-        assertThat(thread1.getTopicId()).isEqualTo("1133776655");
+        assertThat(thread1.getFocus()).contains("summary");
         Thread thread2 = findThreadById(threads, "topic-2");
-        assertThat(thread2.getTopicId()).isEqualTo("1133776655");
+        assertThat(thread2.getFocus()).contains("city");
         Thread thread3 = findThreadById(threads, "topic-3");
-        assertThat(thread3.getTopicId()).isEqualTo("1111111111");
+        assertThat(thread3.getFocus()).contains("username");
     }
 
     private Thread findThreadById(List<Thread> threads, String id) {
         return threads.stream()
-                .filter(t -> t.getId().equals(id))
+                .filter(t -> t.getTopicId().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new AssumptionViolatedException("No thread found with id %d".formatted(id)));
+                .orElseThrow(() -> new AssertionError("No thread found with id %s".formatted(id)));
     }
 
     @Language("json")

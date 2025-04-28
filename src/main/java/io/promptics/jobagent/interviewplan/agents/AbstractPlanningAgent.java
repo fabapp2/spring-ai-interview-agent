@@ -43,7 +43,7 @@ public class AbstractPlanningAgent {
         }
     }
 
-    protected <T> List<T> deserialize(String response, Class<T> type) throws JsonProcessingException {
-        return objectMapper.readValue(response, new TypeReference<List<T>>() {});
+    protected <T> List<T> deserialize(String response, TypeReference<List<T>> typeReference) throws JsonProcessingException {
+        return objectMapper.readValue(response, typeReference);
     }
 }

@@ -1,6 +1,7 @@
 package io.promptics.jobagent.interviewplan.agents;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.networknt.schema.ValidationMessage;
 import io.promptics.jobagent.careerdata.model.Basics;
@@ -54,7 +55,7 @@ public class BasicsThreadsPlanningAgent extends AbstractPlanningAgent {
         }
 
         try {
-            List<Thread> threads = deserialize(response, Thread.class);
+            List<Thread> threads = deserialize(response, new TypeReference<>() {});
             return threads;
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
