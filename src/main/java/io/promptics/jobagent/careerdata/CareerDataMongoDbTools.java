@@ -11,10 +11,10 @@ import java.io.IOException;
 @Component
 public class CareerDataMongoDbTools {
 
-    private final CareerDataMongoService careerDataMongoService;
+    private final CareerDataService careerDataService;
 
-    public CareerDataMongoDbTools(CareerDataMongoService careerDataMongoService) {
-        this.careerDataMongoService = careerDataMongoService;
+    public CareerDataMongoDbTools(CareerDataService careerDataService) {
+        this.careerDataService = careerDataService;
     }
 
     @Tool(description = """
@@ -33,7 +33,7 @@ public class CareerDataMongoDbTools {
                     instead of '67e31ae04b0cd916828428fa' or "67e31ae04b0cd916828428fa"
                     """) String id) {
         try {
-            CareerData careerData = careerDataMongoService.getById(id);
+            CareerData careerData = careerDataService.getById(id);
             return new ObjectMapper().writeValueAsString(careerData);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -59,7 +59,7 @@ public class CareerDataMongoDbTools {
             Returns:
                 Result message
             """) String query) {
-        String s = careerDataMongoService.updateDocument(query);
+        String s = careerDataService.updateDocument(query);
         return s;
     }
 

@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 @Service
-public class CareerDataMongoService {
+public class CareerDataService {
 
     @Autowired
     private MongoTemplate mongoTemplate;

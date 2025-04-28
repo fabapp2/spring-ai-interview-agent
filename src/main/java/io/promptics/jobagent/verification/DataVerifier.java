@@ -3,7 +3,7 @@ package io.promptics.jobagent.verification;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.promptics.jobagent.careerdata.CareerDataManager;
-import io.promptics.jobagent.careerdata.CareerDataMongoService;
+import io.promptics.jobagent.careerdata.CareerDataService;
 import io.promptics.jobagent.careerdata.model.CareerData;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.ChatOptions;
@@ -13,16 +13,16 @@ import org.springframework.stereotype.Component;
 public class DataVerifier {
 
     public static final String RENDER_MODEL = "gpt-3.5-turbo";
-    private final CareerDataMongoService careerDataMongoService;
+    private final CareerDataService careerDataService;
     private final ChatClient renderClient;
     private final CareerDataManager careerDataManager;
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    public DataVerifier(ChatClient.Builder builder, CareerDataMongoService careerDataMongoService, CareerDataManager careerDataManager) {
+    public DataVerifier(ChatClient.Builder builder, CareerDataService careerDataService, CareerDataManager careerDataManager) {
         this.renderClient = builder.defaultOptions(ChatOptions.builder()
                 .model(RENDER_MODEL)
                 .temperature(0.0).build()).build();
-        this.careerDataMongoService = careerDataMongoService;
+        this.careerDataService = careerDataService;
         this.careerDataManager = careerDataManager;
     }
 
@@ -40,7 +40,7 @@ public class DataVerifier {
             }
         }
 
-        CareerData careerData = careerDataMongoService.getById(careerDataId);
+        CareerData careerData = careerDataService.getById(careerDataId);
         String currentCareerData = renderCareerData(careerData);
 
         return content + "\n" + currentCareerData;

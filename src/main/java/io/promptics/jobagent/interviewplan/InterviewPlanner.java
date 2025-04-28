@@ -41,37 +41,8 @@ public class InterviewPlanner {
     }
 
     public InterviewPlan createPlan(InterviewContext context) {
-        String jsonSchema = getJsonSchema();
-        String careerData = getCareerData(context);
-        PromptTemplate prompt = new PromptTemplate(systemPrompt);
-        String renderedPrompt = prompt.render(Map.of(
-                "json_schema", jsonSchema,
-                "datetime", datetimeProvider.getDateTime(),
-                "time_planned", "60",
-                "time_left", "55",
-                "few_shot", fewShot
-        ));
-
-        String userPrompt = new PromptTemplate("CAREER DATA TO WORK WITH:\n{career_data}")
-                .render(Map.of("career_data", careerData));
-
-        try {
-            String content = client.prompt()
-                    .system(renderedPrompt)
-                    .user(userPrompt)
-                    .advisors(
-                            new SimpleLoggerAdvisor()
-                    )
-                    .call()
-                    .content();
-            // Using getEntity() was problematic, Topic.Type was not created
-            log.debug("Generated interview plan: %s".formatted(content));
-            InterviewPlan interviewPlan = objectMapper.readValue(content, InterviewPlan.class);
-            InterviewPlan saved = interviewPlanService.saveInterviewPlan(interviewPlan);
-            return saved;
-        } catch (JsonProcessingException e) {
-            throw new IllegalStateException(e);
-        }
+        // retrieve career data
+        return null;
     }
 
     private String getCareerData(InterviewContext context) {
