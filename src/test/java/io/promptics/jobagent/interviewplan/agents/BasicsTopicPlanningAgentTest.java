@@ -40,7 +40,7 @@ class BasicsTopicPlanningAgentTest {
     @DisplayName("plan")
     void plan() throws JsonProcessingException {
         Basics basicsSection = objectMapper.readValue("""
-                {x
+                {
                   "name": "Max Müller",
                   "email": "max@foo.com",
                   "summary": "",

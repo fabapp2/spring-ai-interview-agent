@@ -1,9 +1,7 @@
 package io.promptics.jobagent.interviewplan.agents;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import com.networknt.schema.*;
 import io.promptics.jobagent.careerdata.model.Basics;
 import io.promptics.jobagent.interviewplan.model.Topic;
@@ -11,26 +9,24 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.chat.prompt.PromptTemplate;
-import org.springframework.core.io.ClassPathResource;
+import org.intellij.lang.annotations.Language;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 @Slf4j
 @Component
-public class BasicsTopicPlanningAgent {
+public class BasicsTopicPlanningAgent extends AbstractPlanningAgent {
 
     public static final String MODEL = "gpt-4o-mini";
     public static final Double TEMPERATURE = 0.0;
     private static final String JSON_SCHEMA = "/schemas/plan/topics-array-schema.json";
     private final ChatClient chatClient;
-    private final ObjectMapper objectMapper;
 
     public BasicsTopicPlanningAgent(ChatClient.Builder builder, ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
+        super(objectMapper);
         ChatOptions chatOptions = ChatOptions.builder()
                 .model(MODEL)
                 .temperature(TEMPERATURE)
@@ -40,7 +36,7 @@ public class BasicsTopicPlanningAgent {
     }
 
     public List<Topic> planTopics(Basics basicsSection) {
-        String section = serializeSection(basicsSection);
+        String section = serialize(basicsSection);
 
         String response = chatClient.prompt()
                 .system(SYSTEM_PROMPT)
@@ -48,7 +44,7 @@ public class BasicsTopicPlanningAgent {
                 .call()
                 .content();
 
-        Set<ValidationMessage> validationMessages = validateJson(response);
+        Set<ValidationMessage> validationMessages = validateJson(response, JSON_SCHEMA);
 
         if(!validationMessages.isEmpty()) {
             // FIXME: call error handling prompt to fix errors
@@ -56,33 +52,8 @@ public class BasicsTopicPlanningAgent {
         }
 
         try {
-            List<Topic> topics = objectMapper.readValue(response, new TypeReference<List<Topic>>(){});
+            List<Topic> topics = deserialize(response, Topic.class);
             return topics;
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static Set<ValidationMessage> validateJson(String json) {
-        try {
-            ClassPathResource resource = new ClassPathResource(JSON_SCHEMA);
-            JsonSchemaFactory schemaFactory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7);
-            JsonSchema schema = schemaFactory.getSchema(resource.getURI());
-            Set<ValidationMessage> messages = schema.validate(json, InputFormat.JSON);
-            return messages;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-    private String serializeSection(Basics basicsSection) {
-        ObjectWriter objectWriter = objectMapper.writer();
-        if (log.isDebugEnabled()) {
-            objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
-        }
-        try {
-            return objectWriter.writeValueAsString(basicsSection);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
@@ -94,6 +65,7 @@ public class BasicsTopicPlanningAgent {
             {basics}
             """;
 
+    @Language("markdown")
     static final String SYSTEM_PROMPT = """
             You are an expert career assistant. Your task is to analyze the "basics" section of a candidate's career profile and generate a meaningful list of interview topics.
              Each topic must focus on clarifying, enriching, or verifying important information based on the provided Basics data.
@@ -103,62 +75,62 @@ public class BasicsTopicPlanningAgent {
             
             ## Required Fields for Each Topic:
                         
-            * id - Always set to "GENERATE_ID". Do not invent real IDs. (The backend will replace it.)
-            * type - A string defining the topic type. Use one of the allowed values listed below.
+            - id - Always set to "GENERATE_ID". Do not invent real IDs. (The backend will replace it.)
+            - type - A string defining the topic type. Use one of the allowed values listed below.
             
             Allowed Values for the type field (with explanations)
                         
-                * basics - For gaps or uncertainties directly in the basics section (e.g., missing summary, unclear location, incomplete profiles).
-                * work - Topics about missing or unclear work experience entries (e.g., missing company name, unclear responsibilities).
-                * volunteer - Topics about missing or unclear volunteer work entries.
-                * education - Topics about missing or unclear education details.
-                * projects - Topics about missing or unclear major projects.
-                * awards - Topics about missing or unclear award details.
-                * certificates - Topics about missing or unclear certificates.
-                * publications - Topics about missing or unclear publications.
-                * skills - Topics about missing or unclear skills.
-                * languages - Topics about missing or unclear language proficiency.
-                * interests - Topics about missing or unclear personal interests.
-                * references - Topics about missing or unclear professional references.
-                * gap - Topics identifying missing time periods between resume activities.
-                * career_transition - Topics about major career changes (e.g., industry switch).
-                * freelance_period - Topics about periods of freelance/self-employment.
-                * timeline_arc - Topics that span multiple years or activities in a major way.
-                * role - Topics about specific roles or responsibilities that are unclear.
-                * narrative - Topics for general career storytelling or motivation aspects.
+                - basics - For gaps or uncertainties directly in the basics section (e.g., missing summary, unclear location, incomplete profiles).
+                - work - Topics about missing or unclear work experience entries (e.g., missing company name, unclear responsibilities).
+                - volunteer - Topics about missing or unclear volunteer work entries.
+                - education - Topics about missing or unclear education details.
+                - projects - Topics about missing or unclear major projects.
+                - awards - Topics about missing or unclear award details.
+                - certificates - Topics about missing or unclear certificates.
+                - publications - Topics about missing or unclear publications.
+                - skills - Topics about missing or unclear skills.
+                - languages - Topics about missing or unclear language proficiency.
+                - interests - Topics about missing or unclear personal interests.
+                - references - Topics about missing or unclear professional references.
+                - gap - Topics identifying missing time periods between resume activities.
+                - career_transition - Topics about major career changes (e.g., industry switch).
+                - freelance_period - Topics about periods of freelance/self-employment.
+                - timeline_arc - Topics that span multiple years or activities in a major way.
+                - role - Topics about specific roles or responsibilities that are unclear.
+                - narrative - Topics for general career storytelling or motivation aspects.
             
             Always select the most specific and meaningful type based on what needs clarification.
             
             ### Optional Fields
             Include only when relevant:
                         
-            * reference - An object describing the element linked to the topic. Use to specify which exact element in the provided Basics data the topic refers to. Linkage rules:
-            * resumeItemId (string) - ID of a specific resume item (e.g., profile entry id inside basics.profiles) that this topic is about. Use the ID given in the input Basics section.
-            * spans (array of strings) - Identifiers for time spans related to this topic, used for timeline or gap-related topics.
-            * startDate (string, format YYYY or YYYY-MM) - Optional start date when the topic refers to a time period.
-            * endDate (string, format YYYY or YYYY-MM) - Optional end date when the topic refers to a time period.
-            * resumeItemBeforeId (string) - ID of a resume item before a detected gap.
-            * resumeItemAfterId (string) - ID of a resume item after a detected gap.
+            - reference - An object describing the element linked to the topic. Use to specify which exact element in the provided Basics data the topic refers to. Linkage rules:
+            - resumeItemId (string) - ID of a specific resume item (e.g., profile entry id inside basics.profiles) that this topic is about. Use the ID given in the input Basics section.
+            - spans (array of strings) - Identifiers for time spans related to this topic, used for timeline or gap-related topics.
+            - startDate (string, format YYYY or YYYY-MM) - Optional start date when the topic refers to a time period.
+            - endDate (string, format YYYY or YYYY-MM) - Optional end date when the topic refers to a time period.
+            - resumeItemBeforeId (string) - ID of a resume item before a detected gap.
+            - resumeItemAfterId (string) - ID of a resume item after a detected gap.
             + gapType - Required if the topic type is "gap". Allowed values:
-            * time - For normal missing periods between activities.
-            * timeline_boundary - For gaps at the start or end of the resume timeline.
+            - time - For normal missing periods between activities.
+            - timeline_boundary - For gaps at the start or end of the resume timeline.
                         
-            * reason - Short human-readable explanation for why the topic is needed.
+            - reason - Short human-readable explanation for why the topic is needed.
                         
-            * reasonMeta - Machine-readable structured metadata. Allowed fields:
+            - reasonMeta - Machine-readable structured metadata. Allowed fields:
                         
-            * detectedBy (string)
+            - detectedBy (string)
                         
-            * gapDurationInMonths (integer)
-            * missingSectionCandidates (array of strings)
-            * patternType (string)
-            * confidenceScore (number)
-            * relatedResumeItems (array of strings)
-            * timestamp (ISO 8601 string)
-            * priorityScore - Integer between 0 and 100.
-            * priority - Priority level as "low", "medium", or "high".
-            * createdAt - Timestamp (ISO 8601 format). Leave empty.
-            * updatedAt - Timestamp (ISO 8601 format). Leave empty.
+            - gapDurationInMonths (integer)
+            - missingSectionCandidates (array of strings)
+            - patternType (string)
+            - confidenceScore (number)
+            - relatedResumeItems (array of strings)
+            - timestamp (ISO 8601 string)
+            - priorityScore - Integer between 0 and 100.
+            - priority - Priority level as "low", "medium", or "high".
+            - createdAt - Timestamp (ISO 8601 format). Leave empty.
+            - updatedAt - Timestamp (ISO 8601 format). Leave empty.
                         
             ## General Rules
                         
@@ -172,7 +144,8 @@ public class BasicsTopicPlanningAgent {
             If the topic is about basics overall (e.g., missing city in location), set resumeItemId to "basics".
             Use spans, startDate, endDate, resumeItemBeforeId, and resumeItemAfterId only for time-related or gap-related topics.
             Never add properties to reference that are not listed.
-            Respond only with the correct JSON structure, no explanations, no comments.
+            
+            Respond only with the correct JSON structure, no explanations, no comments, no additional markup.
              
              ## Examples
              
