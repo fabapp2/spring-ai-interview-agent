@@ -6,6 +6,7 @@ import io.promptics.jobagent.MongoDbConfig;
 import io.promptics.jobagent.careerdata.model.CareerData;
 import io.promptics.jobagent.careerdata.model.SectionWithId;
 import io.promptics.jobagent.careerdata.model.Work;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
@@ -22,10 +23,10 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@TestClassOrder(ClassOrderer.OrderAnnotation.class)
 @DataMongoTest
-@Import({CareerDataRepository.class})
 @Testcontainers
+@TestClassOrder(ClassOrderer.OrderAnnotation.class)
+@Import({CareerDataRepository.class})
 class CareerDataRepositoryTest {
 
     private ObjectMapper objectMapper = new ObjectMapper();
@@ -38,6 +39,7 @@ class CareerDataRepositoryTest {
 
     @Autowired
     private CareerDataRepository repository;
+    private CareerData careerData;
 
     private CareerData readCareerData() {
         try {
@@ -48,6 +50,11 @@ class CareerDataRepositoryTest {
         }
     }
 
+    @BeforeEach
+    void beforeEach() {
+        initCareerDataIfNotExists();
+    }
+
     @Nested
     @Order(1)
     class CrudCareerDataTest {
@@ -55,13 +62,11 @@ class CareerDataRepositoryTest {
         @Test
         @DisplayName("crud")
         void crud() throws JsonProcessingException {
-            CareerData careerData = readCareerData();
-            CareerData saved = repository.save(careerData);
-            careerDataId = saved.getId();
+            CareerData saved = initCareerData();
 
             assertThat(careerData).usingRecursiveComparison().ignoringFields("id").isEqualTo(saved);
 
-            assertThatIdsWereSet(careerData.getSkills());
+            assertThatIdsWereSet(saved.getSkills());
             assertThatIdsWereSet(saved.getAwards());
             assertThatIdsWereSet(saved.getCertificates());
             assertThatIdsWereSet(saved.getEducation());
@@ -76,15 +81,17 @@ class CareerDataRepositoryTest {
 
 //        System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(saved));
         }
-
     }
+
 
     @Order(2)
     @Nested
     class SectionsCrudTest {
+
+
         @Test
         @DisplayName("update and read work section")
-        void updateAndReadWorkSection() throws JsonProcessingException {
+        void addAndReadWorkSection() throws JsonProcessingException {
 
             List<Work> worksBefore = repository.readSection(careerDataId, Work.class);
             assertThat(worksBefore).hasSize(3);
@@ -106,12 +113,52 @@ class CareerDataRepositoryTest {
             assertThat(worksAfter).hasSize(4);
             assertThatIdsWereSet(worksAfter);
         }
+        
+        @Test
+        @DisplayName("update work section")
+        void updateWorkSection() throws JsonProcessingException {
+            List<Work> worksBefore = repository.readSection(careerDataId, Work.class);
+            assertThat(worksBefore).hasSize(3);
+
+            Work work = objectMapper.readValue("""
+                    {
+                        "name": "SomeCompany",
+                        "position": "Lead Developer",
+                        "startDate": "2020-07",
+                        "endDate": "2022-12",
+                        "summary": "what a ride.",
+                        "highlights": [
+                          "Did a great job."
+                        ]
+                    }
+                    """, Work.class);
+            repository.updateWork(careerDataId, List.of(work));
+            List<Work> worksAfter = repository.readSection(careerDataId, Work.class);
+            assertThat(worksAfter).hasSize(1);
+            assertThatIdsWereSet(worksAfter);
+        }
 
 
+    }
+
+    /**
+     * Used to init carrer data when test run in isolation
+     */
+    private void initCareerDataIfNotExists() {
+        if(careerDataId == null) {
+            initCareerData();
+        }
     }
 
     private void assertThatIdsWereSet(List<? extends SectionWithId> section) {
         section.stream()
                 .forEach(s -> assertThat(s.getId()).isNotNull());
+    }
+
+    private @NotNull CareerData initCareerData() {
+        careerData = readCareerData();
+        CareerData saved = repository.save(careerData);
+        careerDataId = saved.getId();
+        return saved;
     }
 }
