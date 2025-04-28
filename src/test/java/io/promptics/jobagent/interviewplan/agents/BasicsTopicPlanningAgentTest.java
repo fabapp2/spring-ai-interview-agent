@@ -3,10 +3,12 @@ package io.promptics.jobagent.interviewplan.agents;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.knuddels.jtokkit.Encodings;
-import com.knuddels.jtokkit.api.*;
+import com.knuddels.jtokkit.api.Encoding;
+import com.knuddels.jtokkit.api.EncodingRegistry;
+import com.knuddels.jtokkit.api.EncodingType;
+import com.knuddels.jtokkit.api.IntArrayList;
 import io.promptics.jobagent.careerdata.model.Basics;
 import io.promptics.jobagent.interviewplan.model.Topic;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +62,7 @@ class BasicsTopicPlanningAgentTest {
 
         List<Topic> topics = agent.planTopics(basicsSection);
         assertThat(topics).isNotEmpty();
+
         List<Topic> generalBasicsTopics = topics.stream().filter(t -> t.getReference().getResumeItemId().equals("1133776655")).toList();
         List<Topic> profilesBasicsTopics = topics.stream().filter(t -> t.getReference().getResumeItemId().equals("1111111111")).toList();
 
