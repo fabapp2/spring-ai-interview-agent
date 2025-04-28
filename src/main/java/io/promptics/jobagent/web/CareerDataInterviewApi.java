@@ -1,6 +1,6 @@
 package io.promptics.jobagent.web;
 
-import io.promptics.jobagent.CareerDataInterview;
+import io.promptics.jobagent.CareerDataInterviewEngine;
 import lombok.Data;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/career-interview")
 public class CareerDataInterviewApi {
 
-    private final CareerDataInterview careerDataInterview;
+    private final CareerDataInterviewEngine careerDataInterview;
 
-    public CareerDataInterviewApi(CareerDataInterview careerDataInterview) {
+    public CareerDataInterviewApi(CareerDataInterviewEngine careerDataInterview) {
         this.careerDataInterview = careerDataInterview;
     }
 
