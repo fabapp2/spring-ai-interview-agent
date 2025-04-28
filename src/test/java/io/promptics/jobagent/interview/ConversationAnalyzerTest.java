@@ -3,7 +3,6 @@ package io.promptics.jobagent.interview;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.promptics.jobagent.MongoDbConfig;
 import io.promptics.jobagent.careerdata.model.CareerData;
-import io.promptics.jobagent.interviewplan.InterviewPlan;
 import io.promptics.jobagent.interviewplan.InterviewPlanService;
 import io.promptics.jobagent.interviewplan.TopicAndThread;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,9 +45,6 @@ class ConversationAnalyzerTest {
         CareerData careerData = objectMapper.readValue(new ClassPathResource("career-data.json").getFile(), CareerData.class);
         CareerData saved = mongoTemplate.save(careerData);
         careerDataId = saved.getId();
-        InterviewPlan plan = objectMapper.readValue(new ClassPathResource("interview-plan.json").getFile(), InterviewPlan.class);
-        plan.setCareerDataId(careerDataId);
-        mongoTemplate.save(plan);
     }
 
     @Test

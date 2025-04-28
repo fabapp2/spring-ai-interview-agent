@@ -95,10 +95,6 @@ public class InterviewPlanService {
         ).getUniqueMappedResult();
     }
 
-    public InterviewPlan saveInterviewPlan(InterviewPlan plan) {
-        return mongoTemplate.save(plan);
-    }
-
     public void saveTopics(List<Topic> topics) {
         topicRepository.saveAll(topics);
     }
