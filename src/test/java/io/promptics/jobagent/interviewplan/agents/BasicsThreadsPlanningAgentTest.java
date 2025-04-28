@@ -10,9 +10,8 @@ import com.knuddels.jtokkit.api.EncodingType;
 import com.knuddels.jtokkit.api.IntArrayList;
 import io.promptics.jobagent.careerdata.model.Basics;
 import io.promptics.jobagent.interviewplan.model.Thread;
-import io.promptics.jobagent.interviewplan.model.ThreadTopic;
+import io.promptics.jobagent.interviewplan.model.Topic;
 import org.intellij.lang.annotations.Language;
-import org.junit.AssumptionViolatedException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +45,7 @@ class BasicsThreadsPlanningAgentTest {
     void generateThreadsForTopics() throws JsonProcessingException {
         Basics basicsSection = objectMapper.readValue(BASICS_JSON, Basics.class);
 
-        List<ThreadTopic> topics = objectMapper.readValue(TOPICS_JSON, new TypeReference<>() {});
+        List<Topic> topics = objectMapper.readValue(TOPICS_JSON, new TypeReference<>() {});
         List<Thread> threads = agent.planThreads(basicsSection, topics);
 
         assertThat(threads).hasSize(3);

@@ -3,20 +3,17 @@ package io.promptics.jobagent.interviewplan;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.promptics.jobagent.InterviewContext;
-import io.promptics.jobagent.careerdata.CareerDataRepository;
 import io.promptics.jobagent.careerdata.CareerDataService;
 import io.promptics.jobagent.careerdata.model.Basics;
 import io.promptics.jobagent.careerdata.model.CareerData;
 import io.promptics.jobagent.interviewplan.agents.BasicsThreadsPlanningAgent;
 import io.promptics.jobagent.interviewplan.agents.BasicsTopicPlanningAgent;
 import io.promptics.jobagent.interviewplan.model.Thread;
-import io.promptics.jobagent.interviewplan.model.ThreadTopic;
+import io.promptics.jobagent.interviewplan.model.Topic;
 import io.promptics.jobagent.utils.DateTimeProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.prompt.ChatOptions;
-import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
@@ -24,8 +21,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @Slf4j
 @Component
@@ -57,7 +52,7 @@ public class InterviewPlanner {
         CareerData careerData = careerDataService.getById(careerDataId);
 
         Basics basics = careerData.getBasics();
-        List<ThreadTopic> topics = basicsTopicPlanningAgent.planTopics(basics);
+        List<Topic> topics = basicsTopicPlanningAgent.planTopics(basics);
         List<Thread> threads = basicsThreadsPlanningAgent.planThreads(basics, topics);
         return null;
     }

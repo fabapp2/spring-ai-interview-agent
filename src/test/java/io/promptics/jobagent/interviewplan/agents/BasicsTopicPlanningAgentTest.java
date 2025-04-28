@@ -8,7 +8,7 @@ import com.knuddels.jtokkit.api.EncodingRegistry;
 import com.knuddels.jtokkit.api.EncodingType;
 import com.knuddels.jtokkit.api.IntArrayList;
 import io.promptics.jobagent.careerdata.model.Basics;
-import io.promptics.jobagent.interviewplan.model.ThreadTopic;
+import io.promptics.jobagent.interviewplan.model.Topic;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class BasicsThreadTopicPlanningAgentTest {
+class BasicsTopicPlanningAgentTest {
 
     @Autowired
     BasicsTopicPlanningAgent agent;
@@ -60,14 +60,14 @@ class BasicsThreadTopicPlanningAgentTest {
                 }
                 """, Basics.class);
 
-        List<ThreadTopic> topics = agent.planTopics(basicsSection);
+        List<Topic> topics = agent.planTopics(basicsSection);
         assertThat(topics).isNotEmpty();
 
-        List<ThreadTopic> generalBasicsTopics = topics.stream().filter(t -> t.getReference().getResumeItemId().equals("1133776655")).toList();
-        List<ThreadTopic> profilesBasicsTopics = topics.stream().filter(t -> t.getReference().getResumeItemId().equals("1111111111")).toList();
+        List<Topic> generalBasicsTopics = topics.stream().filter(t -> t.getReference().getResumeItemId().equals("1133776655")).toList();
+        List<Topic> profilesBasicsTopics = topics.stream().filter(t -> t.getReference().getResumeItemId().equals("1111111111")).toList();
 
         assertThat(generalBasicsTopics).hasSize(2);
-        assertThat(generalBasicsTopics).extracting(ThreadTopic::getReason)
+        assertThat(generalBasicsTopics).extracting(Topic::getReason)
                 .contains(
                         "Candidate's city information is missing.",
                         "Candidate's professional summary is missing."

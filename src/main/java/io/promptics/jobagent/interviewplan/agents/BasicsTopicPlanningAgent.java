@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.networknt.schema.*;
 import io.promptics.jobagent.careerdata.model.Basics;
-import io.promptics.jobagent.interviewplan.model.ThreadTopic;
+import io.promptics.jobagent.interviewplan.model.Topic;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.ChatOptions;
@@ -36,7 +36,7 @@ public class BasicsTopicPlanningAgent extends AbstractPlanningAgent {
         chatClient = builder.defaultOptions(chatOptions).build();
     }
 
-    public List<ThreadTopic> planTopics(Basics basicsSection) {
+    public List<Topic> planTopics(Basics basicsSection) {
         String section = serialize(basicsSection);
 
         String response = chatClient.prompt()
@@ -53,7 +53,7 @@ public class BasicsTopicPlanningAgent extends AbstractPlanningAgent {
         }
 
         try {
-            List<ThreadTopic> topics = deserialize(response, new TypeReference<>() {});
+            List<Topic> topics = deserialize(response, new TypeReference<>() {});
             return topics;
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
