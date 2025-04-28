@@ -37,7 +37,7 @@ public class CareerDataRepository {
 
     private final MongoTemplate mongoTemplate;
 
-    <T extends SectionWithId> List<T> readSection(String careerDataId, Class<T> section) {
+    public <T extends SectionWithId> List<T> readSection(String careerDataId, Class<T> section) {
         String fieldName = SECTION_FIELDS.get(section);
         if (fieldName == null) {
             throw new IllegalArgumentException("No field mapping found for class: " + section.getSimpleName());
@@ -57,7 +57,7 @@ public class CareerDataRepository {
                 .collect(Collectors.toList());
     }
 
-    void updateBasics(String careerDataId, Basics basics) {
+    public void updateBasics(String careerDataId, Basics basics) {
         basics.getProfiles().stream()
                 .filter(s -> s.getId() == null)
                 .forEach(s -> s.setId(generateId()));
@@ -66,53 +66,53 @@ public class CareerDataRepository {
         mongoTemplate.updateFirst(query, update, CareerData.class);
     }
 
-    void updateWork(String careerDataId, List<Work> work) {
+    public void updateWork(String careerDataId, List<Work> work) {
         updateSection(careerDataId, "work", work);
     }
 
-    void updateAwards(String careerDataId, List<Award> award) {
+    public void updateAwards(String careerDataId, List<Award> award) {
         updateSection(careerDataId, "award", award);
     }
 
-    void updateCertificates(String careerDataId, List<Certificate> certificates) {
+    public void updateCertificates(String careerDataId, List<Certificate> certificates) {
         updateSection(careerDataId, "certificates", certificates);
     }
 
-    void updateEducation(String careerDataId, List<Education> education) {
+    public void updateEducation(String careerDataId, List<Education> education) {
         updateSection(careerDataId, "education", education);
     }
 
-    void updateInterests(String careerDataId, List<Interest> interests) {
+    public void updateInterests(String careerDataId, List<Interest> interests) {
         updateSection(careerDataId, "interests", interests);
     }
 
-    void updateLanguages(String careerDataId, List<Language> languages) {
+    public void updateLanguages(String careerDataId, List<Language> languages) {
         updateSection(careerDataId, "languages", languages);
     }
 
-    void updateMeta(String careerDataId, Meta meta) {
+    public void updateMeta(String careerDataId, Meta meta) {
         Query query = new Query(Criteria.where("_id").is(careerDataId));
         Update update = new Update().set("meta", meta);
         mongoTemplate.updateFirst(query, update, CareerData.class);
     }
 
-    void updateProjects(String careerDataId, List<Project> projects) {
+    public void updateProjects(String careerDataId, List<Project> projects) {
         updateSection(careerDataId, "projects", projects);
     }
 
-    void updatePublications(String careerDataId, List<Publication> publications) {
+    public void updatePublications(String careerDataId, List<Publication> publications) {
         updateSection(careerDataId, "publications", publications);
     }
 
-    void updateReferences(String careerDataId, List<Reference> references) {
+    public void updateReferences(String careerDataId, List<Reference> references) {
         updateSection(careerDataId, "references", references);
     }
 
-    void updateSkills(String careerDataId, List<Skill> skills) {
+    public void updateSkills(String careerDataId, List<Skill> skills) {
         updateSection(careerDataId, "skills", skills);
     }
 
-    void updateVolunteer(String careerDataId, List<Volunteer> volunteer) {
+    public void updateVolunteer(String careerDataId, List<Volunteer> volunteer) {
         updateSection(careerDataId, "volunteer", volunteer);
     }
 
