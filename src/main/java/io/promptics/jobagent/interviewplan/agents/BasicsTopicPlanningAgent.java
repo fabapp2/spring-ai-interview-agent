@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.networknt.schema.*;
 import io.promptics.jobagent.careerdata.model.Basics;
-import io.promptics.jobagent.interviewplan.model.Topic;
+import io.promptics.jobagent.interviewplan.model.ThreadTopic;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.ChatOptions;
@@ -35,7 +35,7 @@ public class BasicsTopicPlanningAgent extends AbstractPlanningAgent {
         chatClient = builder.defaultOptions(chatOptions).build();
     }
 
-    public List<Topic> planTopics(Basics basicsSection) {
+    public List<ThreadTopic> planTopics(Basics basicsSection) {
         String section = serialize(basicsSection);
 
         String response = chatClient.prompt()
@@ -52,7 +52,7 @@ public class BasicsTopicPlanningAgent extends AbstractPlanningAgent {
         }
 
         try {
-            List<Topic> topics = deserialize(response, Topic.class);
+            List<ThreadTopic> topics = deserialize(response, ThreadTopic.class);
             return topics;
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);

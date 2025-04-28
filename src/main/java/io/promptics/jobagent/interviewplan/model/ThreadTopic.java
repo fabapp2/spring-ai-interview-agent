@@ -2,7 +2,6 @@
 package io.promptics.jobagent.interviewplan.model;
 
 import java.time.Instant;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,7 +38,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document("topics")
-public class Topic {
+public class ThreadTopic {
 
     /**
      * MongoDB ObjectId (24 character hex string) uniquely identifies the document
@@ -55,7 +54,7 @@ public class Topic {
     @JsonProperty("type")
     @JsonPropertyDescription("Defines the high-level topic area linked to resume sections or narrative concepts.")
     @NotNull
-    private Topic.Type type;
+    private ThreadTopic.Type type;
     /**
      * Links to specific resume entries or spans (optional).
      */
@@ -68,7 +67,7 @@ public class Topic {
      */
     @JsonProperty("gapType")
     @JsonPropertyDescription("Specifies if a gap is a timeline boundary or time-based.")
-    private Topic.GapType gapType;
+    private ThreadTopic.GapType gapType;
     /**
      * Optional human-readable explanation for why this topic exists.
      */
@@ -93,7 +92,7 @@ public class Topic {
      */
     @JsonProperty("priority")
     @JsonPropertyDescription("Human-readable priority label, derived from priorityScore.")
-    private Topic.Priority priority;
+    private ThreadTopic.Priority priority;
     /**
      * Timestamp when the topic was created.
      */
@@ -115,10 +114,10 @@ public class Topic {
         TIME("time"),
         TIMELINE_BOUNDARY("timeline_boundary");
         private final String value;
-        private final static Map<String, Topic.GapType> CONSTANTS = new HashMap<String, Topic.GapType>();
+        private final static Map<String, ThreadTopic.GapType> CONSTANTS = new HashMap<String, ThreadTopic.GapType>();
 
         static {
-            for (Topic.GapType c : values()) {
+            for (ThreadTopic.GapType c : values()) {
                 CONSTANTS.put(c.value, c);
             }
         }
@@ -138,8 +137,8 @@ public class Topic {
         }
 
         @JsonCreator
-        public static Topic.GapType fromValue(String value) {
-            Topic.GapType constant = CONSTANTS.get(value);
+        public static ThreadTopic.GapType fromValue(String value) {
+            ThreadTopic.GapType constant = CONSTANTS.get(value);
             if (constant == null) {
                 throw new IllegalArgumentException(value);
             } else {
@@ -159,10 +158,10 @@ public class Topic {
         MEDIUM("medium"),
         HIGH("high");
         private final String value;
-        private final static Map<String, Topic.Priority> CONSTANTS = new HashMap<String, Topic.Priority>();
+        private final static Map<String, ThreadTopic.Priority> CONSTANTS = new HashMap<String, ThreadTopic.Priority>();
 
         static {
-            for (Topic.Priority c : values()) {
+            for (ThreadTopic.Priority c : values()) {
                 CONSTANTS.put(c.value, c);
             }
         }
@@ -182,8 +181,8 @@ public class Topic {
         }
 
         @JsonCreator
-        public static Topic.Priority fromValue(String value) {
-            Topic.Priority constant = CONSTANTS.get(value);
+        public static ThreadTopic.Priority fromValue(String value) {
+            ThreadTopic.Priority constant = CONSTANTS.get(value);
             if (constant == null) {
                 throw new IllegalArgumentException(value);
             } else {
@@ -219,10 +218,10 @@ public class Topic {
         ROLE("role"),
         NARRATIVE("narrative");
         private final String value;
-        private final static Map<String, Topic.Type> CONSTANTS = new HashMap<String, Topic.Type>();
+        private final static Map<String, ThreadTopic.Type> CONSTANTS = new HashMap<String, ThreadTopic.Type>();
 
         static {
-            for (Topic.Type c : values()) {
+            for (ThreadTopic.Type c : values()) {
                 CONSTANTS.put(c.value, c);
             }
         }
@@ -242,8 +241,8 @@ public class Topic {
         }
 
         @JsonCreator
-        public static Topic.Type fromValue(String value) {
-            Topic.Type constant = CONSTANTS.get(value);
+        public static ThreadTopic.Type fromValue(String value) {
+            ThreadTopic.Type constant = CONSTANTS.get(value);
             if (constant == null) {
                 throw new IllegalArgumentException(value);
             } else {
