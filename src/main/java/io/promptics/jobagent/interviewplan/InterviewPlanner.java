@@ -8,7 +8,7 @@ import io.promptics.jobagent.careerdata.model.Basics;
 import io.promptics.jobagent.careerdata.model.CareerData;
 import io.promptics.jobagent.interviewplan.agents.BasicsThreadsPlanningAgent;
 import io.promptics.jobagent.interviewplan.agents.BasicsTopicPlanningAgent;
-import io.promptics.jobagent.interviewplan.model.Thread;
+import io.promptics.jobagent.interviewplan.model.TopicThread;
 import io.promptics.jobagent.interviewplan.model.Topic;
 import io.promptics.jobagent.utils.DateTimeProvider;
 import lombok.extern.slf4j.Slf4j;
@@ -53,7 +53,7 @@ public class InterviewPlanner {
 
         Basics basics = careerData.getBasics();
         List<Topic> topics = basicsTopicPlanningAgent.planTopics(basics);
-        List<Thread> threads = basicsThreadsPlanningAgent.planThreads(basics, topics);
+        List<TopicThread> threads = basicsThreadsPlanningAgent.planThreads(basics, topics);
         return null;
     }
 

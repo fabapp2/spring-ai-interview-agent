@@ -9,7 +9,7 @@ import com.knuddels.jtokkit.api.EncodingRegistry;
 import com.knuddels.jtokkit.api.EncodingType;
 import com.knuddels.jtokkit.api.IntArrayList;
 import io.promptics.jobagent.careerdata.model.Basics;
-import io.promptics.jobagent.interviewplan.model.Thread;
+import io.promptics.jobagent.interviewplan.model.TopicThread;
 import io.promptics.jobagent.interviewplan.model.Topic;
 import org.intellij.lang.annotations.Language;
 import org.junit.jupiter.api.DisplayName;
@@ -46,18 +46,18 @@ class BasicsThreadsPlanningAgentTest {
         Basics basicsSection = objectMapper.readValue(BASICS_JSON, Basics.class);
 
         List<Topic> topics = objectMapper.readValue(TOPICS_JSON, new TypeReference<>() {});
-        List<Thread> threads = agent.planThreads(basicsSection, topics);
+        List<TopicThread> threads = agent.planThreads(basicsSection, topics);
 
         assertThat(threads).hasSize(3);
-        Thread thread1 = findThreadById(threads, "topic-1");
+        TopicThread thread1 = findThreadById(threads, "topic-1");
         assertThat(thread1.getFocus()).contains("summary");
-        Thread thread2 = findThreadById(threads, "topic-2");
+        TopicThread thread2 = findThreadById(threads, "topic-2");
         assertThat(thread2.getFocus()).contains("city");
-        Thread thread3 = findThreadById(threads, "topic-3");
+        TopicThread thread3 = findThreadById(threads, "topic-3");
         assertThat(thread3.getFocus()).contains("username");
     }
 
-    private Thread findThreadById(List<Thread> threads, String id) {
+    private TopicThread findThreadById(List<TopicThread> threads, String id) {
         return threads.stream()
                 .filter(t -> t.getTopicId().equals(id))
                 .findFirst()

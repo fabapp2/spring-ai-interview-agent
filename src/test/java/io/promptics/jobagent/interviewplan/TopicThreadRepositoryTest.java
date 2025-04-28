@@ -7,12 +7,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public class ThreadRepositoryTest extends RepositoryTest<Thread, String, ThreadRepository> {
+public class TopicThreadRepositoryTest extends RepositoryTest<Thread, String, ThreadRepository> {
 
     @Autowired
     ThreadRepository threadRepository;
 
-    public ThreadRepositoryTest() {
+    public TopicThreadRepositoryTest() {
         super(Thread.class);
     }
 

@@ -34,7 +34,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
     "updatedAt"
 })
 @Document("threads")
-public class Thread {
+public class TopicThread {
 
     /**
      * MongoDB ObjectId (24 character hex string) uniquely identifies the document
@@ -61,7 +61,7 @@ public class Thread {
     @JsonProperty("type")
     @JsonPropertyDescription("Defines the inquiry focus of the thread.")
     @NotNull
-    private Thread.Type type;
+    private TopicThread.Type type;
     /**
      * Optional freeform text providing additional focus or nuance for the thread.
      * 
@@ -77,7 +77,7 @@ public class Thread {
     @JsonProperty("status")
     @JsonPropertyDescription("Current lifecycle status of the thread.")
     @NotNull
-    private Thread.Status status;
+    private TopicThread.Status status;
     /**
      * Estimated intended duration for handling this thread, in seconds.
      * 
@@ -116,14 +116,14 @@ public class Thread {
      */
     @JsonProperty("contextAction")
     @JsonPropertyDescription("Optional field describing the preferred agent behavior for this thread, such as 'ask', 'confirm', 'summarize'.")
-    private Thread.ContextAction contextAction;
+    private TopicThread.ContextAction contextAction;
     /**
      * Optional field describing the specific goal of the thread, such as 'extract_responsibilities' or 'capture_achievements'.
      * 
      */
     @JsonProperty("contextGoal")
     @JsonPropertyDescription("Optional field describing the specific goal of the thread, such as 'extract_responsibilities' or 'capture_achievements'.")
-    private Thread.ContextGoal contextGoal;
+    private TopicThread.ContextGoal contextGoal;
     /**
      * Timestamp when this thread was created.
      * 
@@ -185,7 +185,7 @@ public class Thread {
      * 
      */
     @JsonProperty("type")
-    public Thread.Type getType() {
+    public TopicThread.Type getType() {
         return type;
     }
 
@@ -195,7 +195,7 @@ public class Thread {
      * 
      */
     @JsonProperty("type")
-    public void setType(Thread.Type type) {
+    public void setType(TopicThread.Type type) {
         this.type = type;
     }
 
@@ -223,7 +223,7 @@ public class Thread {
      * 
      */
     @JsonProperty("status")
-    public Thread.Status getStatus() {
+    public TopicThread.Status getStatus() {
         return status;
     }
 
@@ -233,7 +233,7 @@ public class Thread {
      * 
      */
     @JsonProperty("status")
-    public void setStatus(Thread.Status status) {
+    public void setStatus(TopicThread.Status status) {
         this.status = status;
     }
 
@@ -314,7 +314,7 @@ public class Thread {
      * 
      */
     @JsonProperty("contextAction")
-    public Thread.ContextAction getContextAction() {
+    public TopicThread.ContextAction getContextAction() {
         return contextAction;
     }
 
@@ -323,7 +323,7 @@ public class Thread {
      * 
      */
     @JsonProperty("contextAction")
-    public void setContextAction(Thread.ContextAction contextAction) {
+    public void setContextAction(TopicThread.ContextAction contextAction) {
         this.contextAction = contextAction;
     }
 
@@ -332,7 +332,7 @@ public class Thread {
      * 
      */
     @JsonProperty("contextGoal")
-    public Thread.ContextGoal getContextGoal() {
+    public TopicThread.ContextGoal getContextGoal() {
         return contextGoal;
     }
 
@@ -341,7 +341,7 @@ public class Thread {
      * 
      */
     @JsonProperty("contextGoal")
-    public void setContextGoal(Thread.ContextGoal contextGoal) {
+    public void setContextGoal(TopicThread.ContextGoal contextGoal) {
         this.contextGoal = contextGoal;
     }
 
@@ -395,10 +395,10 @@ public class Thread {
         GENERATE("generate"),
         REFLECT("reflect");
         private final String value;
-        private final static Map<String, Thread.ContextAction> CONSTANTS = new HashMap<String, Thread.ContextAction>();
+        private final static Map<String, TopicThread.ContextAction> CONSTANTS = new HashMap<String, TopicThread.ContextAction>();
 
         static {
-            for (Thread.ContextAction c: values()) {
+            for (TopicThread.ContextAction c: values()) {
                 CONSTANTS.put(c.value, c);
             }
         }
@@ -418,8 +418,8 @@ public class Thread {
         }
 
         @JsonCreator
-        public static Thread.ContextAction fromValue(String value) {
-            Thread.ContextAction constant = CONSTANTS.get(value);
+        public static TopicThread.ContextAction fromValue(String value) {
+            TopicThread.ContextAction constant = CONSTANTS.get(value);
             if (constant == null) {
                 throw new IllegalArgumentException(value);
             } else {
@@ -446,10 +446,10 @@ public enum ContextGoal {
         ASSESS_LANGUAGE_USAGE("assess_language_usage"),
         MAP_INTEREST_RELEVANCE("map_interest_relevance");
         private final String value;
-        private final static Map<String, Thread.ContextGoal> CONSTANTS = new HashMap<String, Thread.ContextGoal>();
+        private final static Map<String, TopicThread.ContextGoal> CONSTANTS = new HashMap<String, TopicThread.ContextGoal>();
 
         static {
-            for (Thread.ContextGoal c: values()) {
+            for (TopicThread.ContextGoal c: values()) {
                 CONSTANTS.put(c.value, c);
             }
         }
@@ -469,8 +469,8 @@ public enum ContextGoal {
         }
 
         @JsonCreator
-        public static Thread.ContextGoal fromValue(String value) {
-            Thread.ContextGoal constant = CONSTANTS.get(value);
+        public static TopicThread.ContextGoal fromValue(String value) {
+            TopicThread.ContextGoal constant = CONSTANTS.get(value);
             if (constant == null) {
                 throw new IllegalArgumentException(value);
             } else {
@@ -493,10 +493,10 @@ public enum ContextGoal {
         COMPLETED("completed"),
         SKIPPED("skipped");
         private final String value;
-        private final static Map<String, Thread.Status> CONSTANTS = new HashMap<String, Thread.Status>();
+        private final static Map<String, TopicThread.Status> CONSTANTS = new HashMap<String, TopicThread.Status>();
 
         static {
-            for (Thread.Status c: values()) {
+            for (TopicThread.Status c: values()) {
                 CONSTANTS.put(c.value, c);
             }
         }
@@ -516,8 +516,8 @@ public enum ContextGoal {
         }
 
         @JsonCreator
-        public static Thread.Status fromValue(String value) {
-            Thread.Status constant = CONSTANTS.get(value);
+        public static TopicThread.Status fromValue(String value) {
+            TopicThread.Status constant = CONSTANTS.get(value);
             if (constant == null) {
                 throw new IllegalArgumentException(value);
             } else {
@@ -552,10 +552,10 @@ public enum ContextGoal {
         LANGUAGE_USAGE("language_usage"),
         INTEREST_RELEVANCE("interest_relevance");
         private final String value;
-        private final static Map<String, Thread.Type> CONSTANTS = new HashMap<String, Thread.Type>();
+        private final static Map<String, TopicThread.Type> CONSTANTS = new HashMap<String, TopicThread.Type>();
 
         static {
-            for (Thread.Type c: values()) {
+            for (TopicThread.Type c: values()) {
                 CONSTANTS.put(c.value, c);
             }
         }
@@ -575,8 +575,8 @@ public enum ContextGoal {
         }
 
         @JsonCreator
-        public static Thread.Type fromValue(String value) {
-            Thread.Type constant = CONSTANTS.get(value);
+        public static TopicThread.Type fromValue(String value) {
+            TopicThread.Type constant = CONSTANTS.get(value);
             if (constant == null) {
                 throw new IllegalArgumentException(value);
             } else {
