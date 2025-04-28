@@ -46,15 +46,20 @@ public class InterviewPlanner {
         this.basicsThreadsPlanningAgent = basicsThreadsPlanningAgent;
     }
 
-    public InterviewPlan createPlan(InterviewContext context) {
+    public List<Topic> createPlan(InterviewContext context) {
         // retrieve career data
         String careerDataId = context.getCareerDataId();
         CareerData careerData = careerDataService.getById(careerDataId);
 
         Basics basics = careerData.getBasics();
+
         List<Topic> topics = basicsTopicPlanningAgent.planTopics(basics);
+        interviewPlanService.saveTopics(topics);
+
         List<TopicThread> threads = basicsThreadsPlanningAgent.planThreads(basics, topics);
-        return null;
+        interviewPlanService.saveThreads(threads);
+
+        return topics;
     }
 
     private String getCareerData(InterviewContext context) {

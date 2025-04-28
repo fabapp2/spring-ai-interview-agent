@@ -5,6 +5,7 @@ import io.promptics.jobagent.InterviewContext;
 import io.promptics.jobagent.MongoDbConfig;
 import io.promptics.jobagent.careerdata.CareerDataRepository;
 import io.promptics.jobagent.careerdata.model.CareerData;
+import io.promptics.jobagent.interviewplan.model.Topic;
 import io.promptics.jobagent.utils.DateTimeProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,6 +20,7 @@ import org.testcontainers.junit.jupiter.Container;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -61,8 +63,9 @@ class InterviewPlannerTest {
         given(dateTimeProvider.getDateTime()).willReturn("2025-01-13 12:33:45");
         given(careerDataRepository.findById("67e98007bd5c558ba6ad93d6")).willReturn(Optional.of(careerData));
         InterviewContext context = new InterviewContext("67e98007bd5c558ba6ad93d6", "222", "333", "Max");
-        InterviewPlan interviewPlan = interviewPlanner.createPlan(context);
-        assertThat(interviewPlan.getTopics()).hasSizeGreaterThan(2);
+        List<Topic> topics = interviewPlanner.createPlan(context);
+
+        assertThat(topics).hasSizeGreaterThan(2);
     }
 
 }
