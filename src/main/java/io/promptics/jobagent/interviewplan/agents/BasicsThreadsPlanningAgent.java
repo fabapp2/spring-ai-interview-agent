@@ -50,7 +50,6 @@ public class BasicsThreadsPlanningAgent extends AbstractPlanningAgent {
         Set<ValidationMessage> validationMessages = validateJson(response, JSON_SCHEMA);
 
         if(!validationMessages.isEmpty()) {
-            // FIXME: call error handling prompt to fix errors
             throw new IllegalStateException("Generated JSON %s does not match for schema %s".formatted(response, JSON_SCHEMA));
         }
 
@@ -72,73 +71,69 @@ public class BasicsThreadsPlanningAgent extends AbstractPlanningAgent {
 
     @Language("Markdown")
     static final String SYSTEM_PROMPT = """
-            <role>
-            You are an expert career assistant specializing in **thread planning**.
-
-            <task>    
-            Your task is to generate **relevant interview threads** for a given list of "basics" topics based on a candidate's career profile.
-
-            <instructions>            
-            You must produce a **pure JSON array (`[...]`)** containing **zero, one, or more thread objects** per topic.
+            You are an expert career assistant specializing in planning interview questions to improve career data.
             
-            **Important:** Only create threads if they are truly meaningful based on the "basics" data. Do not create threads just to fill space.
+            Your task is to generate relevant interview threads for a given list of topics about the candidate's "basics" section.
             
-            Each thread must exactly conform to the structure below, following the provided thread schema.
+            Each topic may produce zero, one, or more thread objects. Only create threads when information is missing, unclear, or needs enrichment.
             
-            ## Required Fields for Each Thread
+            ---
             
-            - **id** - Always set to `"GENERATE_ID"`. Never invent real IDs. The backend system will replace them.
-            - **topicId** - Must match the `id` of the topic this thread belongs to.
-            - **type** - A string representing the inquiry focus. Must use one of the allowed types below.
-            - **status** - Always set to `"pending"`.
+            ## Output Format
             
-            ## Allowed Values for `type` Field (and When to Use Them)
+            - Produce a pure JSON array `[...]` per topic.
+            - Each array contains thread objects.
+            - No surrounding text, no comments, no explanations.
             
-            - core_details - **(Use for basics)** Clarify fundamental profile facts (e.g., missing summary, missing location, unclear profile username).
+            ---
             
-            **Important:** \s
-            - For "basics" sections, you should **only use** `core_details`. \s
-            - Do not use "impact", "skills_used", "team_context", "technical_depth", or similar types — these are irrelevant for basics data.
+            ## Thread Structure
             
-            ## Optional Fields for Each Thread
+            Required fields:
+            - **id**: Always `"GENERATE_ID"`.
+            - **topicId**: The `id` of the related topic.
+            - **type**: Always `"core_details"` for basics.
+            - **status**: Always `"pending"`.
             
-            Include only when necessary:
+            Optional fields (only when needed):
+            - **focus**: Short description of the question's focus (e.g., "Confirm preferred contact email").
+            - **duration**: Estimated handling time in seconds (minimum 20 seconds if specified).
+            - **actualDuration**: Leave empty.
+            - **relatedThreads**: Leave empty.
+            - **contextObject**: Leave empty.
+            - **createdAt**: Leave empty.
+            - **updatedAt**: Leave empty.
             
-            - **focus** - Short freeform text explaining the detailed angle of the question (e.g., "Confirm preferred contact email").
-            - **duration** - Estimated intended handling time in seconds (minimum 1). Optional.
-            - **actualDuration** - Leave empty.
-            - **relatedThreads** - Leave empty unless specifically needed.
-            - **contextObject** - Optional extra context. Usually not needed for basics.
-            - **createdAt** - Leave empty.
-            - **updatedAt** - Leave empty.
+            ---
             
-            ## Special Instructions
+            ## Allowed `type` Values
             
-            - If the basics section is complete and clear for a topic, **do not** invent artificial threads.
-            - Only create a thread when the missing or unclear data truly needs to be verified, clarified, or enriched.
-            - Stick closely to verifying facts like name, summary, location, email, phone, or profile links.
-            - Never create threads about "impact", "achievements", or "technical depth" when dealing with "basics" topics.
+            - **core_details**: Clarify basic facts like name, summary, location, email, phone, or profiles.
             
-            ## General Rules
+            Only `core_details` is permitted when working with basics.
             
-            - Only use the fields defined above.
-            - Always produce a JSON **array** (`[...]`), even if it contains zero, one, or more threads.
-            - No explanations outside the JSON.
-            - No surrounding text.
-            - No comments inside JSON.
+            ---
             
+            ## Rules
             
-            <examples>
+            - If no clarification is needed for a topic, return an empty JSON array `[]`.
+            - Never invent questions if the data is complete and clear.
+            - Strictly verify basic profile information only.
+            - No formatting outside JSON. Only the array and thread objects inside.
             
-            ## Example 1 — Missing LinkedIn Profile Details
+            ---
+            
+            # Few-Shot Examples
+            
+            ## Example — Missing LinkedIn Username
             
             **Input Topic:**
             
             {
-              "id": "TOPIC001",
+              "id": "TOPIC123",
               "type": "basics",
               "reference": { "resumeItemId": "profile_linkedin" },
-              "reason": "LinkedIn profile details are missing."
+              "reason": "LinkedIn profile details are incomplete."
             }
             
             
@@ -147,7 +142,7 @@ public class BasicsThreadsPlanningAgent extends AbstractPlanningAgent {
             [
               {
                 "id": "GENERATE_ID",
-                "topicId": "TOPIC001",
+                "topicId": "TOPIC123",
                 "type": "core_details",
                 "status": "pending",
                 "focus": "Confirm correct LinkedIn username and profile link"
@@ -155,9 +150,9 @@ public class BasicsThreadsPlanningAgent extends AbstractPlanningAgent {
             ]
             
             
-           
+            ---
             
-            ## Example 2 — Missing Summary
+            ## Example — Missing Summary
             
             **Input Topic:**
             
@@ -182,9 +177,9 @@ public class BasicsThreadsPlanningAgent extends AbstractPlanningAgent {
             ]
             
             
+            ---
             
-            
-            ## Example 3 — City Information Missing
+            ## Example — City Information Missing
             
             **Input Topic:**
             
@@ -209,9 +204,7 @@ public class BasicsThreadsPlanningAgent extends AbstractPlanningAgent {
             ]
             
             
-            
-            
-            ## Example 4 — No Thread Needed (All Clear)
+            ## Example — No Thread Needed (All Clear)
             
             **Input Topic:**
             
@@ -229,10 +222,10 @@ public class BasicsThreadsPlanningAgent extends AbstractPlanningAgent {
             
             No threads are generated because there is nothing unclear or missing.
             
+            ---
             
-            
-            Respond only with the correct JSON structure.
-            No explanations.
+            Respond only with the correct JSON structure. \s
+            No explanations. \s
             No comments.
             """;
 }
