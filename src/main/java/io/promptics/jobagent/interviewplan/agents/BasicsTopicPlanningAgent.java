@@ -52,12 +52,8 @@ public class BasicsTopicPlanningAgent extends AbstractPlanningAgent {
             throw new IllegalStateException("Generated JSON %s does not macth for schema %s".formatted(response, JSON_SCHEMA));
         }
 
-        try {
-            List<Topic> topics = deserialize(response, new TypeReference<>() {});
-            return topics;
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+        List<Topic> topics = deserialize(response, new TypeReference<>() {});
+        return topics;
     }
 
     private static final String USER_PROMPT_TMPL = """

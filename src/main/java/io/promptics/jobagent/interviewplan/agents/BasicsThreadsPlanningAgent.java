@@ -53,12 +53,8 @@ public class BasicsThreadsPlanningAgent extends AbstractPlanningAgent {
             throw new IllegalStateException("Generated JSON %s does not match for schema %s".formatted(response, JSON_SCHEMA));
         }
 
-        try {
-            List<TopicThread> threads = deserialize(response, new TypeReference<>() {});
-            return threads;
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+        List<TopicThread> threads = deserialize(response, new TypeReference<>() {});
+        return threads;
     }
 
     private static final String USER_PROMPT_TMPL = """
