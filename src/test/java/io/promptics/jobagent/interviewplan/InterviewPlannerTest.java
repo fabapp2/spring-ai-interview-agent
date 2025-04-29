@@ -65,7 +65,7 @@ class InterviewPlannerTest {
         InterviewContext context = new InterviewContext("67e98007bd5c558ba6ad93d6", "222", "333", "Max");
         List<Topic> topics = interviewPlanner.createPlan(context);
 
-        assertThat(topics).hasSizeGreaterThan(2);
+        assertThat(topics).anySatisfy(t -> t.getReason().contains("location"));
     }
 
 }
