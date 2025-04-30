@@ -1,6 +1,9 @@
 package io.promptics.jobagent.interview;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,6 +12,9 @@ import java.util.Date;
 import java.util.List;
 
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Document("thread_conversation")
 public class ThreadConversation {
     @Id
