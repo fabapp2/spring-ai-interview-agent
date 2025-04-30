@@ -41,15 +41,6 @@ class CareerDataRepositoryTest {
     private CareerDataRepository repository;
     private CareerData careerData;
 
-    private CareerData readCareerData() {
-        try {
-            File file = new ClassPathResource("career-data-complete.json").getFile();
-            return objectMapper.readValue(file, CareerData.class);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     @BeforeEach
     void beforeEach() {
         initCareerDataIfNotExists();
@@ -81,16 +72,18 @@ class CareerDataRepositoryTest {
 
 //        System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(saved));
         }
-    }
 
+    }
 
     @Order(2)
     @Nested
+    @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
     class SectionsCrudTest {
 
 
         @Test
-        @DisplayName("update and read work section")
+        @Order(1)
+        @DisplayName("add and read work section")
         void addAndReadWorkSection() throws JsonProcessingException {
 
             List<Work> worksBefore = repository.readSection(careerDataId, Work.class);
@@ -113,12 +106,13 @@ class CareerDataRepositoryTest {
             assertThat(worksAfter).hasSize(4);
             assertThatIdsWereSet(worksAfter);
         }
-        
+
         @Test
+        @Order(2)
         @DisplayName("update work section")
         void updateWorkSection() throws JsonProcessingException {
             List<Work> worksBefore = repository.readSection(careerDataId, Work.class);
-            assertThat(worksBefore).hasSize(3);
+            assertThat(worksBefore).hasSize(4);
 
             Work work = objectMapper.readValue("""
                     {
@@ -139,8 +133,8 @@ class CareerDataRepositoryTest {
         }
 
 
-    }
 
+    }
     /**
      * Used to init carrer data when test run in isolation
      */
@@ -160,5 +154,14 @@ class CareerDataRepositoryTest {
         CareerData saved = repository.save(careerData);
         careerDataId = saved.getId();
         return saved;
+    }
+
+    private CareerData readCareerData() {
+        try {
+            File file = new ClassPathResource("career-data-complete.json").getFile();
+            return objectMapper.readValue(file, CareerData.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
