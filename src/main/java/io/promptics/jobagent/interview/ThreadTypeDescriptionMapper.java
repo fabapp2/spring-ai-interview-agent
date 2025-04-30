@@ -202,7 +202,7 @@ public class ThreadTypeDescriptionMapper {
         Map<String, Object> variables = new HashMap<>();
         variables.put("typeName", content.name());
         variables.put("bulletPoints", content.bulletPoints());
-        
-        return new PromptTemplate(TYPE_TEMPLATE, variables).render();
+        String rendered = new PromptTemplate(TYPE_TEMPLATE, variables).render();
+        return rendered.trim();
     }
 }

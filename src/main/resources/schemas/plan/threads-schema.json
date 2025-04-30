@@ -5,6 +5,7 @@
     "id",
     "topicId",
     "type",
+    "focus",
     "status"
   ],
   "properties": {
