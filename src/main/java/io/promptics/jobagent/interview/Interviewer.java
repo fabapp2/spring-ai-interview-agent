@@ -3,7 +3,9 @@ package io.promptics.jobagent.interview;
 import io.promptics.jobagent.InterviewContext;
 import io.promptics.jobagent.interviewplan.InterviewPlanMongoTools;
 import io.promptics.jobagent.interviewplan.InterviewPlanService;
+import io.promptics.jobagent.interviewplan.InterviewPlanner;
 import io.promptics.jobagent.interviewplan.TopicAndThread;
+import io.promptics.jobagent.interviewplan.model.Topic;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.stereotype.Component;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Component;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  * The Interviewer agent conducts the interview.
@@ -44,23 +47,26 @@ public class Interviewer {
     private final InterviewPlanService interviewPlanService;
     private final InterviewPromptBuilder promptBuilder;
     private final ConversationAnalyzer analyzer;
+    private final InterviewPlanner interviewPlanner;
 
-    public Interviewer(ChatClient.Builder builder, InterviewPlanMongoTools mongoDbTools, InterviewPlanService interviewPlanService, InterviewPromptBuilder promptBuilder, ConversationAnalyzer analyzer) {
+    public Interviewer(ChatClient.Builder builder, InterviewPlanMongoTools mongoDbTools, InterviewPlanService interviewPlanService, InterviewPromptBuilder promptBuilder, ConversationAnalyzer analyzer, InterviewPlanner interviewPlanner) {
         client = builder.defaultOptions(ChatOptions.builder().temperature(0.0).build()).build();
         this.mongoDbTools = mongoDbTools;
         this.interviewPlanService = interviewPlanService;
         this.promptBuilder = promptBuilder;
         this.analyzer = analyzer;
+        this.interviewPlanner = interviewPlanner;
     }
 
     /**
      * Run the interview.
      *
      * @param context the InterviewContext
-     * @param input the
+     * @param input   the
      */
     public String execute(InterviewContext context, String input) {
-
+        // FIXME: move plan creation elsewhere
+        List<Topic> plan = interviewPlanner.createPlan(context);
         TopicAndThread topicAndThread = getCurrentlyActiveThread(context);
 
         ThreadConversation conversation = addUserInputToConversation(input, topicAndThread);
