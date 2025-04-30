@@ -1,24 +1,13 @@
 package io.promptics.jobagent.interview;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.promptics.jobagent.MongoDbConfig;
-import io.promptics.jobagent.careerdata.model.CareerData;
-import io.promptics.jobagent.interviewplan.InterviewPlanService;
 import io.promptics.jobagent.interviewplan.TopicAndThread;
+import io.promptics.jobagent.interviewplan.model.Reference;
 import io.promptics.jobagent.interviewplan.model.Topic;
 import io.promptics.jobagent.interviewplan.model.TopicThread;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.testcontainers.containers.MongoDBContainer;
-import org.testcontainers.junit.jupiter.Container;
-
-import java.io.IOException;
 
 @SpringBootTest
 class ConversationAnalyzerTest {
@@ -29,8 +18,16 @@ class ConversationAnalyzerTest {
     @Test
     @DisplayName("analyze")
     void analyze() {
-        Topic topic = Topic.builder().build();
-        TopicThread thread = TopicThread.builder().build();
+        Topic topic = Topic.builder()
+                .type(Topic.Type.BASICS)
+                .reference(Reference.builder()
+                        .resumeItemId("1122334455")
+                        .build())
+                .build();
+        TopicThread thread = TopicThread.builder()
+                .type(TopicThread.Type.CORE_DETAILS)
+                .focus("Some data is missing")
+                .build();
         TopicAndThread topicAndThread = new TopicAndThread(topic, thread);
 
         ThreadConversation conversation = ThreadConversation.builder()
@@ -41,7 +38,7 @@ class ConversationAnalyzerTest {
                         .build())
                 .build();
 
-        String s = analyzer.analyzeUserInput(topicAndThread, conversation, "I got certified with AWS and did a deepdive into AI and large language models.");
+        String s = analyzer.analyzeUserInput(topicAndThread, conversation, "I got certified with AWS and did a deep dive into AI and large language models.");
         // FIXME: finish test
         System.out.println(s);
     }
