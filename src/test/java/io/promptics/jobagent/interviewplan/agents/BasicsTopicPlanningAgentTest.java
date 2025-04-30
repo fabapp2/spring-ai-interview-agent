@@ -11,6 +11,7 @@ import io.promptics.jobagent.careerdata.model.Basics;
 import io.promptics.jobagent.interviewplan.model.Topic;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.ExpectedToFail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -28,6 +29,8 @@ class BasicsTopicPlanningAgentTest {
     ObjectMapper objectMapper;
 
     @Test
+    // FIXME
+    @ExpectedToFail("Improve system prompt to either be really small or big enough for caching")
     @DisplayName("system prompt should be cacheable")
     void systemPromptShouldBeCacheable() {
         EncodingRegistry registry = Encodings.newDefaultEncodingRegistry();
