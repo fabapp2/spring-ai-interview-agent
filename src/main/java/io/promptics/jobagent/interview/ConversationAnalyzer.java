@@ -70,6 +70,7 @@ public class ConversationAnalyzer {
 
         String plan = "";
         try {
+            // FIXME: Render current plan instead
             plan = new String(new ClassPathResource("interview-plan.json").getInputStream().readAllBytes());
         } catch (IOException e) {
             throw new RuntimeException(e);
