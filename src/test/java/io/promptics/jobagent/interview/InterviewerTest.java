@@ -4,7 +4,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.promptics.jobagent.MongoDbConfig;
 import io.promptics.jobagent.careerdata.model.CareerData;
 import io.promptics.jobagent.interviewplan.InterviewPlanner;
+import io.promptics.jobagent.interviewplan.TopicRepository;
+import io.promptics.jobagent.interviewplan.TopicThreadRepository;
+import io.promptics.jobagent.interviewplan.model.Reference;
 import io.promptics.jobagent.interviewplan.model.Topic;
+import io.promptics.jobagent.interviewplan.model.TopicThread;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,6 +32,8 @@ class InterviewerTest {
 
     @Autowired
     Interviewer interviewer;
+    @Autowired
+    private TopicRepository topicRepository;
     private String careerDataId;
     private String planId;
 
@@ -41,6 +47,10 @@ class InterviewerTest {
     MongoTemplate mongoTemplate;
     @Autowired
     private InterviewPlanner interviewPlanner;
+    private CareerData careerData;
+    private List<Topic> plan;
+    @Autowired
+    private TopicThreadRepository topicThreadRepository;
 
     @BeforeEach
     void beforeEach() throws IOException {
@@ -50,15 +60,32 @@ class InterviewerTest {
     @Test
     @DisplayName("start interview")
     void startInterview() {
-        InterviewContext context = new InterviewContext(careerDataId, planId, "sessionid", "Max");
-        String output = interviewer.execute(context, "Start interview");
+        String output = interviewer.startInterview(careerData, plan);
         assertThat(output).isNotNull();
     }
 
     private void intializeMongoDb() throws IOException {
         CareerData cd = om.readValue(new ClassPathResource("career-data.json").getFile(), CareerData.class);
-        CareerData careerData = mongoTemplate.save(cd);
+        careerData = mongoTemplate.save(cd);
         this.careerDataId = careerData.getId();
+        Topic topic = Topic.builder()
+                .careerDataId(careerDataId)
+                .type(Topic.Type.BASICS)
+                .reference(Reference.builder()
+                        .resumeItemId("1112223334")
+                        .build())
+                .build();
+        plan = List.of(topic);
+        topicRepository.saveAll(plan);
+        List<TopicThread> threads = List.of(
+                TopicThread.builder()
+                        .topicId(plan.get(0).getId())
+                        .type(TopicThread.Type.CORE_DETAILS)
+                        .focus("Phone number contains no country code.")
+                        .build()
+        );
+        topicThreadRepository.saveAll(threads);
+
 //        InterviewPlan interviewPlan = om.readValue(new ClassPathResource("interview-plan.json").getFile(), InterviewPlan.class);
 //        interviewPlan.setCareerDataId(cd.getId());
 //        InterviewPlan plan = mongoTemplate.save(interviewPlan);

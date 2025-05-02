@@ -59,7 +59,7 @@ public class InterviewPlanner {
      */
     public TopicAndThread findCurrentTopicAndThread(String careerDataId) {
         // FIXME: get the next topic with highest priority
-        Topic curTopic = topicRepository.findAll().get(0);
+        Topic curTopic = topicRepository.findByCareerDataId(careerDataId);
         List<TopicThread> curThread = topicThreadRepository.findByTopicId(curTopic.getId());
         return new TopicAndThread(curTopic, curThread.get(0));
     }
@@ -81,10 +81,7 @@ public class InterviewPlanner {
     }
 
 
-    public List<Topic> createPlan(InterviewContext context) {
-        // retrieve career data
-        String careerDataId = context.getCareerDataId();
-        CareerData careerData = careerDataService.getById(careerDataId);
+    public List<Topic> createInitialInterviewPlan(CareerData careerData) {
 
         Basics basics = careerData.getBasics();
 
@@ -332,4 +329,9 @@ public class InterviewPlanner {
                 }}]
             }}    
             """;
+
+    public List<Topic> adjustPLan(CareerData careerData) {
+        // FIXME: Adjust initial plan,
+        return List.of();
+    }
 }

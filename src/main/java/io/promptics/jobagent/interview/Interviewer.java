@@ -1,6 +1,6 @@
 package io.promptics.jobagent.interview;
 
-import io.promptics.jobagent.InterviewContext;
+import io.promptics.jobagent.careerdata.model.CareerData;
 import io.promptics.jobagent.interviewplan.InterviewPlanner;
 import io.promptics.jobagent.interviewplan.TopicAndThread;
 import io.promptics.jobagent.interviewplan.model.Topic;
@@ -46,22 +46,19 @@ public class Interviewer {
     private final InterviewPlanner interviewPlanner;
 
     public Interviewer(ChatClient.Builder builder, InterviewPromptBuilder promptBuilder, ConversationAnalyzer analyzer, InterviewPlanner interviewPlanner) {
-        client = builder.defaultOptions(ChatOptions.builder().temperature(0.0).build()).build();
+        client = builder.defaultOptions(ChatOptions.builder().model("gpt-4.1-mini").temperature(0.0).build()).build();
         this.promptBuilder = promptBuilder;
         this.analyzer = analyzer;
         this.interviewPlanner = interviewPlanner;
     }
 
-    /**
-     * Run the interview.
-     *
-     * @param context the InterviewContext
-     * @param input   the
-     */
-    public String execute(InterviewContext context, String input) {
+    public String startInterview(CareerData careerData, List<Topic> plan) {
+        return execute(careerData, plan, "Start the interview");
+    }
+
+    public String execute(CareerData careerData, List<Topic> plan, String input) {
         // FIXME: move plan creation elsewhere
-        List<Topic> plan = interviewPlanner.createPlan(context);
-        TopicAndThread topicAndThread = getCurrentlyActiveThread(context);
+        TopicAndThread topicAndThread = getCurrentlyActiveThread(careerData.getId());
 
         ThreadConversation conversation = addUserInputToConversation(input, topicAndThread);
 
@@ -105,8 +102,7 @@ public class Interviewer {
                 .build());
     }
 
-    private TopicAndThread getCurrentlyActiveThread(InterviewContext context) {
-        return interviewPlanner.findCurrentTopicAndThread(context.getCareerDataId());
+    private TopicAndThread getCurrentlyActiveThread(String id) {
+        return interviewPlanner.findCurrentTopicAndThread(id);
     }
-
 }

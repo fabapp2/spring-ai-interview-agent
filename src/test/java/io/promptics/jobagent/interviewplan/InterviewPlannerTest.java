@@ -21,7 +21,6 @@ import org.testcontainers.junit.jupiter.Container;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -62,8 +61,8 @@ class InterviewPlannerTest {
     void shouldCreateInterviewPlan() {
         given(dateTimeProvider.getDateTime()).willReturn("2025-01-13 12:33:45");
         given(careerDataService.getById("67e98007bd5c558ba6ad93d6")).willReturn(careerData);
-        InterviewContext context = new InterviewContext("67e98007bd5c558ba6ad93d6", "222", "333", "Max");
-        List<Topic> topics = interviewPlanner.createPlan(context);
+
+        List<Topic> topics = interviewPlanner.createInitialInterviewPlan(careerData);
 
         assertThat(topics).anySatisfy(t -> t.getReason().contains("location"));
     }
