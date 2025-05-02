@@ -50,17 +50,16 @@ public class CareerDataMongoDbTools {
             - operation: 'set', 'push', 'pull', 'unset', 'add_to_set', etc. (MongoDB update operators without the $)
             - field_path: Path to the field using dot notation (e.g., "basics.name", "skills.0.keywords")
             - value: The value to use in the operation (not needed for 'unset')
-                        
+            
             Examples:
             - '67e31ae04b0cd916828428fa, set, basics.name, John Doe'
             - '67e31ae04b0cd916828428fa, push, skills, {"name": "Advanced Problem Solving"}'
             - '67e31ae04b0cd916828428fa, unset, skills.0.level'
-                        
+            
             Returns:
                 Result message
             """) String query) {
-        String s = careerDataService.updateDocument(query);
-        return s;
+        return careerDataService.updateDocument(query);
     }
 
 }
