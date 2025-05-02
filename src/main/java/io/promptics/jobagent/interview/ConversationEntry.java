@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ConversationEntry {
-    // ISO-8601 format
+
     @JsonProperty("timestamp")
     private String timestamp;
 
