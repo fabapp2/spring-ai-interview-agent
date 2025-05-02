@@ -47,6 +47,9 @@ public class Topic {
     @Id
     @NotNull
     private String id;
+
+    private String careerDataId;
+
     /**
      * Defines the high-level topic area linked to resume sections or narrative concepts.
      * (Required)

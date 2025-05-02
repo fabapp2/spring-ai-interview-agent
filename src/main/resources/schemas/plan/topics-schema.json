@@ -10,6 +10,10 @@
       "type": "string",
       "description": "NanoID of the topic, used for stable reference"
     },
+    "careerDataId": {
+      "type": "string",
+      "description": "Id of the career data this topic relates to"
+    },
     "type": {
       "type": "string",
       "description": "The type of the topic, either aligned to a resume section or a narrative element",
