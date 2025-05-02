@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
-public class CareerDataRepository {
+class CareerDataRepository {
 
     private static final Map<Class<?>, String> SECTION_FIELDS = new HashMap<>();
 

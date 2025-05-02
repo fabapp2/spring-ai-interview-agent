@@ -3,7 +3,7 @@ package io.promptics.jobagent.interviewplan;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.promptics.jobagent.InterviewContext;
 import io.promptics.jobagent.MongoDbConfig;
-import io.promptics.jobagent.careerdata.CareerDataRepository;
+import io.promptics.jobagent.careerdata.CareerDataService;
 import io.promptics.jobagent.careerdata.model.CareerData;
 import io.promptics.jobagent.interviewplan.model.Topic;
 import io.promptics.jobagent.utils.DateTimeProvider;
@@ -43,7 +43,7 @@ class InterviewPlannerTest {
     DateTimeProvider dateTimeProvider;
 
     @MockitoBean
-    CareerDataRepository careerDataRepository;
+    CareerDataService careerDataService;
 
     CareerData careerData;
 
@@ -61,7 +61,7 @@ class InterviewPlannerTest {
     @DisplayName("should create interview plan")
     void shouldCreateInterviewPlan() {
         given(dateTimeProvider.getDateTime()).willReturn("2025-01-13 12:33:45");
-        given(careerDataRepository.findById("67e98007bd5c558ba6ad93d6")).willReturn(Optional.of(careerData));
+        given(careerDataService.getById("67e98007bd5c558ba6ad93d6")).willReturn(careerData);
         InterviewContext context = new InterviewContext("67e98007bd5c558ba6ad93d6", "222", "333", "Max");
         List<Topic> topics = interviewPlanner.createPlan(context);
 
