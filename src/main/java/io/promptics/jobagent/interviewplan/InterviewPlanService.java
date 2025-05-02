@@ -40,20 +40,6 @@ public class InterviewPlanService {
     }
 
     /**
-     * Mark a {@link Thread} as completed and get the next {@link TopicAndThread} in return.
-     */
-    public Optional<TopicAndThread> completeThreadAndGetNext(TopicAndThread topicAndThread) {
-        return Optional.empty();
-    }
-
-    /**
-     * Add a new {@link Thread} to current {@link TopicDep} to followup.
-     */
-    public void addThreadToCurrentTopic(Thread newThread, String relatedThreadId) {
-
-    }
-
-    /**
      * Find the next active topic and thread.
      */
     public TopicAndThread findCurrentTopicAndThread(String careerDataId) {

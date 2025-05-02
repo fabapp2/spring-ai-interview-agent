@@ -37,7 +37,7 @@ public class InterviewPlanner {
     // find prompts at the end...
 
     public InterviewPlanner(ChatClient.Builder chatClientBuilder, CareerDataService careerDataService, ObjectMapper objectMapper, DateTimeProvider datetimeProvider, InterviewPlanService interviewPlanService, BasicsTopicPlanningAgent basicsTopicPlanningAgent, BasicsThreadsPlanningAgent basicsThreadsPlanningAgent) {
-        this.client = chatClientBuilder.defaultOptions(ChatOptions.builder().model("gpt-3.5-turbo").temperature(0.0).build()).build();
+        this.client = chatClientBuilder.defaultOptions(ChatOptions.builder().model("gpt-4.1-mini").temperature(0.0).build()).build();
         this.careerDataService = careerDataService;
         this.objectMapper = objectMapper;
         this.datetimeProvider = datetimeProvider;
