@@ -6,6 +6,7 @@ import io.promptics.jobagent.MongoDbConfig;
 import io.promptics.jobagent.careerdata.model.CareerData;
 import io.promptics.jobagent.careerdata.model.SectionWithId;
 import io.promptics.jobagent.careerdata.model.Work;
+import io.promptics.jobagent.utils.NanoIdGenerator;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataMongoTest
 @Testcontainers
 @TestClassOrder(ClassOrderer.OrderAnnotation.class)
-@Import({CareerDataRepository.class})
+@Import({CareerDataRepository.class, NanoIdGenerator.class})
 class CareerDataRepositoryTest {
 
     private ObjectMapper objectMapper = new ObjectMapper();
