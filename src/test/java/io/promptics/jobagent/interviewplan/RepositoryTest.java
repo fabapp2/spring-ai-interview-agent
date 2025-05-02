@@ -3,7 +3,7 @@ package io.promptics.jobagent.interviewplan;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.promptics.jobagent.CareerDataInterviewConfig;
+import io.promptics.jobagent.InterviewConfig;
 import io.promptics.jobagent.MongoDbConfig;
 import org.json.JSONException;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -19,7 +19,7 @@ import org.testcontainers.containers.MongoDBContainer;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataMongoTest
-@Import(CareerDataInterviewConfig.class)
+@Import(InterviewConfig.class)
 public abstract class RepositoryTest<T, ID, R extends MongoRepository<T, ID>> {
 
     final static MongoDBContainer mongoDBContainer;

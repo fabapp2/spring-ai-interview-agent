@@ -6,7 +6,7 @@ import io.promptics.jobagent.verification.DataVerifier;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CareerDataInterviewEngine {
+public class InterviewEngine {
 
     private final PreProcessor preProcessor;
     private final InterviewPlanner interviewPlanner;
@@ -14,7 +14,7 @@ public class CareerDataInterviewEngine {
     private final DataVerifier verifier;
     private final InterviewContextHolder contextHolder;
 
-    public CareerDataInterviewEngine(PreProcessor preProcessor, InterviewPlanner interviewPlanner, Interviewer interviewer, DataVerifier verifier, InterviewContextHolder contextHolder) {
+    public InterviewEngine(PreProcessor preProcessor, InterviewPlanner interviewPlanner, Interviewer interviewer, DataVerifier verifier, InterviewContextHolder contextHolder, CareerDataService careerDataService) {
         this.preProcessor = preProcessor;
         this.interviewPlanner = interviewPlanner;
         this.interviewer = interviewer;

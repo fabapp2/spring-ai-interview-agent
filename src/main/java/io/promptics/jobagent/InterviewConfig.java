@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class CareerDataInterviewConfig {
+public class InterviewConfig {
     @Bean
     ChatMemory chatMemory() {
         return new InMemoryChatMemory();
