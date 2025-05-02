@@ -3,14 +3,15 @@
     "name": "Max Wurst",
     "label": "Senior Developer",
     "email": "max.wurst@techgiant.com",
-    "phone": "+49 (0) 123 456 7890",
+    "phone": "0 123 456 7890",
     "summary": "Sarcastic yet oddly effective Senior Developer with 8 years of experience in writing code that occasionally works. Known for turning coffee into questionable software solutions and debugging like it's an Olympic sport. Currently pretending to be productive at TechGiant while secretly plotting world domination through perfectly indented code.",
     "location": null,
     "profiles": [
       {
         "network": "LinkedIn",
         "username": "maxwurst",
-        "url": "https://linkedin.com/in/maxwurst"
+        "url": "https://linkedin.com/in/maxwurst",
+        "id": "1112223334"
       }
     ]
   },
