@@ -11,7 +11,7 @@ public class CareerDataManager {
     private final ChatClient client;
     private final CareerDataMongoDbTools mongoDbTools;
     private String systemPrompt = """
-        You are an AI assistant that manages career data in a MongoDB. 
+        You are an AI assistant that manages career data in a MongoDB.
         
         Use tools to help you verify and update career information.
         
@@ -49,7 +49,7 @@ public class CareerDataManager {
        The career data is: {careerDataId}
        """;
 
-    //         Also, always verify the schema matches the Resume JSON schema.
+    // FIXME: Always verify the schema matches the Resume JSON schema.
 
     public CareerDataManager(ChatClient.Builder builder, CareerDataMongoDbTools mongoDbTools) {
         client = builder.build();
