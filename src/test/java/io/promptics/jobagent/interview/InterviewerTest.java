@@ -1,7 +1,6 @@
 package io.promptics.jobagent.interview;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.promptics.jobagent.InterviewContext;
 import io.promptics.jobagent.MongoDbConfig;
 import io.promptics.jobagent.careerdata.model.CareerData;
 import io.promptics.jobagent.interviewplan.InterviewPlanner;
