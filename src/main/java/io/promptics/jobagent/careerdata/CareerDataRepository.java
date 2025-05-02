@@ -1,8 +1,8 @@
 package io.promptics.jobagent.careerdata;
 
-import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
 import com.mongodb.client.result.UpdateResult;
 import io.promptics.jobagent.careerdata.model.*;
+import io.promptics.jobagent.utils.NanoIdGenerator;
 import lombok.RequiredArgsConstructor;
 import org.bson.Document;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -11,7 +11,10 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -34,8 +37,10 @@ public class CareerDataRepository {
         SECTION_FIELDS.put(Volunteer.class, "volunteer");
     }
 
-
     private final MongoTemplate mongoTemplate;
+
+    private final NanoIdGenerator idGenerator;
+    private final NanoIdGenerator nanoIdGenerator;
 
     public <T extends SectionWithId> List<T> readSection(String careerDataId, Class<T> section) {
         String fieldName = SECTION_FIELDS.get(section);
@@ -166,6 +171,6 @@ public class CareerDataRepository {
     }
 
     public String generateId() {
-        return NanoIdUtils.randomNanoId(new Random(), "0123456789abcdefghijklmnopqrstuvwxyz".toCharArray(), 8);
+        return nanoIdGenerator.generateId();
     }
 }
