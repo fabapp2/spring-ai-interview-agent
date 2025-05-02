@@ -1,8 +1,6 @@
 package io.promptics.jobagent.interview;
 
 import io.promptics.jobagent.InterviewContext;
-import io.promptics.jobagent.interviewplan.InterviewPlanMongoTools;
-import io.promptics.jobagent.interviewplan.InterviewPlanService;
 import io.promptics.jobagent.interviewplan.InterviewPlanner;
 import io.promptics.jobagent.interviewplan.TopicAndThread;
 import io.promptics.jobagent.interviewplan.model.Topic;
@@ -43,16 +41,12 @@ import java.util.List;
 public class Interviewer {
 
     private final ChatClient client;
-    private final InterviewPlanMongoTools mongoDbTools;
-    private final InterviewPlanService interviewPlanService;
     private final InterviewPromptBuilder promptBuilder;
     private final ConversationAnalyzer analyzer;
     private final InterviewPlanner interviewPlanner;
 
-    public Interviewer(ChatClient.Builder builder, InterviewPlanMongoTools mongoDbTools, InterviewPlanService interviewPlanService, InterviewPromptBuilder promptBuilder, ConversationAnalyzer analyzer, InterviewPlanner interviewPlanner) {
+    public Interviewer(ChatClient.Builder builder, InterviewPromptBuilder promptBuilder, ConversationAnalyzer analyzer, InterviewPlanner interviewPlanner) {
         client = builder.defaultOptions(ChatOptions.builder().temperature(0.0).build()).build();
-        this.mongoDbTools = mongoDbTools;
-        this.interviewPlanService = interviewPlanService;
         this.promptBuilder = promptBuilder;
         this.analyzer = analyzer;
         this.interviewPlanner = interviewPlanner;
@@ -85,7 +79,6 @@ public class Interviewer {
         String output = client.prompt()
                 .system(prompt)
                 .user(input)
-                .tools(mongoDbTools)
                 .call()
                 .content();
 
@@ -105,7 +98,7 @@ public class Interviewer {
     }
 
     private ThreadConversation addToConversation(TopicAndThread topicAndThread, String output, String role) {
-        return interviewPlanService.addToThreadConversation(topicAndThread.getThread().getTopicId(), ConversationEntry.builder()
+        return interviewPlanner.addToThreadConversation(topicAndThread.getThread().getTopicId(), ConversationEntry.builder()
                 .timestamp(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").withZone(ZoneId.of("UTC")).format(Instant.now()))
                 .role(role)
                 .text(output)
@@ -113,7 +106,7 @@ public class Interviewer {
     }
 
     private TopicAndThread getCurrentlyActiveThread(InterviewContext context) {
-        return interviewPlanService.findCurrentTopicAndThread(context.getCareerDataId());
+        return interviewPlanner.findCurrentTopicAndThread(context.getCareerDataId());
     }
 
 }

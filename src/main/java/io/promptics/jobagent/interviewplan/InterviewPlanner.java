@@ -6,6 +6,9 @@ import io.promptics.jobagent.InterviewContext;
 import io.promptics.jobagent.careerdata.CareerDataService;
 import io.promptics.jobagent.careerdata.model.Basics;
 import io.promptics.jobagent.careerdata.model.CareerData;
+import io.promptics.jobagent.interview.ConversationEntry;
+import io.promptics.jobagent.interview.ThreadConversation;
+import io.promptics.jobagent.interview.ThreadConversationRepository;
 import io.promptics.jobagent.interviewplan.agents.BasicsThreadsPlanningAgent;
 import io.promptics.jobagent.interviewplan.agents.BasicsTopicPlanningAgent;
 import io.promptics.jobagent.interviewplan.model.TopicThread;
@@ -21,6 +24,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Component
@@ -30,21 +34,52 @@ public class InterviewPlanner {
     private final ChatClient client;
     private final ObjectMapper objectMapper;
     private final DateTimeProvider datetimeProvider;
-    private final InterviewPlanService interviewPlanService;
     private final BasicsTopicPlanningAgent basicsTopicPlanningAgent;
     private final BasicsThreadsPlanningAgent basicsThreadsPlanningAgent;
+    private final ThreadConversationRepository conversationRepository;
+    private final TopicRepository topicRepository;
+    private final TopicThreadRepository topicThreadRepository;
 
     // find prompts at the end...
 
-    public InterviewPlanner(ChatClient.Builder chatClientBuilder, CareerDataService careerDataService, ObjectMapper objectMapper, DateTimeProvider datetimeProvider, InterviewPlanService interviewPlanService, BasicsTopicPlanningAgent basicsTopicPlanningAgent, BasicsThreadsPlanningAgent basicsThreadsPlanningAgent) {
+    public InterviewPlanner(ChatClient.Builder chatClientBuilder, CareerDataService careerDataService, ObjectMapper objectMapper, DateTimeProvider datetimeProvider, BasicsTopicPlanningAgent basicsTopicPlanningAgent, BasicsThreadsPlanningAgent basicsThreadsPlanningAgent, ThreadConversationRepository conversationRepository, TopicRepository topicRepository, TopicThreadRepository topicThreadRepository) {
         this.client = chatClientBuilder.defaultOptions(ChatOptions.builder().model("gpt-4.1-mini").temperature(0.0).build()).build();
         this.careerDataService = careerDataService;
         this.objectMapper = objectMapper;
         this.datetimeProvider = datetimeProvider;
-        this.interviewPlanService = interviewPlanService;
         this.basicsTopicPlanningAgent = basicsTopicPlanningAgent;
         this.basicsThreadsPlanningAgent = basicsThreadsPlanningAgent;
+        this.conversationRepository = conversationRepository;
+        this.topicRepository = topicRepository;
+        this.topicThreadRepository = topicThreadRepository;
     }
+
+    /**
+     * Find the next active topic and thread.
+     */
+    public TopicAndThread findCurrentTopicAndThread(String careerDataId) {
+        // FIXME: get the next topic with highest priority
+        Topic curTopic = topicRepository.findAll().get(0);
+        List<TopicThread> curThread = topicThreadRepository.findByTopicId(curTopic.getId());
+        return new TopicAndThread(curTopic, curThread.get(0));
+    }
+
+    /**
+     * Add a new message to the conversation of a thread.
+     */
+    public ThreadConversation addToThreadConversation(String threadId, ConversationEntry entry) {
+        Optional<ThreadConversation> optionalConversation = conversationRepository.findById(threadId);
+        if (optionalConversation.isEmpty()) {
+            ThreadConversation threadConversation = new ThreadConversation();
+            threadConversation.setThreadId(threadId);
+            ThreadConversation saved = conversationRepository.save(threadConversation);
+            optionalConversation = Optional.of(saved);
+        }
+        ThreadConversation conversation = optionalConversation.get();
+        conversation.getEntries().add(entry);
+        return conversationRepository.save(conversation);
+    }
+
 
     public List<Topic> createPlan(InterviewContext context) {
         // retrieve career data
@@ -54,10 +89,10 @@ public class InterviewPlanner {
         Basics basics = careerData.getBasics();
 
         List<Topic> topics = basicsTopicPlanningAgent.planTopics(basics);
-        interviewPlanService.saveTopics(topics);
+        topicRepository.saveAll(topics);
 
         List<TopicThread> threads = basicsThreadsPlanningAgent.planThreads(basics, topics);
-        interviewPlanService.saveThreads(threads);
+        topicThreadRepository.saveAll(threads);
 
         return topics;
     }
@@ -84,13 +119,13 @@ public class InterviewPlanner {
     private static final String systemPrompt = """
             You are a career interview planning agent.
             Your task is to create a structured **interview plan** that guides an AI through gathering missing and meaningful career information. The plan will be used to conduct interactive, thread-based interviews.\s
-            
+                        
             ---
-            
+                        
             CURRENT DATE TIME: {datetime}
             TIME LEFT: {time_left} minutes
             TIME PLANNED: {time_planned} minutes
-            
+                        
             ---
              
              PLANNING APPROACH:
@@ -137,12 +172,12 @@ public class InterviewPlanner {
             EXPECTED OUTPUT:
             Create a structured interview plan following this exact JSON schema:
             {json_schema}
-            
+                        
             Return an interview plan that follows this schema exactly. Do not return the schema itself.
             Do not wrap the JSON in ```json and ```                                    
             """;
 
-            private final String fewShot = """
+    private final String fewShot = """
                     
             ## 1. Recent Employment Gap
             Current Date: 2025-04-12
