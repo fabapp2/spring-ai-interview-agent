@@ -5,8 +5,13 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.networknt.schema.*;
+import io.promptics.jobagent.careerdata.model.Basics;
+import io.promptics.jobagent.interviewplan.model.Topic;
+import io.promptics.jobagent.interviewplan.model.TopicThread;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
@@ -15,11 +20,13 @@ import java.util.Set;
 
 @Slf4j
 @RequiredArgsConstructor
-public class AbstractPlanningAgent {
+public abstract class AbstractThreadsPlanningAgent<S> {
 
     private final ObjectMapper objectMapper;
 
-    protected static Set<ValidationMessage> validateJson(String json, String jsonSchema) {
+    public abstract List<TopicThread> planThreads(S sectionData, List<Topic> topics);
+
+    protected Set<ValidationMessage> validateJson(String json, String jsonSchema) {
         try {
             ClassPathResource resource = new ClassPathResource(jsonSchema);
             JsonSchemaFactory schemaFactory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7);
@@ -50,4 +57,26 @@ public class AbstractPlanningAgent {
             throw new RuntimeException(e);
         }
     }
+
+    public List<TopicThread> planThreads(Basics sectionData, List<Topic> topics) {
+        String topicsJson = serialize(topics);
+        String basicsSectionJson = serialize(sectionData);
+        String response = promptLlm(basicsSectionJson, topicsJson);
+
+        Set<ValidationMessage> validationMessages = validateJson(response, getJsonSchema());
+
+        if (!validationMessages.isEmpty()) {
+            throw new IllegalStateException("Generated JSON %s does not match for schema %s".formatted(response, getJsonSchema()));
+        }
+
+        List<TopicThread> threads = deserialize(response, new TypeReference<>() {});
+        return threads;
+    }
+
+    private String getJsonSchema() {
+        return "/schemas/plan/threads-array-schema.json";
+    }
+
+    @Nullable
+    protected abstract String promptLlm(String basicsSectionJson, String topicsJson);
 }

@@ -33,7 +33,7 @@ public class CareerDataMongoDbTools {
                     instead of '67e31ae04b0cd916828428fa' or "67e31ae04b0cd916828428fa"
                     """) String id) {
         try {
-            CareerData careerData = careerDataService.getById(id);
+            CareerData careerData = careerDataService.loadCareerData(id);
             return new ObjectMapper().writeValueAsString(careerData);
         } catch (IOException e) {
             throw new RuntimeException(e);

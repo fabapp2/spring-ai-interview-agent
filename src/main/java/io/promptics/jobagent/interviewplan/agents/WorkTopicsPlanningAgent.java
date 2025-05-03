@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class WorkTopicsPlanningAgent extends AbstractPlanningAgent {
+public class WorkTopicsPlanningAgent extends AbstractTopicsPlanningAgent<List<Work>> {
 
     private static final String MODEL = "gpt-4o-mini";
     private static final Double TEMPERATURE = 0.1;
@@ -23,7 +23,8 @@ public class WorkTopicsPlanningAgent extends AbstractPlanningAgent {
         client = builder.defaultOptions(options).build();
     }
 
-    List<Topic> plan(List<Work> works) {
+    @Override
+    public List<Topic> planTopics(String careerDataId, List<Work> works) {
         String workJson = serialize(works);
         String response = client.prompt()
                 .system(SYSTEM_PROMPT)
@@ -31,6 +32,7 @@ public class WorkTopicsPlanningAgent extends AbstractPlanningAgent {
                 .call()
                 .content();
         List<Topic> topics = deserialize(response, new TypeReference<List<Topic>>() {});
+        topics.forEach(topic -> topic.setCareerDataId(careerDataId));
         return topics;
     }
 
@@ -45,7 +47,6 @@ public class WorkTopicsPlanningAgent extends AbstractPlanningAgent {
         The topic has to follow a fixed JSON format.
         
         ## Required Fields for Each Topic:
-        - id - Always set to "GENERATE_ID". Do not invent real IDs. (The backend will replace it.)
         - type - A string defining the topic type. Use one of the allowed values listed below.
         
         Allowed Values for the type field (with explanations)

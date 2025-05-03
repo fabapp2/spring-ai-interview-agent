@@ -1,6 +1,5 @@
 package io.promptics.jobagent.interviewplan.agents;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.networknt.schema.*;
@@ -19,7 +18,7 @@ import java.util.Set;
 
 @Slf4j
 @Component
-public class BasicsTopicPlanningAgent extends AbstractPlanningAgent {
+public class BasicsTopicPlanningAgent extends AbstractTopicsPlanningAgent<Basics> {
 
     public static final String MODEL = "gpt-4o-mini";
     public static final Double TEMPERATURE = 0.0;
@@ -36,7 +35,7 @@ public class BasicsTopicPlanningAgent extends AbstractPlanningAgent {
         chatClient = builder.defaultOptions(chatOptions).build();
     }
 
-    public List<Topic> planTopics(Basics basicsSection) {
+    public List<Topic> planTopics(String careerDataId, Basics basicsSection) {
         String section = serialize(basicsSection);
 
         String response = chatClient.prompt()
@@ -53,6 +52,7 @@ public class BasicsTopicPlanningAgent extends AbstractPlanningAgent {
         }
 
         List<Topic> topics = deserialize(response, new TypeReference<>() {});
+        topics.forEach(topic -> topic.setCareerDataId(careerDataId));
         return topics;
     }
 
@@ -73,9 +73,9 @@ You must produce a pure JSON array ([...]) containing one or more topic objects.
 Each topic must exactly conform to the following structure:
 
 ## Required Fields for Each Topic:
-            
-- id - Always set to "GENERATE_ID". Do not invent real IDs. (The backend will replace it.)
 - type - A string defining the topic type. Use one of the allowed values listed below.
+- priorityScore - set to 100
+- reason - Short human-readable explanation for why the topic is needed.
 
 Value for the type field (with explanations)
             
@@ -87,8 +87,6 @@ Include only when relevant:
 - reference - An object describing the element linked to the topic. Use to specify which exact element in the provided Basics data the topic refers to. Linkage rules:
 - resumeItemId (string) - ID of a specific resume item (e.g., profile entry id inside basics.profiles) that this topic is about. Use the ID given in the input Basics section.
             
-- reason - Short human-readable explanation for why the topic is needed.            
-            
 ## General Rules
             
 Do not generate any fields other than those listed above.
@@ -98,6 +96,7 @@ Do not add explanations outside the JSON.
 Always use resumeItemId if the topic clearly refers to a specific item (e.g., a missing LinkedIn profile inside basics.profiles).
 Never add properties to reference that are not listed.
 Respond only with the correct JSON structure, no explanations, no comments, no additional markup.
+Do not set field "id"
  
  ## Examples
  
@@ -127,19 +126,16 @@ Respond only with the correct JSON structure, no explanations, no comments, no a
  
  [
    {
-     "id": "GENERATE_ID",
      "type": "basics",
      "reference": { "resumeItemId": "1122334455" },
      "reason": "Candidate's professional summary is missing."
    },
    {
-     "id": "GENERATE_ID",
      "type": "basics",
      "reference": { "resumeItemId": "1122334455" },
      "reason": "Candidate's city information is missing."
    },
    {
-     "id": "GENERATE_ID",
      "type": "basics",
      "reference": { "resumeItemId": "1111111111" },
      "reason": "LinkedIn profile details are incomplete (username and URL missing)."
@@ -163,11 +159,11 @@ Respond only with the correct JSON structure, no explanations, no comments, no a
  Expected Topics Output:
  [
    {
-     "id": "GENERATE_ID",
      "type": "basics",
      "reference": { "resumeItemId": "1122334455" },
      "reason": "Relocation preferences are not specified."
    }
  ]
 """;
+
 }

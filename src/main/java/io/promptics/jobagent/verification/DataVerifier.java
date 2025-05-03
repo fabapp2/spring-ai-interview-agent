@@ -40,7 +40,7 @@ public class DataVerifier {
             }
         }
 
-        CareerData careerData = careerDataService.getById(careerDataId);
+        CareerData careerData = careerDataService.loadCareerData(careerDataId);
         String currentCareerData = renderCareerData(careerData);
 
         return content + "\n" + currentCareerData;

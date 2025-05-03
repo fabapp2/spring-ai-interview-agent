@@ -13,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class WorkTopicsPlanningAgentTest {
@@ -71,7 +70,8 @@ class WorkTopicsPlanningAgentTest {
                   ]
                 """, new TypeReference<List<Work>>() {
         });
-        List<Topic> topics = agent.plan(works);
+        String careerDataId = "111111111";
+        List<Topic> topics = agent.planTopics(careerDataId, works);
         assertThat(topics).isNotEmpty();
     }
 }

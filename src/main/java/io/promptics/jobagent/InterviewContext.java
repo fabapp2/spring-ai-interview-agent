@@ -11,6 +11,7 @@ public class InterviewContext {
 
     public InterviewContext(String careerDataId, String planId, String sessionId, String username) {
         this.careerDataId = careerDataId;
+        // FIXME: Remove
         this.planId = planId;
         this.sessionId = sessionId;
         this.username = username;

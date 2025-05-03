@@ -54,7 +54,8 @@ class BasicsTopicPlanningAgentTest {
                   }
                 }
                 """, Basics.class);
-        List<Topic> topics = agent.planTopics(basicsSection);
+        String careerDataId = "666666666";
+        List<Topic> topics = agent.planTopics(careerDataId, basicsSection);
         assertThat(topics).hasSize(0);
     }
 
@@ -72,7 +73,8 @@ class BasicsTopicPlanningAgentTest {
                   }
                 }
                 """, Basics.class);
-        List<Topic> topics = agent.planTopics(basicsSection);
+        String careerDataId = "666666666";
+        List<Topic> topics = agent.planTopics(careerDataId, basicsSection);
         assertThat(topics).hasSize(1);
         assertThat(topics.get(0).getReason()).contains("city");
     }
@@ -101,7 +103,8 @@ class BasicsTopicPlanningAgentTest {
                 }
                 """, Basics.class);
 
-        List<Topic> topics = agent.planTopics(basicsSection);
+        String careerDataId = "666666666";
+        List<Topic> topics = agent.planTopics(careerDataId, basicsSection);
         assertThat(topics).isNotEmpty();
 
         List<Topic> generalBasicsTopics = topics.stream().filter(t -> t.getReference().getResumeItemId().equals("1133776655")).toList();

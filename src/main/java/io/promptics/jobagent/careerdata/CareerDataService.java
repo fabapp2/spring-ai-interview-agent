@@ -130,7 +130,7 @@ public class CareerDataService {
         }
     }
 
-    public CareerData getById(String id) {
+    public CareerData loadCareerData(String id) {
         return repository.findById(id).orElseThrow(() -> new IllegalStateException("No career data for id %s".formatted(id)));
     }
 

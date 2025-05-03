@@ -1,7 +1,6 @@
 package io.promptics.jobagent.interviewplan;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.promptics.jobagent.InterviewContext;
 import io.promptics.jobagent.MongoDbConfig;
 import io.promptics.jobagent.careerdata.CareerDataService;
 import io.promptics.jobagent.careerdata.model.CareerData;
@@ -60,11 +59,10 @@ class InterviewPlannerTest {
     @DisplayName("should create interview plan")
     void shouldCreateInterviewPlan() {
         given(dateTimeProvider.getDateTime()).willReturn("2025-01-13 12:33:45");
-        given(careerDataService.getById("67e98007bd5c558ba6ad93d6")).willReturn(careerData);
+        given(careerDataService.loadCareerData("67e98007bd5c558ba6ad93d6")).willReturn(careerData);
 
-        List<Topic> topics = interviewPlanner.createInitialInterviewPlan(careerData);
-
-        assertThat(topics).anySatisfy(t -> t.getReason().contains("location"));
+        TopicAndThread topicAndThread = interviewPlanner.createInitialInterviewPlan(careerData);
+        assertThat(topicAndThread.getTopic().getReason()).contains("location");
     }
 
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.promptics.jobagent.MongoDbConfig;
 import io.promptics.jobagent.careerdata.model.CareerData;
 import io.promptics.jobagent.interviewplan.InterviewPlanner;
+import io.promptics.jobagent.interviewplan.TopicAndThread;
 import io.promptics.jobagent.interviewplan.TopicRepository;
 import io.promptics.jobagent.interviewplan.TopicThreadRepository;
 import io.promptics.jobagent.interviewplan.model.Reference;
@@ -60,7 +61,8 @@ class InterviewerTest {
     @Test
     @DisplayName("start interview")
     void startInterview() {
-        String output = interviewer.startInterview(careerData, plan);
+        TopicAndThread tat = interviewPlanner.findCurrentTopicAndThread(careerDataId);
+        String output = interviewer.startInterview(careerData, tat);
         assertThat(output).isNotNull();
     }
 

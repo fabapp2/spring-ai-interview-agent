@@ -3,7 +3,6 @@ package io.promptics.jobagent.interview;
 import io.promptics.jobagent.careerdata.model.CareerData;
 import io.promptics.jobagent.interviewplan.InterviewPlanner;
 import io.promptics.jobagent.interviewplan.TopicAndThread;
-import io.promptics.jobagent.interviewplan.model.Topic;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.stereotype.Component;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Component;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 /**
  * The Interviewer agent conducts the interview.
@@ -52,17 +50,15 @@ public class Interviewer {
         this.interviewPlanner = interviewPlanner;
     }
 
-    public String startInterview(CareerData careerData, List<Topic> plan) {
-        return execute(careerData, plan, "Start the interview");
+    public String startInterview(CareerData careerData, TopicAndThread topicAndThread) {
+        return execute(careerData, topicAndThread, "Start the interview");
     }
 
-    public String execute(CareerData careerData, List<Topic> plan, String input) {
-        // FIXME: move plan creation elsewhere
-        TopicAndThread topicAndThread = getCurrentlyActiveThread(careerData.getId());
+    public String execute(CareerData careerData, TopicAndThread topicAndThread, String input) {
 
         ThreadConversation conversation = addUserInputToConversation(input, topicAndThread);
 
-        analyzer.analyzeUserInput(topicAndThread, conversation, input);
+        String analysis = analyzer.analyzeUserInput(topicAndThread, conversation, input);
 
         String additionalContext = "";
 
@@ -102,7 +98,4 @@ public class Interviewer {
                 .build());
     }
 
-    private TopicAndThread getCurrentlyActiveThread(String id) {
-        return interviewPlanner.findCurrentTopicAndThread(id);
-    }
 }

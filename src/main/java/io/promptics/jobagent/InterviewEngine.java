@@ -4,6 +4,7 @@ import io.promptics.jobagent.careerdata.CareerDataService;
 import io.promptics.jobagent.careerdata.model.CareerData;
 import io.promptics.jobagent.interview.Interviewer;
 import io.promptics.jobagent.interviewplan.InterviewPlanner;
+import io.promptics.jobagent.interviewplan.TopicAndThread;
 import io.promptics.jobagent.interviewplan.model.Topic;
 import io.promptics.jobagent.verification.DataVerifier;
 import org.springframework.stereotype.Service;
@@ -32,18 +33,26 @@ public class InterviewEngine {
     public String message(String userMessage) {
         InterviewContext context = contextHolder.getContext();
         String careerDataId = context.getCareerDataId();
-        CareerData careerData = careerDataService.getById(careerDataId);
+        CareerData careerData = careerDataService.loadCareerData(careerDataId);
 
         // pre processing
         MessageAnalysis analysis = preProcessor.execute(userMessage);
         String message = analysis.getCorrectedMessage();
         String response = "Sorry, didn't get you.";
 
+
         if (analysis.getIntent() == MessageAnalysis.Intent.VERIFICATION) {
             verifier.execute(message, context.getCareerDataId());
         } else if(analysis.getIntent() == MessageAnalysis.Intent.INTERVIEW) {
+            // extract information from message
+            // decide to which setions the information belongs
+            // update sections with new information
+            // update topics/threads for updated sections
+
+
+            TopicAndThread topicAndThread = interviewPlanner.findCurrentTopicAndThread(context.getCareerDataId());
             List<Topic> plan = interviewPlanner.adjustPLan(careerData);
-            response = interviewer.execute(careerData, plan, message);
+            response = interviewer.execute(careerData, topicAndThread, message);
         }
 
         return response;
@@ -52,8 +61,9 @@ public class InterviewEngine {
     public String start() {
         InterviewContext context = contextHolder.getContext();
         String careerDataId = context.getCareerDataId();
-        CareerData careerData = careerDataService.getById(careerDataId);
-        List<Topic> initialInterviewPlan = interviewPlanner.createInitialInterviewPlan(careerData);
-        return interviewer.startInterview(careerData, initialInterviewPlan);
+        CareerData careerData = careerDataService.loadCareerData(careerDataId);
+        interviewPlanner.createInitialInterviewPlan(careerData);
+        TopicAndThread topicAndThread = interviewPlanner.findCurrentTopicAndThread(careerDataId);
+        return interviewer.startInterview(careerData, topicAndThread);
     }
 }

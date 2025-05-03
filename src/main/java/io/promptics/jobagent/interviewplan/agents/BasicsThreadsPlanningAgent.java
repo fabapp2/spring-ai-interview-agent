@@ -1,28 +1,21 @@
 package io.promptics.jobagent.interviewplan.agents;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.networknt.schema.ValidationMessage;
 import io.promptics.jobagent.careerdata.model.Basics;
-import io.promptics.jobagent.interviewplan.model.TopicThread;
-import io.promptics.jobagent.interviewplan.model.Topic;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.intellij.lang.annotations.Language;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @Component
-public class BasicsThreadsPlanningAgent extends AbstractPlanningAgent {
+public class BasicsThreadsPlanningAgent extends AbstractThreadsPlanningAgent<Basics> {
 
     private static final Double TEMPERATURE = 0.0;
     public static final String MODEL = "gpt-4o-mini";
-    private static final String JSON_SCHEMA = "/schemas/plan/threads-array-schema.json";
     private final ChatClient chatClient;
 
     public BasicsThreadsPlanningAgent(ChatClient.Builder builder, ObjectMapper objectMapper) {
@@ -34,9 +27,9 @@ public class BasicsThreadsPlanningAgent extends AbstractPlanningAgent {
         this.chatClient = builder.defaultOptions(chatOptions).build();
     }
 
-    public List<TopicThread> planThreads(Basics basicsSection, List<Topic> topics) {
-        String topicsJson = serialize(topics);
-        String basicsSectionJson = serialize(basicsSection);
+    @Override
+    @Nullable
+    protected String promptLlm(String basicsSectionJson, String topicsJson) {
         String userPrompt = new PromptTemplate(USER_PROMPT_TMPL).render(Map.of(
                         "basics", basicsSectionJson,
                         "topics", topicsJson
@@ -47,15 +40,7 @@ public class BasicsThreadsPlanningAgent extends AbstractPlanningAgent {
                 .user(userPrompt)
                 .call()
                 .content();
-
-        Set<ValidationMessage> validationMessages = validateJson(response, JSON_SCHEMA);
-
-        if (!validationMessages.isEmpty()) {
-            throw new IllegalStateException("Generated JSON %s does not match for schema %s".formatted(response, JSON_SCHEMA));
-        }
-
-        List<TopicThread> threads = deserialize(response, new TypeReference<>() {});
-        return threads;
+        return response;
     }
 
     private static final String USER_PROMPT_TMPL = """
@@ -87,7 +72,6 @@ public class BasicsThreadsPlanningAgent extends AbstractPlanningAgent {
             ## Thread Structure
                         
             Required fields:
-            - **id**: Always `"GENERATE_ID"`.
             - **topicId**: The `id` of the related topic.
             - **type**: Always `"core_details"` for basics.
             - **status**: Always `"pending"`.
@@ -100,6 +84,9 @@ public class BasicsThreadsPlanningAgent extends AbstractPlanningAgent {
             - **contextObject**: Leave empty.
             - **createdAt**: Leave empty.
             - **updatedAt**: Leave empty.
+    
+            Do not set **id**    
+
                         
             ---
                         
