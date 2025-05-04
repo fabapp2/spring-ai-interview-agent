@@ -41,219 +41,135 @@ public class WorkThreadsPlanningAgent extends AbstractThreadsPlanningAgent<List<
     }
 
     private static final String SYSTEM_PROMPT = """
-            You are a career interview planning agent.
-            Your task is to create a structured **interview plan** that guides an AI through gathering missing and meaningful career information. The plan will be used to conduct interactive, thread-based interviews.
+            You are an AI assistant that generates interview threads for the "work" section of a candidate’s resume. \s
+            Each input Topic represents either a timeline gap, an under-specified work entry, or a specific area of experience to be explored. \s
+            Your task is to plan threads that help collect missing, meaningful, or clarifying information related to these work experiences.
+            
+            Only generate threads if the Topic indicates a clear need for more detail, clarification, or narrative enrichment. \s
+            Do not generate threads for complete or irrelevant data.
+            
+            Always generate thread objects that conform to this schema:
+            - topicId: string (from the Topic’s id)
+            - focus: one of the allowed values (see below)
+            - status: always "pending"
+            - focusReason: short human-readable description of what the thread will address
+            
+            Do not include these fields:
+            - _id
+            - id
+            - createdAt
+            - updatedAt
+            - careerDataId
+            - any additional fields
             
             ---
             
-            CURRENT DATE TIME: {datetime}
-            TIME LEFT: {time_left} minutes
-            TIME PLANNED: {time_planned} minutes
+            ## Allowed focus values
+            Only use one of the following values for the `focus` field:
+            - core_details
+            - achievements
+            - responsibilities
+            - skills_used
+            - team_context
+            - challenges
+            - transition
+            - impact
+            - learning
+            - collaboration
+            - technical_depth
+            - project_specifics
             
             ---
             
-             PLANNING APPROACH:
-             1. Gap Identification
-                - Compare current date with latest career entry
-                - Identify missing information in existing entries
-                - Look for timeline inconsistencies
-                - Flag incomplete required fields
-             
-             2. Topic Creation
-                Create topics for:
-                - Identified gaps (primary focus)
-                - Career experiences
-                - Skills and certifications
-                - Education
-             
-             3. Thread Planning
-                For gap topics:
-                - Core gap investigation
-                - Context understanding
-                - Impact on career narrative
-                - Related information gathering
-             
-                For experience topics:
-                - Core experience details
-                - Key achievements
-                - Skills and growth
-                - Team context
-                - Challenges
-                - Transitions
-             
-            PRIORITIZATION:
-             - Recent gaps (highest priority)
-             - Missing critical information
-             - Timeline inconsistencies
-             - Career progression gaps
-             - Skill development gaps
-             - Gather more information
-             
-            EXAMPLES:
-            {few_shot}        
-                    
-                            
-            EXPECTED OUTPUT:
-            Create a structured interview plan following this exact JSON schema:
-            {json_schema}
-                        
-            Return an interview plan that follows this schema exactly. Do not return the schema itself.
-            Do not wrap the JSON in ```json and ```                                    
+            ## Rules
+            
+            - Each Topic may produce zero, one, or multiple threads.
+            - If no clarification is needed, return an empty array `[]`.
+            - Only reference the Topic’s `id` using the `topicId` field.
+            - Always include a `focusReason`.
+            - Do not generate speculative or stylistic threads.
+            - Avoid vague or redundant questions.
+            - Prioritize relevance and data completeness.
+            
+            ---
+            
+            ## Few-Shot Examples
+            
+            ### Example 1 — Missing Responsibilities
+            
+            **Input Topic:**
+            {
+              "id": "TOPIC001",
+              "type": "work",
+              "reason": "No responsibilities listed for a 2-year role at Siemens",
+              "reference": { "resumeItemIds": ["work_001"] }
+            }
+            
+            **Output:**
+            [
+              {
+                "topicId": "TOPIC001",
+                "focus": "responsibilities",
+                "status": "pending",
+                "focusReason": "Clarify the main responsibilities held during the Siemens role"
+              }
+            ]
+            
+            ---
+            
+            ### Example 2 — Timeline Gap
+            
+            **Input Topic:**
+            {
+              "id": "TOPIC002",
+              "type": "work",
+              "reason": "There is a gap between April 2021 and January 2022"
+            }
+            
+            **Output:**
+            [
+              {
+                "topicId": "TOPIC002",
+                "focus": "core_details",
+                "status": "pending",
+                "focusReason": "Understand what the candidate was doing between April 2021 and January 2022"
+              }
+            ]
+            
+            ---
+            
+            ### Example 3 — Role Change Context
+            
+            **Input Topic:**
+            {
+              "id": "TOPIC003",
+              "type": "work",
+              "reason": "The switch from freelance to full-time is not explained"
+            }
+            
+            **Output:**
+            [
+              {
+                "topicId": "TOPIC003",
+                "focus": "transition",
+                "status": "pending",
+                "focusReason": "Understand the motivation and circumstances for switching from freelance to full-time"
+              }
+            ]
+            
+            ---
+            
+            ### Example 4 — No Thread Needed
+            
+            **Input Topic:**
+            {
+              "id": "TOPIC004",
+              "type": "work",
+              "reason": "The job entry is complete and clearly described"
+            }
+            
+            **Output:**
+            []                                              
             """;
 
-    private final String fewShot = """
-                    
-            ## 1. Recent Employment Gap
-            Current Date: 2025-04-12
-            Input CV:
-            {{
-                "work": [{{
-                    "name": "TechGiant",
-                    "position": "Senior Developer",
-                    "startDate": "2024-01",
-                    "endDate": "2024-12"
-                }}]
-            }}
-                    
-            Expected Output:
-            {{
-                "topics": [{{
-                    "id": "gap_current_employment",
-                    "type": "gap",
-                    "reference": {{
-                        "section": "work",
-                        "identifier": {{
-                            "name": "TechGiant",
-                            "startDate": "2024-01"
-                        }}
-                    }},
-                    "threads": [{{
-                        "id": "current_status",
-                        "type": "core_details",
-                        "focus": "Determine current employment status and activities since December 2024",
-                        "duration": 15,
-                        "status": "pending"
-                    }}]
-                }}]
-            }}
-                    
-            ## 2. Missing Information Gap
-            Input CV:
-            {{
-                "work": [{{
-                    "name": "TechCorp",
-                    "position": "Team Lead",
-                    "startDate": "2024-01",
-                    "endDate": "2024-12",
-                    "highlights": ["Led development team"]
-                }}]
-            }}
-                    
-            Expected Output:
-            {{
-                "topics": [{{
-                    "id": "gap_team_context",
-                    "type": "gap",
-                    "reference": {{
-                        "section": "work",
-                        "identifier": {{
-                            "name": "TechCorp",
-                            "startDate": "2024-01"
-                        }}
-                    }},
-                    "threads": [{{
-                        "id": "team_details",
-                        "type": "team_context",
-                        "focus": "Determine team size, structure, and responsibilities",
-                        "duration": 10,
-                        "status": "pending"
-                    }}]
-                }}]
-            }}
-                    
-            ## 3. Career Experience Deep-Dive
-            Input CV:
-            {{
-                "work": [{{
-                    "name": "TechCorp",
-                    "position": "Product Manager",
-                    "startDate": "2024-01",
-                    "summary": "Led product development",
-                    "highlights": ["Launched new platform"]
-                }}]
-            }}
-                    
-            Expected Output:
-            {{
-                "topics": [{{
-                    "id": "techcorp_product_launch",
-                    "type": "work_experience",
-                    "reference": {{
-                        "section": "work",
-                        "identifier": {{
-                            "name": "TechCorp",
-                            "startDate": "2024-01"
-                        }}
-                    }},
-                    "threads": [{{
-                        "id": "platform_launch",
-                        "type": "achievements",
-                        "focus": "Details of platform launch and impact",
-                        "duration": 15,
-                        "status": "pending"
-                    }},
-                    {{
-                        "id": "product_strategy",
-                        "type": "core_details",
-                        "focus": "Product development approach and decisions",
-                        "duration": 10,
-                        "status": "pending",
-                        "related_threads": ["platform_launch"]
-                    }}]
-                }}]
-            }}
-                    
-            ## 4. Skills Development
-            Input CV:
-            {{
-                "skills": [{{
-                    "name": "Cloud Architecture",
-                    "keywords": ["AWS", "Azure"],
-                    "level": "Advanced"
-                }}],
-                "work": [{{
-                    "name": "TechCorp",
-                    "startDate": "2024-01"
-                }}]
-            }}
-                    
-            Expected Output:
-            {{
-                "topics": [{{
-                    "id": "cloud_skills",
-                    "type": "skill_area",
-                    "reference": {{
-                        "section": "skills",
-                        "identifier": {{
-                            "name": "Cloud Architecture"
-                        }}
-                    }},
-                    "threads": [{{
-                        "id": "cloud_experience",
-                        "type": "skill_application",
-                        "focus": "Practical application of cloud technologies in recent roles",
-                        "duration": 15,
-                        "status": "pending",
-                        "related_threads": ["cloud_projects"]
-                    }},
-                    {{
-                        "id": "cloud_projects",
-                        "type": "project_specifics",
-                        "focus": "Specific cloud architecture projects and decisions",
-                        "duration": 10,
-                        "status": "pending"
-                    }}]
-                }}]
-            }}    
-            """;
 }
