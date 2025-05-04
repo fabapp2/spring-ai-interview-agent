@@ -5,11 +5,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.networknt.schema.*;
+import io.promptics.jobagent.utils.JsonValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.io.ClassPathResource;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
@@ -57,14 +56,6 @@ public abstract class AbstractGeneralPlanningAgent<S> {
     }
 
     protected Set<ValidationMessage> validateJson(String json, String jsonSchema) {
-        try {
-            ClassPathResource resource = new ClassPathResource(jsonSchema);
-            JsonSchemaFactory schemaFactory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7);
-            JsonSchema schema = schemaFactory.getSchema(resource.getURI());
-            Set<ValidationMessage> messages = schema.validate(json, InputFormat.JSON);
-            return messages;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        return JsonValidator.validateJson(json, jsonSchema);
     }
 }

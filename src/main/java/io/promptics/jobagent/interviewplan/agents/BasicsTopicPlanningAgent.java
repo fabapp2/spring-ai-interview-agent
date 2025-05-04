@@ -30,6 +30,7 @@ public class BasicsTopicPlanningAgent extends AbstractTopicsPlanningAgent<Basics
     public static final String MODEL = "gpt-4.1-mini";
     public static final Double TEMPERATURE = 0.0;
     private static final String JSON_SCHEMA = "/schemas/plan/topics-array-schema.json";
+    public static final StTemplateRenderer TEMPLATE_RENDERER = StTemplateRenderer.builder().startDelimiterToken('<').endDelimiterToken('>').build();
     private final ChatClient chatClient;
     private final ObjectMapper objectMapper;
 
@@ -40,13 +41,13 @@ public class BasicsTopicPlanningAgent extends AbstractTopicsPlanningAgent<Basics
                 .temperature(TEMPERATURE)
                 .build();
 
-        chatClient = builder.defaultTemplateRenderer(StTemplateRenderer.builder().startDelimiterToken('<').endDelimiterToken('>').build()).defaultOptions(chatOptions).build();
+        chatClient = builder.defaultTemplateRenderer(TEMPLATE_RENDERER).defaultOptions(chatOptions).build();
         this.objectMapper = objectMapper;
     }
 
     public List<Topic> planTopics(String careerDataId, Basics basicsSection) {
         String section = serialize(basicsSection);
-        String userPrompt = new PromptTemplate(USER_PROMPT_TMPL).render(Map.of("basics", section));
+        String userPrompt = PromptTemplate.builder().renderer(TEMPLATE_RENDERER).template(USER_PROMPT_TMPL).build().render(Map.of("basics", section));
         List<Topic> topics = chatClient.prompt()
                 .system(SYSTEM_PROMPT)
                 .user(userPrompt)

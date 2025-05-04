@@ -3,8 +3,12 @@ package io.promptics.jobagent.interviewplan;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.networknt.schema.ValidationMessage;
 import io.promptics.jobagent.InterviewConfig;
 import io.promptics.jobagent.MongoDbConfig;
+import io.promptics.jobagent.interviewplan.model.Topic;
+import io.promptics.jobagent.interviewplan.model.TopicThread;
+import io.promptics.jobagent.utils.JsonValidator;
 import org.json.JSONException;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
@@ -15,6 +19,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.MongoDBContainer;
+
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -46,6 +52,12 @@ public abstract class RepositoryTest<T, ID, R extends MongoRepository<T, ID>> {
     protected abstract MongoRepository<T, ID> getRepository();
 
     protected void assertPersisted(String given) throws JSONException {
+        String schema = "/schemas/plan/topics-schema.json";
+        if(entityClass.isAssignableFrom(TopicThread.class)) {
+            schema = "/schemas/plan/threads-schema.json";
+        }
+        Set<ValidationMessage> validationMessages = JsonValidator.validateJson(given, schema);
+        assertThat(validationMessages).isEmpty();
         T topic = deserialize(given, entityClass);
         T saved = getRepository().save(topic);
         String json = serialize(saved);

@@ -21,11 +21,8 @@ class PreProcessorTest {
     ChatMemory chatMemory;
 
     @Test
-    // FIXME:
-    @ExpectedToFail("Needs some love")
     @DisplayName("simple prompt")
     void simplePrompt() {
-//        chatMemory.add(AbstractChatMemoryAdvisor.DEFAULT_CHAT_MEMORY_CONVERSATION_ID, new UserMessage("Howdie!"));
         String userMessage = "This interview is boing.";
         MessageAnalysis analysis = preProcessor.execute(userMessage);
         assertThat(analysis.getIsCorrected()).isTrue();

@@ -27,13 +27,13 @@ public class TopicThreadRepositoryTest extends RepositoryTest<TopicThread, Strin
         assertPersisted(
                 """
                 {
+                  "careerDataId": "1234",
                   "id": "662a2cf3b931226b6dcb4001",
                   "topicId": "662a2cf3b931226b6dcb3001",
-                  "type": "core_details",
                   "status": "pending",
-                  "duration": 300,
-                  "contextAction": "ask",
-                  "contextGoal": "extract_responsibilities"
+                  "focus": "team_context",
+                  "createdAt": "2025-04-25T08:00:00Z",
+                  "updatedAt": "2025-04-25T08:10:00Z"
                 }
                 """);
     }

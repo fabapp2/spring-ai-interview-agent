@@ -59,12 +59,8 @@ class TopicAndThreadRendererTest {
         String rendered = sut.renderTopicAndThread(topicAndThread.getTopic(), topicAndThread.getThread());
         System.out.println(rendered);
         assertThat(rendered).isEqualTo("""
-            ##  Current interview topic
-            The current topic covers "" of career data.
-            It references the career data section with id "1122334455"
-            
-            ## Thread of interview topic
-            Thread focus: No location information for city
+            The current topic covers the section "basics" in career data with id "1122334455".
+            The current thread in this topic is: "core_details" and handles "core_details".
             
             Type: Core Details
             - Essential information about the topic
