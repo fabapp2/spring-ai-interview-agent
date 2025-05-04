@@ -1,5 +1,6 @@
 package io.promptics.jobagent.interviewplan.agents;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.networknt.schema.*;
@@ -10,8 +11,14 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.intellij.lang.annotations.Language;
+import org.springframework.ai.template.TemplateRenderer;
+import org.springframework.ai.template.st.StTemplateRenderer;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.ParameterizedType;
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -20,150 +27,260 @@ import java.util.Set;
 @Component
 public class BasicsTopicPlanningAgent extends AbstractTopicsPlanningAgent<Basics> {
 
-    public static final String MODEL = "gpt-4o-mini";
+    public static final String MODEL = "gpt-4.1-mini";
     public static final Double TEMPERATURE = 0.0;
     private static final String JSON_SCHEMA = "/schemas/plan/topics-array-schema.json";
     private final ChatClient chatClient;
+    private final ObjectMapper objectMapper;
 
-    public BasicsTopicPlanningAgent(ChatClient.Builder builder, ObjectMapper objectMapper) {
+    public BasicsTopicPlanningAgent(ChatClient.Builder builder, @Qualifier("objectMapper") ObjectMapper objectMapper) {
         super(objectMapper);
         ChatOptions chatOptions = ChatOptions.builder()
                 .model(MODEL)
                 .temperature(TEMPERATURE)
                 .build();
 
-        chatClient = builder.defaultOptions(chatOptions).build();
+        chatClient = builder.defaultTemplateRenderer(StTemplateRenderer.builder().startDelimiterToken('<').endDelimiterToken('>').build()).defaultOptions(chatOptions).build();
+        this.objectMapper = objectMapper;
     }
 
     public List<Topic> planTopics(String careerDataId, Basics basicsSection) {
         String section = serialize(basicsSection);
-
-        String response = chatClient.prompt()
+        String userPrompt = new PromptTemplate(USER_PROMPT_TMPL).render(Map.of("basics", section));
+        List<Topic> topics = chatClient.prompt()
                 .system(SYSTEM_PROMPT)
-                .user(new PromptTemplate(USER_PROMPT_TMPL).render(Map.of("basics", section)))
+                .user(userPrompt)
                 .call()
-                .content();
+                .entity(new ParameterizedTypeReference<>() {});
 
-        Set<ValidationMessage> validationMessages = validateJson(response, JSON_SCHEMA);
+        topics.forEach(topic -> {
+            topic.setCareerDataId(careerDataId);
+            Instant now = Instant.now();
+            topic.setCreatedAt(now);
+            topic.setUpdatedAt(now);
+        });
+
+        Set<ValidationMessage> validationMessages = validateJson(topics, JSON_SCHEMA);
 
         if(!validationMessages.isEmpty()) {
             // FIXME: call error handling prompt to fix errors
-            throw new IllegalStateException("Generated JSON %s does not macth for schema %s".formatted(response, JSON_SCHEMA));
+            throw new IllegalStateException("Generated JSON %s does not match for schema %s. Messages: %s".formatted(topics, JSON_SCHEMA, validationMessages));
         }
 
-        List<Topic> topics = deserialize(response, new TypeReference<>() {});
-        topics.forEach(topic -> topic.setCareerDataId(careerDataId));
         return topics;
     }
 
+    private Set<ValidationMessage> validateJson(Object response, String jsonSchema) {
+        try {
+            String json = objectMapper.writeValueAsString(response);
+            return validateJson(json, jsonSchema);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private static final String USER_PROMPT_TMPL = """
-            Given Basics:
-            
             {basics}
             """;
 
     @Language("markdown")
     static final String SYSTEM_PROMPT = """
-You are an expert career assistant.
+You are an AI assistant that generates structured Topics from the "basics" section of resume data.
+Each Topic represents a specific area to explore during an AI-led resume interview.
+Topics are high-level entry points and will later be expanded into Threads by another agent.
 
- Your task is to analyze the "basics" section of a candidate's career profile and generate relevant interview topics.
- Each topic must focus on clarifying, enriching, or verifying important information based on the provided Basics data.
- 
-You must produce a pure JSON array ([...]) containing one or more topic objects.
-Each topic must exactly conform to the following structure:
+Your job is to analyze the basics section and identify missing, inconsistent, or noteworthy information.
+Each Topic should focus on a clearly missing, incomplete, or invalid piece of information in the basics section.
+Do not suggest improvements for fields that are complete and reasonable.
+Only include a topic if the data is clearly missing, empty, or invalid.
+Do not generate topics about refining, expanding, or speculating on complete fields.
+Do not suggest additional profiles or deeper explanations unless something is explicitly missing or blank in the input.
+Do not create Topics related to other resume sections such as “education”, “work”, “projects”, or “skills” unless they are explicitly mentioned or clearly implied within the basics section.
+These areas are handled separately by other agents.
 
-## Required Fields for Each Topic:
-- type - A string defining the topic type. Use one of the allowed values listed below.
-- priorityScore - set to 100
-- reason - Short human-readable explanation for why the topic is needed.
+Always set the type field to "basics".
+Your output must be a valid JSON array.
+Include only the following fields in each object:
+- type: always "basics"
+- reason: short explanation of why this topic should be discussed
+- reference.resumeItemIds: optional, only if the topic is clearly tied to an input item with an "id"
 
-Value for the type field (with explanations)
-            
-- basics - For gaps or uncertainties directly in the basics section (e.g., missing summary, unclear location, incomplete profiles).
+Do not include any other fields.
+Do not include markdown, comments, or explanation text.
 
-### Optional Fields
-Include only when relevant:
-            
-- reference - An object describing the element linked to the topic. Use to specify which exact element in the provided Basics data the topic refers to. Linkage rules:
-- resumeItemId (string) - ID of a specific resume item (e.g., profile entry id inside basics.profiles) that this topic is about. Use the ID given in the input Basics section.
-            
-## General Rules
-            
-Do not generate any fields other than those listed above.
-Omit optional fields if not applicable.
-Always output a JSON array ([...]), not a single object ({}).
-Do not add explanations outside the JSON.
-Always use resumeItemId if the topic clearly refers to a specific item (e.g., a missing LinkedIn profile inside basics.profiles).
-Never add properties to reference that are not listed.
-Respond only with the correct JSON structure, no explanations, no comments, no additional markup.
-Do not set field "id"
- 
- ## Examples
- 
- ### Example 1 — Imperfect Basics Input (Missing LinkedIn Profile, Missing Summary)
- 
- Career Basics Input:       
- {
-   "name": "Anna Müller",
-   "email": "anna@example.com",
-   "summary": "",
-   "location": {
-     "city": "",
-     "countryCode": "DE"
-   },
-   "profiles": [
-     {
-       "id": "1111111111",
-       "network": "LinkedIn",
-       "username": "",
-       "url": ""
-     }
-   ],
-   "id": "1122334455"
- }
- 
- Expected Topics Output:
- 
- [
-   {
-     "type": "basics",
-     "reference": { "resumeItemId": "1122334455" },
-     "reason": "Candidate's professional summary is missing."
-   },
-   {
-     "type": "basics",
-     "reference": { "resumeItemId": "1122334455" },
-     "reason": "Candidate's city information is missing."
-   },
-   {
-     "type": "basics",
-     "reference": { "resumeItemId": "1111111111" },
-     "reason": "LinkedIn profile details are incomplete (username and URL missing)."
-   }
- ]
- 
- ### Example 2 — Well-Filled Basics Input (Missing Relocation Information)
- 
- Career Basics Input:
- {
-   "name": "Liam Smith",
-   "email": "liam@example.com",
-   "summary": "Experienced DevOps Engineer.",
-   "location": {
-     "city": "Hamburg",
-     "countryCode": "DE"
-   },
-   "id": "1122334455"
- }
- 
- Expected Topics Output:
- [
-   {
-     "type": "basics",
-     "reference": { "resumeItemId": "1122334455" },
-     "reason": "Relocation preferences are not specified."
-   }
- ]
+---
+
+### Few-Shot Examples
+
+#### Example 1
+
+Input basics:
+{
+  "email": "no-at-symbol.com",
+  "phone": "",
+  "summary": "Creative writer and community manager."
+}
+
+Output:
+[
+  {
+    "type": "basics",
+    "reason": "The candidate's name is missing and should be collected"
+  },
+  {
+    "type": "basics",
+    "reason": "The email address appears to be invalid and should be verified"
+  },
+  {
+    "type": "basics",
+    "reason": "The phone number is missing and should be confirmed"
+  },
+  {
+    "type": "basics",
+    "reason": "The location information is missing"
+  },
+  {
+    "type": "basics",
+    "reason": "The candidate's professional title or role is not provided"
+  },
+  {
+    "type": "basics",
+    "reason": "No social or professional profiles are listed"
+  }
+]
+
+---
+
+#### Example 2
+
+Input basics:
+{
+  "profiles": [
+    {
+      "id": "1111111111",
+      "network": "LinkedIn",
+      "username": "",
+      "url": ""
+    }
+  ]
+}
+
+Output:
+[
+  {
+    "type": "basics",
+    "reason": "The candidate's name is missing and should be collected"
+  },
+  {
+    "type": "basics",
+    "reason": "The LinkedIn profile has both username and URL fields empty, which makes it incomplete",
+    "reference": {
+      "resumeItemIds": ["1111111111"]
+    }
+  }
+]
+
+---
+
+#### Example 3
+
+Input basics:
+{
+  "name": "Leila M",
+  "phone": "",
+  "summary": "Student in computer science looking for internships in AI."
+}
+
+Output:
+[
+  {
+    "type": "basics",
+    "reason": "The phone number is empty and should be collected"
+  },
+  {
+    "type": "basics",
+    "reason": "The candidate's educational background and internship goals should be clarified"
+  },
+  {
+    "type": "basics",
+    "reason": "The location information is missing"
+  },
+  {
+    "type": "basics",
+    "reason": "No professional title or current role is provided"
+  }
+]
+
+---
+
+#### Example 4
+
+Input basics:
+{
+  "label": "Full-Stack Developer",
+  "location": {
+    "city": "Berlin",
+    "countryCode": "DE"
+  },
+  "profiles": [
+    {
+      "id": "abc222",
+      "network": "GitHub",
+      "username": "alexcodez",
+      "url": "https://github.com/alexcodez"
+    }
+  ]
+}
+
+Output:
+[
+  {
+    "type": "basics",
+    "reason": "The candidate's name is missing and should be confirmed"
+  },
+  {
+    "type": "basics",
+    "reason": "The GitHub profile might be useful to highlight during the interview",
+    "reference": {
+      "resumeItemIds": ["abc222"]
+    }
+  }
+]
+
+---
+
+#### Example 5
+
+Input basics:
+
+{
+  "name": "Max Müller",
+  "email": "max@foo.com",
+  "label": "Software Engineer specialized in Cloud and JavaScript",
+  "phone": "+66 2234 2233",
+  "summary": "Software engineer with 2 years of experience, specializing in JavaScript and cloud technologies such as AWS and serverless architectures.",
+  "location": {
+    "country": "Germany"
+  },
+  "profiles": [
+    {
+      "id": "1111111111",
+      "network": "LinkedIn",
+      "username": "max",
+      "url": "https://linkedin.com/in/max"
+    }
+  ]
+}
+
+Output:
+[
+  {
+    "type": "basics",
+    "reason": "The candidate's location is incomplete as the city is missing"
+  }
+]
+
+Now generate a list of Topics based on the following basics section:
 """;
 
 }
