@@ -15,13 +15,13 @@ import java.util.List;
 
 public abstract class AbstractSectionAnalyzer<S> {
 
-    private final AbstractTopicsPlanningAgent<S, Topic> topicPlanningAgent;
+    private final AbstractTopicsPlanningAgent<S> topicPlanningAgent;
     private final AbstractThreadsPlanningAgent threadsPlanningAgent;
     private final TopicRepository topicRepository;
     private final TopicThreadRepository topicThreadRepository;
     private final S type;
 
-    protected AbstractSectionAnalyzer(AbstractTopicsPlanningAgent<S, Topic> topicPlanningAgent, AbstractThreadsPlanningAgent threadsPlanningAgent, TopicRepository topicRepository, TopicThreadRepository topicThreadRepository) {
+    protected AbstractSectionAnalyzer(AbstractTopicsPlanningAgent<S> topicPlanningAgent, AbstractThreadsPlanningAgent threadsPlanningAgent, TopicRepository topicRepository, TopicThreadRepository topicThreadRepository) {
         this.topicPlanningAgent = topicPlanningAgent;
         this.threadsPlanningAgent = threadsPlanningAgent;
         this.topicRepository = topicRepository;

@@ -2,18 +2,11 @@ package io.promptics.jobagent.interviewplan.agents;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.promptics.jobagent.careerdata.model.Work;
-import io.promptics.jobagent.interviewplan.model.Topic;
-import io.promptics.jobagent.interviewplan.model.TopicThread;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.prompt.ChatOptions;
-import org.springframework.ai.chat.prompt.PromptTemplate;
-import org.springframework.ai.template.st.StTemplateRenderer;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
 
 @Component
 public class WorkThreadsPlanningAgent extends AbstractThreadsPlanningAgent<List<Work>> {
@@ -158,7 +151,7 @@ public class WorkThreadsPlanningAgent extends AbstractThreadsPlanningAgent<List<
             ]
             
             ---
-            
+        
             ### Example 4 — No Thread Needed
             
             **Input Topic:**

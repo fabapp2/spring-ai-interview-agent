@@ -2,26 +2,33 @@ package io.promptics.jobagent.interviewplan.agents;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import groovyjarjarpicocli.CommandLine;
 import io.promptics.jobagent.careerdata.model.Work;
 import io.promptics.jobagent.interviewplan.model.Topic;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.DefaultChatClient;
 import org.springframework.ai.chat.prompt.ChatOptions;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class WorkTopicsPlanningAgent extends AbstractTopicsPlanningAgent<List<Work>, Topic> {
+public class WorkTopicsPlanningAgent extends AbstractTopicsPlanningAgent<List<Work>> {
 
-    private static final String MODEL = "gpt-4o-mini";
+    private static final String MODEL = "gpt-4.1-mini";
     private static final Double TEMPERATURE = 0.1;
     private ChatClient client;
 
     public WorkTopicsPlanningAgent(ChatClient.Builder builder, ObjectMapper objectMapper) {
         super(builder, objectMapper);
-        ChatOptions options = ChatOptions.builder().model(MODEL).temperature(TEMPERATURE).build();
-        client = builder.defaultOptions(options).build();
+        // FIXME: hierarchy
+        client = builder.defaultTemplateRenderer(AbstractGeneralPlanningAgent.TEMPLATE_RENDERER).defaultOptions(ChatOptions.builder()
+                .temperature(TEMPERATURE)
+                .model(MODEL)
+                .build()).build();
     }
+
 
     @Override
     public List<Topic> planTopics(String careerDataId, List<Work> works) {
@@ -31,14 +38,14 @@ public class WorkTopicsPlanningAgent extends AbstractTopicsPlanningAgent<List<Wo
                 .user(workJson)
                 .call()
                 .content();
-        List<Topic> topics = deserialize(response, new TypeReference<List<Topic>>() {});
+        List<Topic> topics = deserialize(response, new TypeReference<>() {});
         topics.forEach(topic -> topic.setCareerDataId(careerDataId));
         return topics;
     }
 
     static final String SYSTEM_PROMPT = """
-        You are an AI assistant that analyzes the "work" section of a resume and generates a structured list of interview topics. \s
-        Your goal is to identify missing, incomplete, vague, or under-detailed work experience entries. \s
+        You are an AI assistant that analyzes the "work" section of a resume and generates a structured list of interview topics.
+        Your goal is to identify missing, incomplete, vague, or under-detailed work experience entries.
         You generate one or more structured Topic objects per relevant case, which will later be expanded into interview threads by a separate agent.
 
         Your responsibilities:
@@ -47,8 +54,8 @@ public class WorkTopicsPlanningAgent extends AbstractTopicsPlanningAgent<List<Wo
         - Highlight experiences worth elaborating (e.g. technical depth, team context, impact)
         - Generate topics that support a deeper understanding of the candidate's career progression and contributions
 
-        Each output object must represent a single interview topic. \s
-        Only create topics when meaningful enrichment or clarification is possible. \s
+        Each output object must represent a single interview topic.
+        Only create topics when meaningful enrichment or clarification is possible.
         Do not generate topics for complete, redundant, or obviously irrelevant entries.
 
         ---
@@ -65,10 +72,6 @@ public class WorkTopicsPlanningAgent extends AbstractTopicsPlanningAgent<List<Wo
         - `focusReason`: a precise, specific explanation of what the interviewer should explore
         - `reference.resumeItemIds`: array of one or more string IDs referring to the related work entries
         - `reference.startDate` and `reference.endDate`: optional, use only for timeline gaps
-
-        Do not include:
-        - `_id`, `id`, `careerDataId`, `createdAt`, `updatedAt`
-        - Any fields not listed above
 
         ---
 

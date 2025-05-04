@@ -7,6 +7,7 @@ import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,7 +33,11 @@ public class TopicAndThreadRenderer {
         Map<String, Object> variables = new HashMap<>();
         variables.put("section", topic.getType().value());
         variables.put("threadType", thread.getFocus().value());
-        variables.put("resumeItemId", topic.getReference().getResumeItemIds());
+        List<String> resumeItemIds = List.of();
+        if(topic.getReference() != null) {
+            resumeItemIds = topic.getReference().getResumeItemIds();
+        }
+        variables.put("resumeItemId", resumeItemIds);
         variables.put("threadFocus", thread.getFocus());
         variables.put("typeDescription", typeDescription);
 

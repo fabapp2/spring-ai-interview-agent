@@ -62,7 +62,7 @@ class InterviewPlannerTest {
         given(careerDataService.loadCareerData("67e98007bd5c558ba6ad93d6")).willReturn(careerData);
 
         TopicAndThread topicAndThread = interviewPlanner.createInitialInterviewPlan(careerData);
-        assertThat(topicAndThread.getTopic().getReason()).contains("gap");
+        assertThat(topicAndThread.getTopic().getReason()).contains("location");
     }
 
 }

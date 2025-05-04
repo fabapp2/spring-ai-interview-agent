@@ -26,9 +26,9 @@ import java.util.Set;
 
 @Slf4j
 @Component
-public class BasicsTopicPlanningAgent extends AbstractTopicsPlanningAgent<Basics, Topic> {
+public class BasicsTopicPlanningAgent extends AbstractTopicsPlanningAgent<Basics> {
 
-    public static final String MODEL = "gpt-4.1-mini";
+    public static final String MODEL = "gpt-4-turbo";
     public static final Double TEMPERATURE = 0.0;
     private static final String JSON_SCHEMA = "/schemas/plan/topics-array-schema.json";
     public static final StTemplateRenderer TEMPLATE_RENDERER = StTemplateRenderer.builder().startDelimiterToken('<').endDelimiterToken('>').build();

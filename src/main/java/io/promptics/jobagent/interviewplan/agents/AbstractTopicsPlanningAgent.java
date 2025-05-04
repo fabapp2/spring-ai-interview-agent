@@ -8,8 +8,11 @@ import org.springframework.ai.chat.client.ChatClient;
 import java.util.List;
 
 @Slf4j
-public abstract class AbstractTopicsPlanningAgent<S, T>  extends AbstractGeneralPlanningAgent<S, T> {
+public abstract class AbstractTopicsPlanningAgent<S>  extends AbstractGeneralPlanningAgent<S, Topic> {
 
+    protected AbstractTopicsPlanningAgent(ChatClient chatClient, ObjectMapper objectMapper) {
+        super(chatClient, objectMapper);
+    }
 
     protected AbstractTopicsPlanningAgent(ChatClient.Builder builder, ObjectMapper objectMapper) {
         super(builder, objectMapper);

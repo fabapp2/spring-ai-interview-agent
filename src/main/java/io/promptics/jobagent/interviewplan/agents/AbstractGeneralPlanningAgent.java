@@ -25,6 +25,11 @@ public abstract class AbstractGeneralPlanningAgent<S, T> {
             .endDelimiterToken('>')
             .build();
 
+    protected AbstractGeneralPlanningAgent(ChatClient chatClient, ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+        this.chatClient = chatClient;
+    }
+
     protected AbstractGeneralPlanningAgent(ChatClient.Builder builder, ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
         ChatOptions chatOptions = ChatOptions.builder()
