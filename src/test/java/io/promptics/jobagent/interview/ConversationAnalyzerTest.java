@@ -11,6 +11,8 @@ import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @SpringBootTest
 class ConversationAnalyzerTest {
 
@@ -40,8 +42,11 @@ class ConversationAnalyzerTest {
                         .build())
                 .build();
 
-        ConversationAnalysis s = analyzer.analyzeUserInput(topicAndThread, conversation, "I got certified with AWS and did a deep dive into AI and large language models.");
-        // FIXME: finish test
-        System.out.println(s);
+        ConversationAnalysis analysis = analyzer.analyzeUserInput(topicAndThread, conversation, "I got certified with AWS and did a deep dive into AI and large language models.");
+        assertThat(analysis.getOriginalMessage()).isEqualTo("I got certified with AWS and did a deep dive into AI and large language models.");
+        assertThat(analysis.getExtractedInformations().get(0).getSection()).isEqualTo("certifications");
+        assertThat(analysis.getExtractedInformations().get(0).getInformations()).contains("Certified with AWS");
+        assertThat(analysis.getExtractedInformations().get(1).getSection()).isEqualTo("work");
+        assertThat(analysis.getExtractedInformations().get(1).getInformations()).contains("Did a deep dive into AI and large language models");
     }
 }
