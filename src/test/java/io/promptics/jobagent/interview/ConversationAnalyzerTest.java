@@ -23,14 +23,16 @@ class ConversationAnalyzerTest {
     @DisplayName("analyze")
     void analyze() {
         Topic topic = Topic.builder()
-                .type(Topic.Type.BASICS)
+                .type(Topic.Type.GAP)
                 .reference(Reference.builder()
                         .resumeItemId("1122334455")
                         .build())
+                .reason("Some data is missing")
                 .build();
+        // FIXME: Simplify and fix data model
         TopicThread thread = TopicThread.builder()
                 .type(TopicThread.Type.CORE_DETAILS)
-                .focus("Some data is missing")
+                .focus("There's a gap between teh last position at TechGiant and now")
                 .build();
         TopicAndThread topicAndThread = new TopicAndThread(topic, thread);
 
