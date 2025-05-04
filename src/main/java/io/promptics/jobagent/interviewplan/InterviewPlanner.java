@@ -15,25 +15,26 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
 public class InterviewPlanner {
 
-    private final List<? extends AbstractSectionAnalyzer> sectionAnalyzers;
-
     private final ThreadConversationRepository conversationRepository;
     private final TopicRepository topicRepository;
     private final TopicThreadRepository topicThreadRepository;
+    private final Map<String, ? extends AbstractSectionAnalyzer> analyzersMap;
 
     // find prompts at the end...
 
     public InterviewPlanner(List<? extends AbstractSectionAnalyzer> sectionAnalyzers, ChatClient.Builder chatClientBuilder, CareerDataService careerDataService, ObjectMapper objectMapper, DateTimeProvider datetimeProvider, BasicsTopicPlanningAgent basicsTopicPlanningAgent, BasicsThreadsPlanningAgent basicsThreadsPlanningAgent, WorkTopicsPlanningAgent workTopicsPlanningAgent, ThreadConversationRepository conversationRepository, TopicRepository topicRepository, TopicThreadRepository topicThreadRepository) {
-        this.sectionAnalyzers = sectionAnalyzers;
         this.conversationRepository = conversationRepository;
         this.topicRepository = topicRepository;
         this.topicThreadRepository = topicThreadRepository;
+        this.analyzersMap = sectionAnalyzers.stream().collect(Collectors.toMap(a -> a.getSectionName(), a -> a));
     }
 
     /**
@@ -64,9 +65,9 @@ public class InterviewPlanner {
 
 
     public TopicAndThread createInitialInterviewPlan(CareerData careerData) {
-        sectionAnalyzers.parallelStream()
+        analyzersMap.values().parallelStream()
                 .forEach(sectionAnalyzer -> {
-                    SectionTopicsAndThreads topicsAndThreads = sectionAnalyzer.analyzeSection(careerData);
+                    sectionAnalyzer.analyzeSection(careerData);
                 });
         return findCurrentTopicAndThread(careerData.getId());
     }

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class BasicsSectionAnalyzer extends AbstractSectionAnalyzer<Basics> {
 
+    public static final String SECTION_NAME = "basics";
+
     public BasicsSectionAnalyzer(BasicsTopicPlanningAgent topicPlanningAgent, BasicsThreadsPlanningAgent threadsPlanningAgent, TopicRepository topicRepository, TopicThreadRepository topicThreadRepository) {
         super(topicPlanningAgent, threadsPlanningAgent, topicRepository, topicThreadRepository);
     }
@@ -16,6 +18,11 @@ public class BasicsSectionAnalyzer extends AbstractSectionAnalyzer<Basics> {
     protected Basics getSectionData(CareerData careerData) {
         Basics section = careerData.getBasics();
         return section;
+    }
+
+    @Override
+    public String getSectionName() {
+        return SECTION_NAME;
     }
 
 }

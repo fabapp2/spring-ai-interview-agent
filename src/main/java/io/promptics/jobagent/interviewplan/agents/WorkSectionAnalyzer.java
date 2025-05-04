@@ -11,6 +11,8 @@ import java.util.List;
 @Component
 public class WorkSectionAnalyzer extends AbstractSectionAnalyzer<List<Work>> {
 
+    public static final String SECTION_NAME = "work";
+
     public WorkSectionAnalyzer(WorkTopicsPlanningAgent topicPlanningAgent, WorkThreadsPlanningAgent threadsPlanningAgent, TopicRepository topicRepository, TopicThreadRepository topicThreadRepository) {
         super(topicPlanningAgent, threadsPlanningAgent, topicRepository, topicThreadRepository);
     }
@@ -18,6 +20,11 @@ public class WorkSectionAnalyzer extends AbstractSectionAnalyzer<List<Work>> {
     @Override
     protected List<Work> getSectionData(CareerData careerData) {
         return careerData.getWork();
+    }
+
+    @Override
+    public String getSectionName() {
+        return SECTION_NAME;
     }
 
 }
