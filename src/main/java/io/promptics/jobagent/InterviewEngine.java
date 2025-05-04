@@ -2,16 +2,21 @@ package io.promptics.jobagent;
 
 import io.promptics.jobagent.careerdata.CareerDataService;
 import io.promptics.jobagent.careerdata.model.CareerData;
+import io.promptics.jobagent.interview.ConversationAnalyzer;
 import io.promptics.jobagent.interview.Interviewer;
+import io.promptics.jobagent.interview.ThreadConversation;
+import io.promptics.jobagent.interview.ThreadConversationRepository;
 import io.promptics.jobagent.interviewplan.InterviewPlanner;
 import io.promptics.jobagent.interviewplan.TopicAndThread;
 import io.promptics.jobagent.interviewplan.model.Topic;
 import io.promptics.jobagent.verification.DataVerifier;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class InterviewEngine {
 
     private final PreProcessor preProcessor;
@@ -20,15 +25,9 @@ public class InterviewEngine {
     private final DataVerifier verifier;
     private final InterviewContextHolder contextHolder;
     private final CareerDataService careerDataService;
-
-    public InterviewEngine(PreProcessor preProcessor, InterviewPlanner interviewPlanner, Interviewer interviewer, DataVerifier verifier, InterviewContextHolder contextHolder, CareerDataService careerDataService) {
-        this.preProcessor = preProcessor;
-        this.interviewPlanner = interviewPlanner;
-        this.interviewer = interviewer;
-        this.verifier = verifier;
-        this.contextHolder = contextHolder;
-        this.careerDataService = careerDataService;
-    }
+    private final ConversationAnalyzer conversationAnalyzer;
+    // FIXME: Add service for ThreadConversation or more general for ConversationMemory
+    private final ThreadConversationRepository conversationRepository;
 
     public String message(String userMessage) {
         InterviewContext context = contextHolder.getContext();
@@ -44,14 +43,17 @@ public class InterviewEngine {
         if (analysis.getIntent() == MessageAnalysis.Intent.VERIFICATION) {
             verifier.execute(message, context.getCareerDataId());
         } else if(analysis.getIntent() == MessageAnalysis.Intent.INTERVIEW) {
+            TopicAndThread topicAndThread = interviewPlanner.findCurrentTopicAndThread(context.getCareerDataId());
             // extract information from message
+            ThreadConversation conversation = conversationRepository.findThreadConversationByThreadId(topicAndThread.getThread().getId());
+            String s = conversationAnalyzer.analyzeUserInput(topicAndThread, conversation, message);
+
             // decide to which setions the information belongs
             // update sections with new information
+
             // update topics/threads for updated sections
-
-
-            TopicAndThread topicAndThread = interviewPlanner.findCurrentTopicAndThread(context.getCareerDataId());
             List<Topic> plan = interviewPlanner.adjustPLan(careerData);
+
             response = interviewer.execute(careerData, topicAndThread, message);
         }
 
