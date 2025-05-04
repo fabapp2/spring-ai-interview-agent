@@ -23,7 +23,7 @@ class ConversationAnalyzerTest {
     @DisplayName("analyze")
     void analyze() {
         Topic topic = Topic.builder()
-                .type(Topic.Type.GAP)
+                .type(Topic.Type.WORK)
                 .reference(Reference.builder()
                         .resumeItemId("1122334455")
                         .build())
