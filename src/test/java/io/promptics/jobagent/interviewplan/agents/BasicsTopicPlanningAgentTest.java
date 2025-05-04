@@ -68,6 +68,7 @@ class BasicsTopicPlanningAgentTest {
         summaryMissing.setSummary(null);
         summaryMissing.getLocation().setCountryCode(null);
 
+        // FIXME: Test flaky, sometimes "summary" is marked. Add example
         String careerDataId = "666666666";
         List<Topic> topics = agent.planTopics(careerDataId, summaryMissing);
 

@@ -21,8 +21,8 @@ public class PreProcessor {
         
         ## Task
         - Read the user input
-        - Correct obvious spelling errors
-        - Set the isCorrected falg to 'true' when the user message was corrected.
+        - Correct spelling errors
+        - Set the isCorrected flag to 'true' when the user message was corrected.
         - Recognize the user intent
         
         ## Expected output
@@ -45,6 +45,7 @@ public class PreProcessor {
     }
 
     public MessageAnalysis execute(String userMessage) {
+        // FIXME: Remove dummy code
         chatMemory.add(AbstractChatMemoryAdvisor.DEFAULT_CHAT_MEMORY_CONVERSATION_ID, new AssistantMessage("What was you last job?"));
         chatMemory.add(AbstractChatMemoryAdvisor.DEFAULT_CHAT_MEMORY_CONVERSATION_ID, new UserMessage("I worked at Mc Donalds"));
         chatMemory.add(AbstractChatMemoryAdvisor.DEFAULT_CHAT_MEMORY_CONVERSATION_ID, new AssistantMessage("How long did you work there?"));
