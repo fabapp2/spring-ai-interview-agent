@@ -2,20 +2,23 @@ package io.promptics.jobagent.interviewplan.agents;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.promptics.jobagent.careerdata.model.Basics;
-import org.jetbrains.annotations.Nullable;
+import io.promptics.jobagent.interviewplan.model.TopicThread;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.intellij.lang.annotations.Language;
+import org.springframework.ai.template.st.StTemplateRenderer;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
 
 @Component
 public class BasicsThreadsPlanningAgent extends AbstractThreadsPlanningAgent<Basics> {
 
     private static final Double TEMPERATURE = 0.0;
-    public static final String MODEL = "gpt-4o-mini";
+    public static final String MODEL = "gpt-4.1-mini";
     private final ChatClient chatClient;
 
     public BasicsThreadsPlanningAgent(ChatClient.Builder builder, ObjectMapper objectMapper) {
@@ -24,192 +27,139 @@ public class BasicsThreadsPlanningAgent extends AbstractThreadsPlanningAgent<Bas
                 .temperature(TEMPERATURE)
                 .model(MODEL)
                 .build();
-        this.chatClient = builder.defaultOptions(chatOptions).build();
+        this.chatClient = builder
+                .defaultTemplateRenderer(
+                        StTemplateRenderer.builder()
+                                .startDelimiterToken('<')
+                                .endDelimiterToken('>')
+                                .build()
+                ).defaultOptions(chatOptions).build();
     }
 
     @Override
-    @Nullable
-    protected String promptLlm(String basicsSectionJson, String topicsJson) {
+    protected List<TopicThread> promptLlm(String basicsSectionJson, String topicsJson) {
         String userPrompt = new PromptTemplate(USER_PROMPT_TMPL).render(Map.of(
                         "basics", basicsSectionJson,
                         "topics", topicsJson
                 )
         );
-        String response = chatClient.prompt()
+        List<TopicThread> response = chatClient.prompt()
                 .system(SYSTEM_PROMPT)
                 .user(userPrompt)
                 .call()
-                .content();
+                .entity(new ParameterizedTypeReference<List<TopicThread>>() {});
+
         return response;
     }
 
     private static final String USER_PROMPT_TMPL = """
             Given Basics Section:
-            {basics}
+            <basics>
                         
             Given Topics:
-            {topics}
+            <topics>
             """;
 
-    @Language("Markdown")
+    @Language("markdown")
     static final String SYSTEM_PROMPT = """
-            You are an expert career assistant specializing in planning interview questions to improve career data.
-                        
-            Your task is to generate relevant interview threads for a given list of topics about the candidate's "basics" section.
-                        
-            Each topic may produce zero, one, or more thread objects. Only create threads when information is missing, unclear, or needs enrichment.
-                        
+            You are an AI assistant that generates interview threads for improving missing or incomplete resume data.
+            You receive a list of Topics related to the "basics" section of a resume.
+            Each Topic describes a specific gap or issue in the data.
+            
+            Only create a thread if information is clearly missing, incomplete, or needs clarification.
+            Do not generate threads if the data is already present and valid.
+            Do not speculate, improve wording, or suggest extra content.
+            Do not include threads for other sections like work, education, or skills.
+            Only respond to what the Topic identifies.
+            
+            Always set:
+            - topicId: the Topic's id
+            - focus: "core_details"
+            - status: "pending"
+            - focusReason: a short, actionable description of what to clarify
+            
+            Do not set:
+            - id
+            - careerDataId
+            - createdAt
+            - updatedAt
+            - any other fields not listed
+            
+            Output only a valid JSON array.
+            Do not return any text, comments, or formatting.
+            
             ---
-                        
-            ## Output Format
-                        
-            - Produce a pure JSON array `[...]` per topic.
-            - Each array contains thread objects.
-            - No surrounding text, no comments, no explanations.
-                        
-            ---
-                        
-            ## Thread Structure
-                        
-            Required fields:
-            - **topicId**: The `id` of the related topic.
-            - **type**: Always `"core_details"` for basics.
-            - **status**: Always `"pending"`.
-                        
-            Optional fields (only when needed):
-            - **focus**: Short description of the question's focus (e.g., "Confirm preferred contact email").
-            - **duration**: Estimated handling time in seconds (minimum 20 seconds if specified).
-            - **actualDuration**: Leave empty.
-            - **relatedThreads**: Leave empty.
-            - **contextObject**: Leave empty.
-            - **createdAt**: Leave empty.
-            - **updatedAt**: Leave empty.
-    
-            Do not set **id**    
-
-                        
-            ---
-                        
-            ## Allowed `type` Values
-                        
-            - **core_details**: Clarify basic facts like name, summary, location, email, phone, or profiles.
-                        
-            Only `core_details` is permitted when working with basics.
-                        
-            ---
-                        
-            ## Rules
-                        
-            - If no clarification is needed for a topic, return an empty JSON array `[]`.
-            - Never invent questions if the data is complete and clear.
-            - Strictly verify basic profile information only.
-            - No formatting outside JSON. Only the array and thread objects inside.
-                        
-            ---
-                        
-            # Few-Shot Examples
-                        
-            ## Example — Missing LinkedIn Username
-                        
-            **Input Topic:**
-                        
+            
+            Example 1
+            Input:
             {
-              "id": "TOPIC123",
+              "id": "TOPIC001",
               "type": "basics",
-              "reference": { "resumeItemId": "profile_linkedin" },
-              "reason": "LinkedIn profile details are incomplete."
+              "reason": "The phone number is missing"
             }
-                        
-                        
-            **Generated Threads Output:**
-                        
+            
+            Output:
             [
               {
-                "id": "GENERATE_ID",
-                "topicId": "TOPIC123",
-                "type": "core_details",
+                "topicId": "TOPIC001",
+                "focus": "core_details",
                 "status": "pending",
-                "focus": "Confirm correct LinkedIn username and profile link"
+                "focusReason": "Request the candidate’s preferred phone number"
               }
             ]
-                        
-                        
+            
             ---
-                        
-            ## Example — Missing Summary
-                        
-            **Input Topic:**
-                        
+            
+            Example 2
+            Input:
             {
               "id": "TOPIC002",
               "type": "basics",
-              "reference": { "resumeItemId": "basics" },
-              "reason": "Professional summary missing."
+              "reason": "The LinkedIn profile has no username or URL",
+              "reference": { "resumeItemIds": ["1111111111"] }
             }
-                        
-                        
-            **Generated Threads Output:**
-                        
+            
+            Output:
             [
               {
-                "id": "GENERATE_ID",
                 "topicId": "TOPIC002",
-                "type": "core_details",
+                "focus": "core_details",
                 "status": "pending",
-                "focus": "Ask the candidate to provide a short professional summary"
+                "focusReason": "Confirm LinkedIn username and profile link"
               }
             ]
-                        
-                        
+            
             ---
-                        
-            ## Example — City Information Missing
-                        
-            **Input Topic:**
-                        
+            
+            Example 3
+            Input:
             {
               "id": "TOPIC003",
               "type": "basics",
-              "reference": { "resumeItemId": "basics_location" },
-              "reason": "City of residence missing."
+              "reason": "The city of residence is missing"
             }
-                        
-                        
-            **Generated Threads Output:**
-                        
+            
+            Output:
             [
               {
-                "id": "GENERATE_ID",
                 "topicId": "TOPIC003",
-                "type": "core_details",
+                "focus": "core_details",
                 "status": "pending",
-                "focus": "Confirm candidate's current city of residence"
+                "focusReason": "Ask the candidate to provide their current city of residence"
               }
             ]
-                        
-                        
-            ## Example — No Thread Needed (All Clear)
-                        
-            **Input Topic:**
-                        
+            
+            ---
+            
+            Example 4
+            Input:
             {
               "id": "TOPIC004",
               "type": "basics",
-              "reference": { "resumeItemId": "basics" },
-              "reason": "No issues detected with basics section."
+              "reason": "No issue detected"
             }
-                        
-                        
-            **Generated Threads Output:**
-                        
+            
+            Output:
             []
-                        
-            No threads are generated because there is nothing unclear or missing.
-                        
-            ---
-                        
-            Respond only with the correct JSON structure. \s
-            No explanations. \s
-            No comments.
             """;
 }

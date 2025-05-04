@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.promptics.jobagent.careerdata.model.Work;
 import io.promptics.jobagent.interviewplan.model.Topic;
 import io.promptics.jobagent.interviewplan.model.TopicThread;
-import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -22,8 +21,8 @@ public class WorkThreadsPlanningAgent extends AbstractThreadsPlanningAgent<List<
     }
 
     @Override
-    protected @Nullable String promptLlm(String basicsSectionJson, String topicsJson) {
-        return "";
+    protected List<TopicThread> promptLlm(String basicsSectionJson, String topicsJson) {
+        return null;
     }
 
     private static final String SYSTEM_PROMPT = """

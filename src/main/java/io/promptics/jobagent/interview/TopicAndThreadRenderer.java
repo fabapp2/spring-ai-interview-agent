@@ -33,7 +33,7 @@ public class TopicAndThreadRenderer {
         variables.put("section", topic.getType().value());
         variables.put("topicType", topic.getReason());
         variables.put("threadType", thread.getFocus().value());
-        variables.put("resumeItemId", topic.getReference().getResumeItemId());
+        variables.put("resumeItemId", topic.getReference().getResumeItemIds());
         variables.put("threadFocus", thread.getFocus());
         variables.put("typeDescription", typeDescription);
 
