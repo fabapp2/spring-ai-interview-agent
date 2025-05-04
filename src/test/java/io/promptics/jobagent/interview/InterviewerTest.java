@@ -82,8 +82,8 @@ class InterviewerTest {
         List<TopicThread> threads = List.of(
                 TopicThread.builder()
                         .topicId(plan.get(0).getId())
-                        .type(TopicThread.Type.CORE_DETAILS)
-                        .focus("Phone number contains no country code.")
+                        .focus(TopicThread.Focus.CORE_DETAILS)
+                        .focusReason("Phone number contains no country code.")
                         .build()
         );
         topicThreadRepository.saveAll(threads);

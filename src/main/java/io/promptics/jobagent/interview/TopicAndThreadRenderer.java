@@ -27,12 +27,12 @@ public class TopicAndThreadRenderer {
 
     public String renderTopicAndThread(Topic topic, TopicThread thread) {
 
-        String typeDescription = descriptionMapper.mapType(thread.getType().value());
+        String typeDescription = descriptionMapper.mapType(thread.getFocus().value());
 
         Map<String, Object> variables = new HashMap<>();
         variables.put("section", topic.getType().value());
         variables.put("topicType", topic.getReason());
-        variables.put("threadType", thread.getType().value());
+        variables.put("threadType", thread.getFocus().value());
         variables.put("resumeItemId", topic.getReference().getResumeItemId());
         variables.put("threadFocus", thread.getFocus());
         variables.put("typeDescription", typeDescription);

@@ -50,8 +50,8 @@ class TopicAndThreadRendererTest {
                         .build())
                 .build();
         TopicThread thread = TopicThread.builder()
-                .type(TopicThread.Type.CORE_DETAILS)
-                .focus("No location information for city")
+                .focus(TopicThread.Focus.CORE_DETAILS)
+                .focusReason("No location information for city")
                 .build();
         TopicAndThread topicAndThread = new TopicAndThread(topic, thread);
 

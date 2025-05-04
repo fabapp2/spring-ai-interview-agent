@@ -43,7 +43,7 @@ class BasicsThreadsPlanningAgentTest {
     }
 
     @Test
-    @DisplayName("generate threads for topui")
+    @DisplayName("generate threads for topics")
     void generateThreadsForTopics() throws JsonProcessingException {
         Basics basicsSection = objectMapper.readValue(BASICS_JSON, Basics.class);
 
@@ -52,11 +52,11 @@ class BasicsThreadsPlanningAgentTest {
 
         assertThat(threads).hasSize(3);
         TopicThread thread1 = findThreadById(threads, "topic-1");
-        assertThat(thread1.getFocus()).contains("summary");
+        assertThat(thread1.getFocusReason()).contains("summary");
         TopicThread thread2 = findThreadById(threads, "topic-2");
-        assertThat(thread2.getFocus()).contains("city");
+        assertThat(thread2.getFocusReason()).contains("city");
         TopicThread thread3 = findThreadById(threads, "topic-3");
-        assertThat(thread3.getFocus()).contains("username");
+        assertThat(thread3.getFocusReason()).contains("username");
     }
 
     private TopicThread findThreadById(List<TopicThread> threads, String id) {

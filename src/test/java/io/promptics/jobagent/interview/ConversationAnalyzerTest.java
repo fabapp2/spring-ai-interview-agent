@@ -31,8 +31,8 @@ class ConversationAnalyzerTest {
                 .build();
         // FIXME: Simplify and fix data model
         TopicThread thread = TopicThread.builder()
-                .type(TopicThread.Type.CORE_DETAILS)
-                .focus("There's a gap between teh last position at TechGiant and now")
+                .focus(TopicThread.Focus.CORE_DETAILS)
+                .focusReason("There's a gap between teh last position at TechGiant and now")
                 .build();
         TopicAndThread topicAndThread = new TopicAndThread(topic, thread);
 

@@ -50,8 +50,8 @@ class ConversationAnalyzerPromptRendererTest {
                 .build(),
                 TopicThread.builder()
                         .id("topic-thread-id")
-                        .type(TopicThread.Type.CORE_DETAILS)
-                        .focus("No link is given for your LinkedIn profile")
+                        .focus(TopicThread.Focus.CORE_DETAILS)
+                        .focusReason("No link is given for your LinkedIn profile")
                     .build()
         );
         String prompt = sut.renderPrompt(topicAndThread, conversation);
