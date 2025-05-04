@@ -2,10 +2,7 @@ package io.promptics.jobagent;
 
 import io.promptics.jobagent.careerdata.CareerDataService;
 import io.promptics.jobagent.careerdata.model.CareerData;
-import io.promptics.jobagent.interview.ConversationAnalyzer;
-import io.promptics.jobagent.interview.Interviewer;
-import io.promptics.jobagent.interview.ThreadConversation;
-import io.promptics.jobagent.interview.ThreadConversationRepository;
+import io.promptics.jobagent.interview.*;
 import io.promptics.jobagent.interviewplan.InterviewPlanner;
 import io.promptics.jobagent.interviewplan.TopicAndThread;
 import io.promptics.jobagent.interviewplan.model.Topic;
@@ -46,7 +43,7 @@ public class InterviewEngine {
             TopicAndThread topicAndThread = interviewPlanner.findCurrentTopicAndThread(context.getCareerDataId());
             // extract information from message
             ThreadConversation conversation = conversationRepository.findThreadConversationByThreadId(topicAndThread.getThread().getId());
-            String s = conversationAnalyzer.analyzeUserInput(topicAndThread, conversation, message);
+            ConversationAnalysis s = conversationAnalyzer.analyzeUserInput(topicAndThread, conversation, message);
 
             // decide to which setions the information belongs
             // update sections with new information

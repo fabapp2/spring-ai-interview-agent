@@ -6,6 +6,8 @@ import io.promptics.jobagent.interviewplan.model.Topic;
 import io.promptics.jobagent.interviewplan.model.TopicThread;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.ai.chat.client.ResponseEntity;
+import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -38,7 +40,7 @@ class ConversationAnalyzerTest {
                         .build())
                 .build();
 
-        String s = analyzer.analyzeUserInput(topicAndThread, conversation, "I got certified with AWS and did a deep dive into AI and large language models.");
+        ConversationAnalysis s = analyzer.analyzeUserInput(topicAndThread, conversation, "I got certified with AWS and did a deep dive into AI and large language models.");
         // FIXME: finish test
         System.out.println(s);
     }

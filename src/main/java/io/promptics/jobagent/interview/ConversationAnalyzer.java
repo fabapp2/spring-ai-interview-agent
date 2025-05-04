@@ -1,6 +1,5 @@
 package io.promptics.jobagent.interview;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.promptics.jobagent.interviewplan.TopicAndThread;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.ChatOptions;
@@ -9,7 +8,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.Map;
 
 @Component
@@ -19,17 +17,17 @@ public class ConversationAnalyzer {
     private final PromptRenderer promptRenderer;
 
     public ConversationAnalyzer(ChatClient.Builder builder, ThreadConversationRenderer conversationRenderer, TopicAndThreadRenderer topicAndThreadRenderer) {
-        chatClient = builder.defaultOptions(ChatOptions.builder().model("gpt-4").temperature(0.0).build()).build();
+        chatClient = builder.defaultOptions(ChatOptions.builder().model("gpt-4.1-mini").temperature(0.0).build()).build();
         this.promptRenderer = new PromptRenderer(topicAndThreadRenderer, conversationRenderer);
     }
 
-    public String analyzeUserInput(TopicAndThread topicAndThread, ThreadConversation conversation, String input) {
+    public ConversationAnalysis analyzeUserInput(TopicAndThread topicAndThread, ThreadConversation conversation, String input) {
         String prompt = promptRenderer.renderPrompt(topicAndThread, conversation);
         return chatClient.prompt()
                 .system(prompt)
                 .user(input)
                 .call()
-                .content();
+                .entity(ConversationAnalysis.class);
     }
 
     static class PromptRenderer {

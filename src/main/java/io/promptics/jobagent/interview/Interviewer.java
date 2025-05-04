@@ -58,7 +58,7 @@ public class Interviewer {
 
         ThreadConversation conversation = addUserInputToConversation(input, topicAndThread);
 
-        String analysis = analyzer.analyzeUserInput(topicAndThread, conversation, input);
+        ConversationAnalysis analysis = analyzer.analyzeUserInput(topicAndThread, conversation, input);
 
         String additionalContext = "";
 
