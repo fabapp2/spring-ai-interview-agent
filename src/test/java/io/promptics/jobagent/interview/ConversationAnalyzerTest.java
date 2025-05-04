@@ -42,5 +42,4 @@ class ConversationAnalyzerTest {
         // FIXME: finish test
         System.out.println(s);
     }
-    
 }

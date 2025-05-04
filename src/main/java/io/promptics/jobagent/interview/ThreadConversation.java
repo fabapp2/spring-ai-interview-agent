@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,7 +18,7 @@ public class ThreadConversation {
     @Id
     private String id;
     private String threadId;
-    private Date lastUpdated;
+    private ZonedDateTime lastUpdated;
     @Singular
     private List<ConversationEntry> entries = new ArrayList<>();
 }

@@ -19,12 +19,8 @@ public class TopicAndThreadRenderer {
     private final ThreadTypeDescriptionMapper descriptionMapper;
 
     private static final String PROMPT_TEMPLATE = """
-        ##  Current interview topic
-        The current topic covers "{topicType}" of career data.
-        It references the career data section with id "{resumeItemId}"
-        
-        ## Thread of interview topic
-        Thread focus: {threadFocus}
+        The current topic covers "{topicType}" in the "{section}" of career data with id "{resumeItemId}".
+        The current thread in this topic is: "{threadFocus}" and handles "{threadType}".
         
         {typeDescription}
         """;
@@ -34,7 +30,9 @@ public class TopicAndThreadRenderer {
         String typeDescription = descriptionMapper.mapType(thread.getType().value());
 
         Map<String, Object> variables = new HashMap<>();
+        variables.put("section", topic.getType().value());
         variables.put("topicType", topic.getReason());
+        variables.put("threadType", thread.getType().value());
         variables.put("resumeItemId", topic.getReference().getResumeItemId());
         variables.put("threadFocus", thread.getFocus());
         variables.put("typeDescription", typeDescription);
