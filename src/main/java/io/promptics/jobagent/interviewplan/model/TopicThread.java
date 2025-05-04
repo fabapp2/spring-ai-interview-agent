@@ -1,6 +1,7 @@
 
 package io.promptics.jobagent.interviewplan.model;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -92,14 +93,14 @@ public class TopicThread {
      */
     @JsonProperty("createdAt")
     @JsonPropertyDescription("Timestamp when this thread was created.")
-    private Date createdAt;
+    private Instant createdAt;
     /**
      * Timestamp when this thread was last updated.
      *
      */
     @JsonProperty("updatedAt")
     @JsonPropertyDescription("Timestamp when this thread was last updated.")
-    private Date updatedAt;
+    private Instant updatedAt;
 
     /**
      * MongoDB ObjectId (24 character hex string) uniquely identifies the document
@@ -221,7 +222,7 @@ public class TopicThread {
      *
      */
     @JsonProperty("createdAt")
-    public Date getCreatedAt() {
+    public Instant getCreatedAt() {
         return createdAt;
     }
 
@@ -230,7 +231,7 @@ public class TopicThread {
      *
      */
     @JsonProperty("createdAt")
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -239,7 +240,7 @@ public class TopicThread {
      *
      */
     @JsonProperty("updatedAt")
-    public Date getUpdatedAt() {
+    public Instant getUpdatedAt() {
         return updatedAt;
     }
 
@@ -248,7 +249,7 @@ public class TopicThread {
      *
      */
     @JsonProperty("updatedAt")
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
     }
 

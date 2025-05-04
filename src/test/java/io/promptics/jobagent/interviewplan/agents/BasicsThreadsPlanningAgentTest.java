@@ -21,6 +21,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.notIn;
 
 @SpringBootTest
 class BasicsThreadsPlanningAgentTest {
@@ -45,10 +46,17 @@ class BasicsThreadsPlanningAgentTest {
     @Test
     @DisplayName("generate threads for topics")
     void generateThreadsForTopics() throws JsonProcessingException {
-        Basics basicsSection = objectMapper.readValue(BASICS_JSON, Basics.class);
 
         List<Topic> topics = objectMapper.readValue(TOPICS_JSON, new TypeReference<>() {});
-        List<TopicThread> threads = agent.planThreads(basicsSection, topics);
+        Basics basicsSection = ValidBasicsProvider.provideObject(objectMapper);
+
+        basicsSection.setSummary(null);
+        basicsSection.getLocation().setCity(null);
+        basicsSection.getProfiles().get(0).setUrl(null);
+        basicsSection.getProfiles().get(0).setUsername(null);
+
+        String careerDataId = "1111111";
+        List<TopicThread> threads = agent.planThreads(careerDataId, basicsSection, topics);
 
         assertThat(threads).hasSize(3);
         TopicThread thread1 = findThreadById(threads, "topic-1");

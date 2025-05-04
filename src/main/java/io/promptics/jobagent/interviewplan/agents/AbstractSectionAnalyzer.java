@@ -46,7 +46,7 @@ public abstract class AbstractSectionAnalyzer<S> {
         S sectionData = getSectionData(careerData);
         List<Topic> topics = topicPlanningAgent.planTopics(careerData.getId(), sectionData);
         topicRepository.saveAll(topics);
-        List<TopicThread> topicThreads = threadsPlanningAgent.planThreads(sectionData, topics);
+        List<TopicThread> topicThreads = threadsPlanningAgent.planThreads(careerData.getId(), sectionData, topics);
         topicThreadRepository.saveAll(topicThreads);
         return new SectionTopicsAndThreads(topics, topicThreads);
     }

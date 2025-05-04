@@ -3,7 +3,6 @@
   "title": "Interview Thread",
   "type": "object",
   "required": [
-    "_id",
     "careerDataId",
     "topicId",
     "focus",

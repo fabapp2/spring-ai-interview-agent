@@ -7,6 +7,7 @@ import io.promptics.jobagent.interviewplan.model.Topic;
 import io.promptics.jobagent.interviewplan.model.TopicThread;
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Set;
 
@@ -17,14 +18,14 @@ public abstract class AbstractThreadsPlanningAgent<S> extends AbstractGeneralPla
         super(objectMapper);
     }
 
-    public abstract List<TopicThread> planThreads(S sectionData, List<Topic> topics);
-
-
-
-    public List<TopicThread> planThreads(Basics sectionData, List<Topic> topics) {
-        String topicsJson = serialize(topics);
-        String basicsSectionJson = serialize(sectionData);
-        List<TopicThread> response = promptLlm(basicsSectionJson, topicsJson);
+    public List<TopicThread> planThreads(String careerDataId, S sectionData, List<Topic> topics) {
+        List<TopicThread> response = promptLlm(sectionData, topics);
+        response.forEach(thread -> {
+            Instant now = Instant.now();
+            thread.setCreatedAt(now);
+            thread.setUpdatedAt(now);
+            thread.setCareerDataId(careerDataId);
+        });
 
         Set<ValidationMessage> validationMessages = validateJson(response, getJsonSchema());
 
@@ -39,5 +40,5 @@ public abstract class AbstractThreadsPlanningAgent<S> extends AbstractGeneralPla
         return "/schemas/plan/threads-array-schema.json";
     }
 
-    protected abstract List<TopicThread> promptLlm(String basicsSectionJson, String topicsJson);
+    protected abstract List<TopicThread> promptLlm(S basicsSectionJson, List<Topic> topicsJson);
 }

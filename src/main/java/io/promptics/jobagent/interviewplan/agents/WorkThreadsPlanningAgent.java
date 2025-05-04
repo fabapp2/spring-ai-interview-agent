@@ -1,6 +1,7 @@
 package io.promptics.jobagent.interviewplan.agents;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.promptics.jobagent.careerdata.model.Basics;
 import io.promptics.jobagent.careerdata.model.Work;
 import io.promptics.jobagent.interviewplan.model.Topic;
 import io.promptics.jobagent.interviewplan.model.TopicThread;
@@ -16,12 +17,12 @@ public class WorkThreadsPlanningAgent extends AbstractThreadsPlanningAgent<List<
     }
 
     @Override
-    public List<TopicThread> planThreads(List<Work> sectionData, List<Topic> topics) {
+    public List<TopicThread> planThreads(String careerDataId, List<Work> sectionData, List<Topic> topics) {
         return List.of();
     }
 
     @Override
-    protected List<TopicThread> promptLlm(String basicsSectionJson, String topicsJson) {
+    protected List<TopicThread> promptLlm(List<Work> sectionData, List<Topic> topicsJson) {
         return null;
     }
 
