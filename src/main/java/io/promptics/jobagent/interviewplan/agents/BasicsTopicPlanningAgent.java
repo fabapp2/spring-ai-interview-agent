@@ -7,6 +7,7 @@ import com.networknt.schema.*;
 import io.promptics.jobagent.careerdata.model.Basics;
 import io.promptics.jobagent.interviewplan.model.Topic;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.http.parser.TE;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.chat.prompt.PromptTemplate;
@@ -25,24 +26,25 @@ import java.util.Set;
 
 @Slf4j
 @Component
-public class BasicsTopicPlanningAgent extends AbstractTopicsPlanningAgent<Basics> {
+public class BasicsTopicPlanningAgent extends AbstractTopicsPlanningAgent<Basics, Topic> {
 
     public static final String MODEL = "gpt-4.1-mini";
     public static final Double TEMPERATURE = 0.0;
     private static final String JSON_SCHEMA = "/schemas/plan/topics-array-schema.json";
     public static final StTemplateRenderer TEMPLATE_RENDERER = StTemplateRenderer.builder().startDelimiterToken('<').endDelimiterToken('>').build();
-    private final ChatClient chatClient;
-    private final ObjectMapper objectMapper;
 
     public BasicsTopicPlanningAgent(ChatClient.Builder builder, @Qualifier("objectMapper") ObjectMapper objectMapper) {
-        super(objectMapper);
-        ChatOptions chatOptions = ChatOptions.builder()
-                .model(MODEL)
-                .temperature(TEMPERATURE)
-                .build();
+        super(builder, objectMapper);
+    }
 
-        chatClient = builder.defaultTemplateRenderer(TEMPLATE_RENDERER).defaultOptions(chatOptions).build();
-        this.objectMapper = objectMapper;
+    @Override
+    protected String getModel() {
+        return MODEL;
+    }
+
+    @Override
+    protected Double getTemperature() {
+        return TEMPERATURE;
     }
 
     public List<Topic> planTopics(String careerDataId, Basics basicsSection) {
@@ -69,15 +71,6 @@ public class BasicsTopicPlanningAgent extends AbstractTopicsPlanningAgent<Basics
         }
 
         return topics;
-    }
-
-    private Set<ValidationMessage> validateJson(Object response, String jsonSchema) {
-        try {
-            String json = objectMapper.writeValueAsString(response);
-            return validateJson(json, jsonSchema);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private static final String USER_PROMPT_TMPL = """

@@ -11,14 +11,14 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class WorkTopicsPlanningAgent extends AbstractTopicsPlanningAgent<List<Work>> {
+public class WorkTopicsPlanningAgent extends AbstractTopicsPlanningAgent<List<Work>, Topic> {
 
     private static final String MODEL = "gpt-4o-mini";
     private static final Double TEMPERATURE = 0.1;
     private ChatClient client;
 
-    public WorkTopicsPlanningAgent(ObjectMapper objectMapper, ChatClient.Builder builder) {
-        super(objectMapper);
+    public WorkTopicsPlanningAgent(ChatClient.Builder builder, ObjectMapper objectMapper) {
+        super(builder, objectMapper);
         ChatOptions options = ChatOptions.builder().model(MODEL).temperature(TEMPERATURE).build();
         client = builder.defaultOptions(options).build();
     }
@@ -91,4 +91,14 @@ public class WorkTopicsPlanningAgent extends AbstractTopicsPlanningAgent<List<Wo
         
         Respond only with the correct JSON structure, no explanations, no comments, no additional markup.
         """;
+
+    @Override
+    protected String getModel() {
+        return MODEL;
+    }
+
+    @Override
+    protected Double getTemperature() {
+        return TEMPERATURE;
+    }
 }

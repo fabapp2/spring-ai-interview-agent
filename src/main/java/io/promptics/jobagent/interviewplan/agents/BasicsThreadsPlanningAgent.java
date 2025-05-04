@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.promptics.jobagent.careerdata.model.Basics;
 import io.promptics.jobagent.interviewplan.model.Topic;
 import io.promptics.jobagent.interviewplan.model.TopicThread;
+import org.apache.tomcat.util.http.parser.TE;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.chat.prompt.PromptTemplate;
@@ -18,53 +20,27 @@ import java.util.Map;
 @Component
 public class BasicsThreadsPlanningAgent extends AbstractThreadsPlanningAgent<Basics> {
 
-    public static final StTemplateRenderer TEMPLATE_RENDERER = StTemplateRenderer.builder()
-            .startDelimiterToken('<')
-            .endDelimiterToken('>')
-            .build();
     private static final Double TEMPERATURE = 0.0;
     public static final String MODEL = "gpt-4.1-mini";
-    private final ChatClient chatClient;
 
     public BasicsThreadsPlanningAgent(ChatClient.Builder builder, ObjectMapper objectMapper) {
-        super(objectMapper);
-        ChatOptions chatOptions = ChatOptions.builder()
-                .temperature(TEMPERATURE)
-                .model(MODEL)
-                .build();
-        this.chatClient = builder
-                .defaultTemplateRenderer(
-                        TEMPLATE_RENDERER
-                ).defaultOptions(chatOptions).build();
+        super(builder, objectMapper);
     }
 
     @Override
-    protected List<TopicThread> promptLlm(Basics basicsSection, List<Topic> topics) {
-
-        String basicsSectionText = serialize(basicsSection, true);
-        String topicsJson = serialize(topics, true);
-
-        String userPrompt = PromptTemplate.builder().template(USER_PROMPT_TMPL).renderer(TEMPLATE_RENDERER).build().render(Map.of(
-                        "basics", basicsSectionText,
-                        "topics", topicsJson
-                )
-        );
-        List<TopicThread> response = chatClient.prompt()
-                .system(SYSTEM_PROMPT)
-                .user(userPrompt)
-                .call()
-                .entity(new ParameterizedTypeReference<List<TopicThread>>() {});
-
-        return response;
+    protected String getModel() {
+        return MODEL;
     }
 
-    private static final String USER_PROMPT_TMPL = """
-            Given Basics Section:
-            <basics>
-                        
-            Given Topics:
-            <topics>
-            """;
+    @Override
+    protected Double getTemperature() {
+        return TEMPERATURE;
+    }
+
+    @Override
+    protected @NotNull String getSystemPrompt() {
+        return SYSTEM_PROMPT;
+    }
 
     @Language("markdown")
     static final String SYSTEM_PROMPT = """

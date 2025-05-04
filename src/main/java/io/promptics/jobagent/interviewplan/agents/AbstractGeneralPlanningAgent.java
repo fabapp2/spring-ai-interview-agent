@@ -6,17 +6,40 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.networknt.schema.*;
 import io.promptics.jobagent.utils.JsonValidator;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.prompt.ChatOptions;
+import org.springframework.ai.template.st.StTemplateRenderer;
 
 import java.util.List;
 import java.util.Set;
 
 @Slf4j
-@RequiredArgsConstructor
-public abstract class AbstractGeneralPlanningAgent<S> {
+public abstract class AbstractGeneralPlanningAgent<S, T> {
 
     private final ObjectMapper objectMapper;
+    protected ChatClient chatClient;
+
+    public static final StTemplateRenderer TEMPLATE_RENDERER = StTemplateRenderer.builder()
+            .startDelimiterToken('<')
+            .endDelimiterToken('>')
+            .build();
+
+    protected AbstractGeneralPlanningAgent(ChatClient.Builder builder, ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+        ChatOptions chatOptions = ChatOptions.builder()
+                .temperature(getTemperature())
+                .model(getModel())
+                .build();
+        this.chatClient = builder
+                .defaultTemplateRenderer(
+                        TEMPLATE_RENDERER
+                ).defaultOptions(chatOptions).build();
+    }
+
+    protected abstract String getModel();
+
+    protected abstract Double getTemperature();
 
     protected String serialize(Object basicsSection, boolean prettyPrint) {
         ObjectWriter objectWriter = objectMapper.writer();
@@ -38,7 +61,7 @@ public abstract class AbstractGeneralPlanningAgent<S> {
         }
     }
 
-    protected <S> List<S> deserialize(String response, TypeReference<List<S>> typeReference) {
+    protected <S> S deserialize(String response, TypeReference<S> typeReference) {
         try {
             return objectMapper.readValue(response, typeReference);
         } catch (JsonProcessingException e) {
@@ -46,7 +69,7 @@ public abstract class AbstractGeneralPlanningAgent<S> {
         }
     }
 
-    protected Set<ValidationMessage> validateJson(List<S> response, String jsonSchema) {
+    protected Set<ValidationMessage> validateJson(List<T> response, String jsonSchema) {
         try {
             String json = objectMapper.writeValueAsString(response);
             return validateJson(json, jsonSchema);

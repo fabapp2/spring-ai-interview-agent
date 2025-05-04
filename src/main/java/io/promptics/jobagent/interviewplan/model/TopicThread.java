@@ -292,7 +292,7 @@ public class TopicThread {
 
         @JsonCreator
         public static TopicThread.Status fromValue(String value) {
-            TopicThread.Status constant = CONSTANTS.get(value);
+            TopicThread.Status constant = CONSTANTS.get(value.toLowerCase());
             if (constant == null) {
                 throw new IllegalArgumentException(value);
             } else {
@@ -346,7 +346,7 @@ public class TopicThread {
 
         @JsonCreator
         public static TopicThread.Focus fromValue(String value) {
-            TopicThread.Focus constant = CONSTANTS.get(value);
+            TopicThread.Focus constant = CONSTANTS.get(value.toLowerCase());
             if (constant == null) {
                 throw new IllegalArgumentException(value);
             } else {
