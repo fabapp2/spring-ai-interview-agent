@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Interview Topic",
+  "type": "object",
+  "required": [
+    "careerDataId",
+    "type",
+    "reason",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "basics",
+        "work",
+        "education",
+        "projects",
+        "skills",
+        "certificates",
+        "publications",
+        "languages",
+        "interests",
+        "references",
+        "narrative"
+      ],
+      "description": "The type of the topic, aligned to a resume section or 'narrative' for overarching topics"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Human-readable explanation for why this topic exists"
+    },
+    "reference": {
+      "type": "object",
+      "description": "Reference to one or more resume items or a time period",
+      "properties": {
+        "resumeItemIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "List of resume item IDs this topic relates to"
+        },
+        "startDate": {
+          "type": "string",
+          "pattern": "^[1-2][0-9]{3}(-[0-1][0-9])?$",
+          "description": "Start of time period, format YYYY or YYYY-MM"
+        },
+        "endDate": {
+          "type": "string",
+          "pattern": "^[1-2][0-9]{3}(-[0-1][0-9])?$",
+          "description": "End of time period, format YYYY or YYYY-MM"
+        }
+      },
+      "additionalProperties": false
+    },
+    "priorityScore": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Numerical priority from 0 to 100"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 creation timestamp"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 update timestamp"
+    },
+    "id": {
+      "type": "string",
+      "description": "MongoDB document ID (Spring Data compatible)"
+    },
+    "careerDataId": {
+      "type": "string",
+      "description": "ID of the resume or career data this topic belongs to"
+    }
+  },
+  "additionalProperties": false
+}

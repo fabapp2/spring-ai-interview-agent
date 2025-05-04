@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Interview Thread",
+  "type": "object",
+  "required": [
+    "_id",
+    "careerDataId",
+    "topicId",
+    "focus",
+    "status",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "topicId": {
+      "type": "string",
+      "description": "Reference to the parent Topic (_id)"
+    },
+    "focus": {
+      "type": "string",
+      "enum": [
+        "core_details",
+        "achievements",
+        "responsibilities",
+        "skills_used",
+        "team_context",
+        "challenges",
+        "transition",
+        "impact",
+        "learning",
+        "collaboration",
+        "technical_depth",
+        "project_specifics"
+      ],
+      "description": "The angle of questioning for this thread"
+    },
+    "focusReason": {
+      "type": "string",
+      "description": "Optional human-readable explanation for the purpose or nuance of this thread"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "in_progress",
+        "completed",
+        "on_hold",
+        "skipped"
+      ],
+      "description": "The current lifecycle status of the thread"
+    },
+    "priorityScore": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Numerical priority from 0 to 100"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 creation timestamp"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 update timestamp"
+    },
+    "id": {
+      "type": "string",
+      "description": "MongoDB document ID (Spring Data compatible)"
+    },
+    "careerDataId": {
+      "type": "string",
+      "description": "ID of the resume or career data this thread belongs to"
+    }
+  },
+  "additionalProperties": false
+}
