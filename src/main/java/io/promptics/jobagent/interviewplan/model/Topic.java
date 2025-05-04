@@ -105,7 +105,7 @@ public class Topic {
 
         @JsonCreator
         public static Topic.Type fromValue(String value) {
-            Topic.Type constant = CONSTANTS.get(value);
+            Topic.Type constant = CONSTANTS.get(value.toLowerCase());
             if (constant == null) {
                 throw new IllegalArgumentException(value);
             } else {
