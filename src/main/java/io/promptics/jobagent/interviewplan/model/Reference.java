@@ -1,67 +1,55 @@
-
 package io.promptics.jobagent.interviewplan.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.Singular;
 
 import java.util.List;
 
 
 /**
  * Links to specific resume entries or spans (optional).
- * 
+ *
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "resumeItemId",
-    "spans",
+    "resumeItemIds",
     "startDate",
-    "endDate",
-    "resumeItemBeforeId",
-    "resumeItemAfterId"
+    "endDate"
 })
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Reference {
 
-    @JsonProperty("resumeItemId")
-    private String resumeItemId;
-    @JsonProperty("spans")
+    @JsonProperty("resumeItemIds")
+    @JsonPropertyDescription("List of resume item IDs this topic relates to")
     @Valid
-    private List<String> spans;
+    @Singular
+    private List<String> resumeItemIds;
+
     @JsonProperty("startDate")
+    @JsonPropertyDescription("Start of time period, format YYYY or YYYY-MM")
     private String startDate;
+
     @JsonProperty("endDate")
+    @JsonPropertyDescription("End of time period, format YYYY or YYYY-MM")
     private String endDate;
-    @JsonProperty("resumeItemBeforeId")
-    private String resumeItemBeforeId;
-    @JsonProperty("resumeItemAfterId")
-    private String resumeItemAfterId;
 
-    @JsonProperty("resumeItemId")
-    public String getResumeItemId() {
-        return resumeItemId;
+    @JsonProperty("resumeItemIds")
+    public List<String> getResumeItemIds() {
+        return resumeItemIds;
     }
 
-    @JsonProperty("resumeItemId")
-    public void setResumeItemId(String resumeItemId) {
-        this.resumeItemId = resumeItemId;
-    }
-
-    @JsonProperty("spans")
-    public List<String> getSpans() {
-        return spans;
-    }
-
-    @JsonProperty("spans")
-    public void setSpans(List<String> spans) {
-        this.spans = spans;
+    @JsonProperty("resumeItemIds")
+    public void setResumeItemIds(List<String> resumeItemIds) {
+        this.resumeItemIds = resumeItemIds;
     }
 
     @JsonProperty("startDate")
@@ -82,26 +70,6 @@ public class Reference {
     @JsonProperty("endDate")
     public void setEndDate(String endDate) {
         this.endDate = endDate;
-    }
-
-    @JsonProperty("resumeItemBeforeId")
-    public String getResumeItemBeforeId() {
-        return resumeItemBeforeId;
-    }
-
-    @JsonProperty("resumeItemBeforeId")
-    public void setResumeItemBeforeId(String resumeItemBeforeId) {
-        this.resumeItemBeforeId = resumeItemBeforeId;
-    }
-
-    @JsonProperty("resumeItemAfterId")
-    public String getResumeItemAfterId() {
-        return resumeItemAfterId;
-    }
-
-    @JsonProperty("resumeItemAfterId")
-    public void setResumeItemAfterId(String resumeItemAfterId) {
-        this.resumeItemAfterId = resumeItemAfterId;
     }
 
 }
