@@ -10,6 +10,7 @@ import io.promptics.jobagent.interviewplan.model.Topic;
 import io.promptics.jobagent.verification.DataVerifier;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.stereotype.Service;
@@ -71,7 +72,7 @@ public class InterviewEngine {
 
             response = interviewer.execute(careerData, topicAndThread, message);
         }
-
+        chatMemory.add(ChatMemory.DEFAULT_CONVERSATION_ID, new AssistantMessage(response));
         return response;
     }
 
@@ -82,7 +83,7 @@ public class InterviewEngine {
         interviewPlanner.createInitialInterviewPlan(careerData);
         TopicAndThread topicAndThread = interviewPlanner.findCurrentTopicAndThread(careerDataId);
         String response = interviewer.startInterview(careerData, topicAndThread);
-        chatMemory.add(ChatMemory.DEFAULT_CONVERSATION_ID, SystemMessage.builder().text(response).build());
+        chatMemory.add(ChatMemory.DEFAULT_CONVERSATION_ID, new AssistantMessage(response));
         return response;
     }
 }
