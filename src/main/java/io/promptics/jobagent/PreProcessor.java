@@ -23,14 +23,17 @@ public class PreProcessor {
         - Read the user input
         - Correct spelling errors
         - Set the isCorrected flag to 'true' when the user message was corrected.
-        - Recognize the user intent
+        - Recognize the user intent and set either INTERVIEW, VERIFICATION or INVALID.
+          - Use INTERVIEW when the user is replying to interview questions
+          - Use VERIFICATION when the user asks to view or change data
+          - USe INVALID in all other cases
         
         ## Expected output
         You return JSON.
         Use this structure: 
         
         {{
-            "intent": "QNA, VERIFICATION or INVALID",
+            "intent": "INTERVIEW, VERIFICATION or INVALID",
             "reason": "The reason for the intent",
             "isCorrected": "true|false depending if the user message was corrected",
             "previousMessage": "The previous ai response if any",
@@ -45,10 +48,6 @@ public class PreProcessor {
     }
 
     public MessageAnalysis execute(String userMessage) {
-        // FIXME: Remove dummy code
-        chatMemory.add(AbstractChatMemoryAdvisor.DEFAULT_CHAT_MEMORY_CONVERSATION_ID, new AssistantMessage("What was you last job?"));
-        chatMemory.add(AbstractChatMemoryAdvisor.DEFAULT_CHAT_MEMORY_CONVERSATION_ID, new UserMessage("I worked at Mc Donalds"));
-        chatMemory.add(AbstractChatMemoryAdvisor.DEFAULT_CHAT_MEMORY_CONVERSATION_ID, new AssistantMessage("How long did you work there?"));
 
         return client.prompt()
                 .system(prompt)

@@ -72,7 +72,7 @@ public class InterviewPlanner {
         return findCurrentTopicAndThread(careerData.getId());
     }
 
-    public List<Topic> adjustPLan(CareerData careerData) {
+    public List<Topic> adjustPLan(CareerData careerData, List<String> conversationAnalysis) {
         // FIXME: Adjust initial plan,
         return List.of();
     }
