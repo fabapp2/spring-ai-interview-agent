@@ -1,34 +1,50 @@
 # Spring AI Interview Agent
 
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.4-brightgreen)
-![Spring AI](https://img.shields.io/badge/Spring%20AI-1.0.0--M7-blue)
+![Spring AI](https://img.shields.io/badge/Spring%20AI-1.0.0--M8-blue)
 ![Java](https://img.shields.io/badge/Java-17-orange)
-![MongoDB](https://img.shields.io/badge/MongoDB-5.4.0-green)
 
-A powerful AI-driven interview agent that conducts structured conversations to collect career data from users. Built with Spring AI and MongoDB for persistence.
+## Intent
+
+This project is a playground, learning, and showcase project with the intent to learn while building something useful for myself.
+One day, I realized that my CV was not very up to date and I had to update it. 
+I experimented with n8n to build an interview loop that would update my CV with additional information.
+I found it to be a bit too complex and not very flexible and started experimenting in this repo.
+Now (a few month later), that I am writing this I'd do a few things differently, and I might even do so in the future. 
+But I also learned a lot and I want to share some of my learnings with you.
+
+## Learnings
+- Start with a larger model, make things work, tune for smaller model
+- Saving costs through context caching in system message can be effective
+- Split logic whenever possible. Allows for easier testing, failure isolation, parallelization and smaller models
+
+## Improvements
+- Use graph RAG to steer the interview
+- Add STT/TTS voice control
+
 
 ## 🚀 Features
 
-- **AI-Powered Interviews**: Leverages Spring AI and LLM capabilities to conduct natural conversations
+- **AI-Powered Interviews**: Uses Spring AI to run an interview loop via an LLM
 - **Structured Data Collection**: Follows a predefined interview plan with topics and threads
 - **Persistence**: Stores career data and interview progress in MongoDB
 - **Preprocessing**: Includes natural language preprocessing to interpret user inputs
-- **Observability**: Full visibility into AI model interactions for debugging and monitoring
+- **Observability**: Spring AI client observations can be enabled/adjusted via config
 
 ## 🏗️ Architecture
 
 The application follows a Spring Boot architecture with the following key components:
 
 - **InterviewApplication**: Main entry point for the Spring Boot application
-- **Interviewer**: Core component that conducts the interview using Spring AI
-- **InterviewPlan**: Structure defining topics and threads for conversation flow
-- **CareerData**: Domain model for storing professional information
-- **MongoDB Services**: Persistence layer for storing and retrieving data
+- **InterviewEngine**: Orchestrates message handling, preprocessing, planning and persistence updates
+- **Interviewer**: Uses Spring AI `ChatClient` to ask/continue questions
+- **InterviewPlanner**: Manages topics/threads for the interview flow
+- **CareerData**: Domain model stored in MongoDB
 
 ## 🛠️ Technical Stack
 
 - **Spring Boot 3.4.4**: Application framework
-- **Spring AI 1.0.0-M7**: AI capabilities integration
+- **Spring AI 1.0.0-M8**: AI capabilities integration
 - **MongoDB**: Data persistence
 - **JUnit 5**: Testing framework
 - **Testcontainers**: Integration testing with containerized dependencies
@@ -40,7 +56,7 @@ The application follows a Spring Boot architecture with the following key compon
 
 - Java 17+
 - Maven
-- MongoDB (or Docker for Testcontainers)
+- MongoDB (or Docker, if you only want to run tests with Testcontainers)
 
 ### Running the Application
 
@@ -66,21 +82,21 @@ spring:
   data:
     mongodb:
       host: localhost
-      port: 27017
+      port: 27018
       database: interview
-      username: admin
-      password: password
+      username: mongouser
+      password: mongopw
 ```
 
 ### API Key Setup
 
-This project requires an OpenAI API key to run. Set it as an environment variable:
+To run LLM-backed parts (OpenAI), set the API key as an environment variable:
 
 ```bash
 export SPRING_AI_OPENAI_API_KEY=your-api-key-here
 ```
 
-Without this environment variable, the application will fail to start and tests will not run properly.
+Without this environment variable, calls to the OpenAI model will fail.
 
 ## 🧪 Testing
 
